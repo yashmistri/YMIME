@@ -1,0 +1,14 @@
+TODO:
+    make/download isometric 2d sprites:
+        angle/dimensions? try 45 degrees
+        tiled? yes
+        convert from 3d models? yes
+        tiles:
+            grass
+            trees
+
+    Make a simple isometric game
+Bugs:
+Notes:
+Ideas:
+    level is 2d sprites but characters are 3d models. need separate lights for 2d and 3d and some way to set both positions correctly
