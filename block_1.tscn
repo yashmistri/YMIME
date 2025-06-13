@@ -1,0 +1,14 @@
+[gd_scene load_steps=2 format=3 uid="uid://ch7uhr8j2xa3v"]
+
+[ext_resource type="Texture2D" uid="uid://im6oylvf3eth" path="res://Assets/kenney_isometricPrototypeTiles/Isometric/block_E.png" id="1_51j2o"]
+
+[node name="Block1" type="Sprite2D"]
+y_sort_enabled = true
+texture = ExtResource("1_51j2o")
+offset = Vector2(0, -192)
+
+[node name="static" type="StaticBody2D" parent="."]
+z_index = 1
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="static"]
+polygon = PackedVector2Array(0, 64, 128, 0, 0, -64, -128, 0)
