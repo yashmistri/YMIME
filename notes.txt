@@ -1,14 +1,25 @@
 TODO:
-    make/download isometric 2d sprites:
-        angle/dimensions? try 45 degrees
-        tiled? yes
-        convert from 3d models? yes
-        tiles:
-            grass
-            trees
+	make/download isometric 2d sprites:
+		angle/dimensions? try 45 degrees
+		tiled? yes
+		convert from 3d models? no
+		tiles:
+			grass
+			trees
+			decorations
 
-    Make a simple isometric game
+	Make a simple isometric game
+		make characters shoot projectiles
+		x give characters hitbox
+		make characters 2d sprites all animation procedural or in game
+		figure out how to get mouse position in world space
+			make animated crosshair in world on click
+		what to do about walls in front of/below player/camera
+		what is game about:
+			constantly spawning enemies in arena
+			goal is survive for as long as possible while enemies get stronger
+			player gets stronger by eliminating enemies
 Bugs:
 Notes:
 Ideas:
-    level is 2d sprites but characters are 3d models. need separate lights for 2d and 3d and some way to set both positions correctly
+	level is 2d sprites but characters are 3d models. need separate lights for 2d and 3d and some way to set both positions correctly

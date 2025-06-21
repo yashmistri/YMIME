@@ -10,3 +10,6 @@ func get_input():
 func _physics_process(delta):
 	get_input()
 	move_and_slide()
+	
+func _process(delta):
+	$body.target = get_local_mouse_position()

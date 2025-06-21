@@ -1,6 +1,20 @@
-[gd_scene load_steps=4 format=3 uid="uid://dj4bns2rylix3"]
+[gd_scene load_steps=19 format=3 uid="uid://dj4bns2rylix3"]
 
 [ext_resource type="Texture2D" uid="uid://cn3pub7e7e1ms" path="res://Assets/kenney_isometricPrototypeTiles/Characters/Human/Human_0_Idle0.png" id="2_wa5vi"]
+[ext_resource type="Texture2D" uid="uid://dawcmernt7xjs" path="res://Assets/kenney_isometricPrototypeTiles/Characters/Human/Human_1_Idle0.png" id="2_x1sy7"]
+[ext_resource type="Texture2D" uid="uid://dklwsmt1ktjvg" path="res://Assets/kenney_isometricPrototypeTiles/Characters/Human/Human_2_Idle0.png" id="3_sm1rv"]
+[ext_resource type="Texture2D" uid="uid://ky0jxu345ag8" path="res://Assets/kenney_isometricPrototypeTiles/Characters/Human/Human_3_Idle0.png" id="4_jx0ln"]
+[ext_resource type="Texture2D" uid="uid://cwqb1ll10t8le" path="res://Assets/kenney_isometricPrototypeTiles/Characters/Human/Human_0_Run0.png" id="5_lpiy1"]
+[ext_resource type="Texture2D" uid="uid://dxkgchatguros" path="res://Assets/kenney_isometricPrototypeTiles/Characters/Human/Human_0_Run1.png" id="6_88tkl"]
+[ext_resource type="Texture2D" uid="uid://cp71fhlt3pvqt" path="res://Assets/kenney_isometricPrototypeTiles/Characters/Human/Human_0_Run2.png" id="7_y0ipg"]
+[ext_resource type="Texture2D" uid="uid://ck6hsvp3ilvu7" path="res://Assets/kenney_isometricPrototypeTiles/Characters/Human/Human_0_Run3.png" id="8_kjduu"]
+[ext_resource type="Texture2D" uid="uid://h8p14bgylalo" path="res://Assets/kenney_isometricPrototypeTiles/Characters/Human/Human_0_Run4.png" id="9_3d8aq"]
+[ext_resource type="Texture2D" uid="uid://buw7kekk7x8dv" path="res://Assets/kenney_isometricPrototypeTiles/Characters/Human/Human_0_Run5.png" id="10_8i6g0"]
+[ext_resource type="Texture2D" uid="uid://b2kxdff2xlxah" path="res://Assets/kenney_isometricPrototypeTiles/Characters/Human/Human_0_Run6.png" id="11_r5wlx"]
+[ext_resource type="Texture2D" uid="uid://c2rvddbxrtg38" path="res://Assets/kenney_isometricPrototypeTiles/Characters/Human/Human_0_Run7.png" id="12_1r1pa"]
+[ext_resource type="Texture2D" uid="uid://b342frs7nnybk" path="res://Assets/kenney_isometricPrototypeTiles/Characters/Human/Human_0_Run8.png" id="13_hvi53"]
+[ext_resource type="Texture2D" uid="uid://kejqcc4vrwps" path="res://Assets/kenney_isometricPrototypeTiles/Characters/Human/Human_0_Run9.png" id="14_rr203"]
+[ext_resource type="Script" uid="uid://c03g3yle7caag" path="res://body.gd" id="15_sm1rv"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_344ge"]
 animations = [{
@@ -17,21 +31,125 @@ animations = [{
 "texture": ExtResource("2_wa5vi")
 }],
 "loop": true,
-"name": &"idle",
+"name": &"idle0",
 "speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_x1sy7")
+}],
+"loop": true,
+"name": &"idle1",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_sm1rv")
+}],
+"loop": true,
+"name": &"idle2",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_jx0ln")
+}],
+"loop": true,
+"name": &"idle3",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_lpiy1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_88tkl")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_y0ipg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_kjduu")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_3d8aq")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_8i6g0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_r5wlx")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_1r1pa")
+}, {
+"duration": 1.0,
+"texture": ExtResource("13_hvi53")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_rr203")
+}],
+"loop": true,
+"name": &"run0",
+"speed": 14.0
 }]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ynf5e"]
-radius = 28.0179
+radius = 75.9539
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_glpr6"]
+size = Vector2(146, 225)
 
 [node name="Character" type="CharacterBody2D"]
 z_index = 1
 motion_mode = 1
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+visible = false
 sprite_frames = SubResource("SpriteFrames_344ge")
-animation = &"idle"
+animation = &"idle3"
+frame_progress = 0.0861619
 offset = Vector2(0, -192)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="move_hitbox" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_ynf5e")
+
+[node name="hitbox" type="Area2D" parent="."]
+collision_layer = 2
+collision_mask = 0
+
+[node name="col" type="CollisionShape2D" parent="hitbox"]
+position = Vector2(0, -108.5)
+shape = SubResource("RectangleShape2D_glpr6")
+
+[node name="body" type="Node2D" parent="."]
+script = ExtResource("15_sm1rv")
+
+[node name="arm_holder" type="Node2D" parent="body"]
+z_index = 1
+position = Vector2(0, -82)
+scale = Vector2(1, 0.5)
+
+[node name="wand" type="Polygon2D" parent="body/arm_holder"]
+color = Color(0.340339, 0.340339, 0.340339, 1)
+polygon = PackedVector2Array(118, -8, 32, -10, 33, 20, 116, 20)
+
+[node name="face_front" type="Polygon2D" parent="body"]
+polygon = PackedVector2Array(-76, -166, -54, -217, -32, -165, 28, -166, 56, -219, 80, -168, 44, -121, 69, -79, 32, -38, -36, -40, -86, -79, -48, -122)
+
+[node name="eye_left" type="Polygon2D" parent="body/face_front"]
+color = Color(0, 0, 0, 1)
+polygon = PackedVector2Array(-37, -126, -24, -140, -13, -125, -28, -112)
+
+[node name="eye_right" type="Polygon2D" parent="body/face_front"]
+color = Color(0, 0, 0, 1)
+polygon = PackedVector2Array(11, -124, 23, -142, 36, -119, 23, -105)
+
+[node name="face_back" type="Polygon2D" parent="body"]
+visible = false
+polygon = PackedVector2Array(-76, -166, -54, -217, -32, -165, 28, -166, 56, -219, 80, -168, 44, -121, 69, -79, 32, -38, -36, -40, -86, -79, -48, -122)
+
+[node name="shadow" type="Polygon2D" parent="body"]
+z_index = -1
+color = Color(0, 0, 0, 0.4)
+polygon = PackedVector2Array(-69, 1, -43, -19, 31, -21, 71, 2, 26, 18, -42, 21)

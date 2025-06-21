@@ -22,3 +22,6 @@ func _physics_process(delta: float) -> void:
 
 	velocity *= Global.iso_warp_factor
 	move_and_slide()
+
+func _process(delta: float) -> void:
+	$body.target = to_local($"../Player".position)
