@@ -1,11 +1,14 @@
-extends CharacterBody2D
+extends Character
+class_name Enemy
 
-
-const SPEED = 100.0
 var nav_agent: NavigationAgent2D
 
 func _ready():
 	nav_agent = $NavigationAgent2D
+	var hitbox: Area2D = $hitbox
+	hitbox.set_collision_layer_value(2, true)
+	set_collision_layer_value(2, true)
+	$hurtbox.dmg = damage
 
 func _physics_process(delta: float) -> void:
 	var direction: Vector2
@@ -15,10 +18,10 @@ func _physics_process(delta: float) -> void:
 		direction = nav_agent.get_next_path_position() - position
 		direction = direction.normalized()
 	if direction:
-		velocity = direction * SPEED
+		velocity = direction * speed
 	else:
-		velocity.x = move_toward(velocity.x, 0, SPEED)
-		velocity.y = move_toward(velocity.y, 0, SPEED)
+		velocity.x = move_toward(velocity.x, 0, speed)
+		velocity.y = move_toward(velocity.y, 0, speed)
 
 	velocity *= Global.iso_warp_factor
 	move_and_slide()

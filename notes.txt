@@ -1,9 +1,49 @@
 TODO:
+	character:
+		have stats: health, damage, speed, level
+	enemy:
+		spawn function
+		spawn node
+		damage player on contact
+	player:
+		fire projectile
+			damage each tile in a line from player to max range
+			or trigger one tile to damage on a delay while a projectile is animated from character to target
+			make sure target only gets damaged once per cast
+		cast damaging area on tiles around cursor
+	game:
+		menu: start, gameover, pause
+		UI: health, abilities
+		status effects: attach a node to a character when a status effect is applied
+			node has a timer for duration and a timer for the interval in which the status effect is triggered
+			negtive: on fire, slowed, stun
+			positive: blocking, fast, more dmg
+			
+	visuals:
+		animate meteor falling to tiles on casting damage area spell
+			small meteors travel from target tile to far away tiles on impact
+		short fire animation for one cell
+		lightning animation for one cell or maybe area
+		character take damage:
+			red, black liquid splatter
+			red, white flash
+			damage numbers animated
+			skull anim on elimination
+			health bar
+		character:
+			walk
+			point weapon in direction
+			eyes face direction
+			show back when facing up
+			special symbols for xp levels
+	sounds:
+		
 	make/download isometric 2d sprites:
 		angle/dimensions? try 45 degrees
 		tiled? yes
 		convert from 3d models? no
 		tiles:
+			or maybe abstract style
 			grass
 			trees
 			decorations
@@ -12,7 +52,7 @@ TODO:
 		make characters shoot projectiles
 		x give characters hitbox
 		make characters 2d sprites all animation procedural or in game
-		figure out how to get mouse position in world space
+		x figure out how to get mouse position in world space
 			make animated crosshair in world on click
 		what to do about walls in front of/below player/camera
 		what is game about:
@@ -20,6 +60,7 @@ TODO:
 			goal is survive for as long as possible while enemies get stronger
 			player gets stronger by eliminating enemies
 Bugs:
+	prevent area damage from spawning on walls
 Notes:
 Ideas:
 	level is 2d sprites but characters are 3d models. need separate lights for 2d and 3d and some way to set both positions correctly

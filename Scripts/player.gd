@@ -1,6 +1,21 @@
-extends CharacterBody2D
+extends Character
+class_name Player
 
-@export var speed = 200
+var area_dmg: PackedScene = preload("res://Scenes/AreaDamage.tscn")
+var main: Node2D
+
+
+func _ready() -> void:
+	var hitbox: Area2D = $hitbox
+	main = $".."
+	hitbox.set_collision_layer_value(1, true)
+	
+func _unhandled_input(event: InputEvent) -> void:
+	if event.is_action_pressed("mouse1"):
+		
+		var tile = main.get_clicked_tile(get_global_mouse_position())
+		if tile:
+			main.spawn_area_dmg(tile.position)
 
 func get_input():
 	var input_direction = Input.get_vector("left", "right", "up", "down")

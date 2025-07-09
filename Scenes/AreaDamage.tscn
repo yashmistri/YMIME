@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://be7o4g8eqag73"]
+
+[ext_resource type="Script" uid="uid://bwwyplnx0g2jw" path="res://Scripts/hurtbox.gd" id="1_1tqb5"]
+[ext_resource type="PackedScene" uid="uid://cvxvs2mwwew38" path="res://Scenes/tile_collider.tscn" id="2_h3wpt"]
+
+[node name="AreaDamage" type="Area2D"]
+y_sort_enabled = true
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("1_1tqb5")
+
+[node name="CollisionPolygon2D" parent="." instance=ExtResource("2_h3wpt")]
+
+[node name="Polygon2D" type="Polygon2D" parent="."]
+color = Color(0.920226, 0.806242, 0.337862, 1)
+polygon = PackedVector2Array(0, -50, 99, 0, 2, 51, -102, 2)
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
