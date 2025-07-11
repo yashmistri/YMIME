@@ -14,10 +14,9 @@ func _ready():
 func _process(delta: float) -> void:
 	pass
 
-func spawn_area_dmg(pos: Vector2):
+func spawn_area_dmg(tile: Node2D):
 	var a := area_dmg.instantiate()
-	a.position = pos
-	call_deferred("add_child", a)
+	tile.call_deferred("add_child", a)
 	
 
 func get_clicked_tile(pos: Vector2):

@@ -1,14 +1,9 @@
-[gd_scene load_steps=9 format=4 uid="uid://b3e2ije72ksjg"]
+[gd_scene load_steps=6 format=4 uid="uid://b3e2ije72ksjg"]
 
 [ext_resource type="Script" uid="uid://cjmqxwwp1md8a" path="res://Scripts/main.gd" id="1_21xkr"]
 [ext_resource type="PackedScene" uid="uid://dj4bns2rylix3" path="res://Scenes/character.tscn" id="1_kry3j"]
-[ext_resource type="Script" uid="uid://ypvnx5slxopf" path="res://enemy.gd" id="3_21xkr"]
 [ext_resource type="Script" uid="uid://uot4kl8l4743" path="res://Scripts/player.gd" id="3_jjvhh"]
 [ext_resource type="TileSet" uid="uid://bm1kjgj3dp0xo" path="res://tiles.tres" id="4_jjvhh"]
-[ext_resource type="Script" uid="uid://bwwyplnx0g2jw" path="res://Scripts/hurtbox.gd" id="5_21xkr"]
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_6bp64"]
-radius = 103.005
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_6bp64"]
 vertices = PackedVector2Array(384, 243.906, 256, 307.906, -103.82, 128, 253.297, -50.5625, 2077.51, -776.859, -512, 332.094, -152.18, 512, -509.297, 690.563, -896, 524.094, 2167.67, 1524.2, 637.297, 525.438, 637.297, 370.563, -509.297, 845.438, -2032.59, 1508.16, 253.297, -205.438, -256, 972.094, -1149.3, 397.438, -2067.75, -782.523, -1149.3, 242.563, 0, -332.094)
@@ -28,22 +23,6 @@ speed = 200
 [node name="Camera2D" type="Camera2D" parent="Player"]
 zoom = Vector2(0.3, 0.3)
 
-[node name="Enemy" parent="." instance=ExtResource("1_kry3j")]
-position = Vector2(708, 569)
-collision_layer = 2
-script = ExtResource("3_21xkr")
-speed = 100
-
-[node name="NavigationAgent2D" type="NavigationAgent2D" parent="Enemy"]
-
-[node name="hurtbox" type="Area2D" parent="Enemy"]
-collision_layer = 0
-script = ExtResource("5_21xkr")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Enemy/hurtbox"]
-shape = SubResource("CircleShape2D_6bp64")
-debug_color = Color(0.977996, 0, 0.399711, 0.42)
-
 [node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
 y_sort_enabled = true
 navigation_polygon = SubResource("NavigationPolygon_6bp64")
@@ -55,8 +34,5 @@ tile_set = ExtResource("4_jjvhh")
 [node name="Walls" type="TileMapLayer" parent="NavigationRegion2D"]
 z_index = 1
 y_sort_enabled = true
-tile_map_data = PackedByteArray("AAD8/wQAAAAAAAAAAgD8/wMAAAAAAAAAAgD9/wIAAAAAAAAAAgD9/wEAAAAAAAAAAgD+/wAAAAAAAAAAAgD+////AAAAAAAAAgD///7/AAAAAAAAAgD///3/AAAAAAAAAgD+/wIAAAAAAAAAAgD+/wMAAAAAAAAAAgD//wQAAAAAAAAAAgD//wUAAAAAAAAAAgAAAAYAAAAAAAAAAgD+/wsAAAAAAAAAAgD//woAAAAAAAAAAgD//wkAAAAAAAAAAgAAAAgAAAAAAAAAAgAAAAcAAAAAAAAAAgABAAYAAAAAAAAAAgA=")
+tile_map_data = PackedByteArray("AAD8/wQAAAAAAAAAAgD8/wMAAAAAAAAAAgD9/wIAAAAAAAAAAgD9/wEAAAAAAAAAAgD+/wAAAAAAAAAAAgD+////AAAAAAAAAgD///7/AAAAAAAAAgD///3/AAAAAAAAAgD+/wIAAAAAAAAAAgD+/wMAAAAAAAAAAgD//wQAAAAAAAAAAgD//wUAAAAAAAAAAgAAAAYAAAAAAAAAAgD+/wsAAAAAAAAAAgD//woAAAAAAAAAAgD//wkAAAAAAAAAAgAAAAgAAAAAAAAAAgAAAAcAAAAAAAAAAgABAAYAAAAAAAAAAgAEAP//AAAAAAAAAwA=")
 tile_set = ExtResource("4_jjvhh")
-
-[connection signal="area_entered" from="Enemy/hurtbox" to="Enemy/hurtbox" method="_on_area_entered"]
-[connection signal="body_entered" from="Enemy/hurtbox" to="Enemy/hurtbox" method="_on_body_entered"]

@@ -15,7 +15,7 @@ func _unhandled_input(event: InputEvent) -> void:
 		
 		var tile = main.get_clicked_tile(get_global_mouse_position())
 		if tile:
-			main.spawn_area_dmg(tile.position)
+			main.spawn_area_dmg(tile)
 
 func get_input():
 	var input_direction = Input.get_vector("left", "right", "up", "down")

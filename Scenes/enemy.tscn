@@ -1,0 +1,24 @@
+[gd_scene load_steps=5 format=3 uid="uid://c3r8kgek20uot"]
+
+[ext_resource type="PackedScene" uid="uid://dj4bns2rylix3" path="res://Scenes/character.tscn" id="1_afpow"]
+[ext_resource type="Script" uid="uid://ypvnx5slxopf" path="res://enemy.gd" id="2_287tu"]
+[ext_resource type="Script" uid="uid://bwwyplnx0g2jw" path="res://Scripts/hurtbox.gd" id="3_0830c"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ghaa6"]
+radius = 103.005
+
+[node name="Enemy" instance=ExtResource("1_afpow")]
+script = ExtResource("2_287tu")
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="." index="4"]
+
+[node name="hurtbox" type="Area2D" parent="." index="5"]
+collision_layer = 0
+script = ExtResource("3_0830c")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="hurtbox" index="0"]
+shape = SubResource("CircleShape2D_ghaa6")
+debug_color = Color(0.977996, 0, 0.399711, 0.42)
+
+[connection signal="area_entered" from="hurtbox" to="hurtbox" method="_on_area_entered"]
+[connection signal="body_entered" from="hurtbox" to="hurtbox" method="_on_body_entered"]

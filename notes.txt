@@ -1,4 +1,7 @@
 TODO:
+	misc:
+		make enemy into scene
+	
 	character:
 		have stats: health, damage, speed, level
 	enemy:
@@ -61,6 +64,8 @@ TODO:
 			player gets stronger by eliminating enemies
 Bugs:
 	prevent area damage from spawning on walls
+	area damage not showing above tiles north of some location
+		make them children of tile
 Notes:
 Ideas:
 	level is 2d sprites but characters are 3d models. need separate lights for 2d and 3d and some way to set both positions correctly

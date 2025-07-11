@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://cqjpmiog6cnfd"]
+
+[ext_resource type="Texture2D" uid="uid://dbabj1mpst508" path="res://Assets/kenney_isometricPrototypeTiles/Isometric/column_E.png" id="1_mdv8j"]
+[ext_resource type="Script" uid="uid://duy0clom3rkrq" path="res://Scripts/spawner.gd" id="2_2ydn3"]
+
+[node name="spawner" type="Sprite2D"]
+modulate = Color(1, 0.196078, 1, 0.388235)
+y_sort_enabled = true
+texture = ExtResource("1_mdv8j")
+offset = Vector2(0, -192)
+script = ExtResource("2_2ydn3")

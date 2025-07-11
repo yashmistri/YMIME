@@ -1,11 +1,13 @@
-[gd_resource type="TileSet" load_steps=4 format=3 uid="uid://bm1kjgj3dp0xo"]
+[gd_resource type="TileSet" load_steps=5 format=3 uid="uid://bm1kjgj3dp0xo"]
 
 [ext_resource type="PackedScene" uid="uid://c4kjgvjlufubh" path="res://Scenes/floor_1.tscn" id="1_bt0c5"]
 [ext_resource type="PackedScene" uid="uid://ch7uhr8j2xa3v" path="res://Scenes/block_1.tscn" id="2_5tqp5"]
+[ext_resource type="PackedScene" uid="uid://cqjpmiog6cnfd" path="res://Scenes/spawner.tscn" id="3_5tqp5"]
 
 [sub_resource type="TileSetScenesCollectionSource" id="TileSetScenesCollectionSource_4bllh"]
 scenes/1/scene = ExtResource("1_bt0c5")
 scenes/2/scene = ExtResource("2_5tqp5")
+scenes/3/scene = ExtResource("3_5tqp5")
 
 [resource]
 tile_shape = 1
