@@ -1,16 +1,21 @@
 TODO:
 	misc:
-		make enemy into scene
-	
+		x make enemy into scene
+		have Main keep count of enemies alive, enemies eliminated
+		limit number of enemies alive at one time?
+		make sure tiles with an ongoing attack or state can't trigger a new attack
 	character:
 		have stats: health, damage, speed, level
 	enemy:
-		spawn function
-		spawn node
-		damage player on contact
+		x spawn function
+		x spawn node
+		x damage player on contact
 	player:
 		fire projectile
 			damage each tile in a line from player to max range
+				make a ray and get all the tiles it intersects
+				then
+				vfx: magical spikes 
 			or trigger one tile to damage on a delay while a projectile is animated from character to target
 			make sure target only gets damaged once per cast
 		cast damaging area on tiles around cursor
@@ -21,12 +26,18 @@ TODO:
 			node has a timer for duration and a timer for the interval in which the status effect is triggered
 			negtive: on fire, slowed, stun
 			positive: blocking, fast, more dmg
+			damage received while stunned is increased
+				this increase goes down with time
+				
+				rewards fast and efficient attacks and combos
 			
 	visuals:
 		animate meteor falling to tiles on casting damage area spell
 			small meteors travel from target tile to far away tiles on impact
 		short fire animation for one cell
 		lightning animation for one cell or maybe area
+		make vfx highlighting a center point 
+			make circle then scale to isometric y = 0.5
 		character take damage:
 			red, black liquid splatter
 			red, white flash

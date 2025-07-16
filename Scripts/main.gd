@@ -2,6 +2,10 @@ extends Node2D
 class_name Main
 
 var area_dmg: PackedScene = preload("res://Scenes/AreaDamage.tscn")
+var enemies_alive := 0
+var total_enemies := 0
+var enemies_defeated := 0
+
 func _ready():
 	# tiles are not ready during main _ready() despite being descended from Main therefore update tilemaplayer state
 	$NavigationRegion2D/Ground.update_internals()
@@ -9,13 +13,16 @@ func _ready():
 	for child in $NavigationRegion2D/Ground.get_children():
 		child.name = "{0}_{1}".format([int(child.position.x), int(child.position.y)])
 		#print(child.name)
+	
+	get_tree().paused = false
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	pass
 
-func spawn_area_dmg(tile: Node2D):
+func spawn_area_dmg(tile: Node2D, dmg: float):
 	var a := area_dmg.instantiate()
+	a.dmg = dmg
 	tile.call_deferred("add_child", a)
 	
 
@@ -35,3 +42,24 @@ func get_tile_node(tile_map_layer: TileMapLayer, child_coord: Vector2i) -> Node2
 	var local_coords := tile_map_layer.map_to_local(child_coord)
 	var coords = "{0}_{1}".format([int(local_coords.x), int(local_coords.y)])
 	return tile_map_layer.get_node(coords)
+	
+func _on_enemy_spawned():
+	enemies_alive += 1
+	print("enemies alive: " + str(enemies_alive))
+	
+func _on_enemy_die():
+	enemies_defeated += 1
+	enemies_alive -= 1
+	if enemies_defeated >= total_enemies:
+		end_game(true)
+
+func _on_player_die():
+	end_game(false)
+
+func end_game(is_win: bool):
+	if is_win:
+		print("win")
+	else:
+		print("lose")
+	get_tree().paused = true
+	$Player/Camera2D/CanvasLayer/GameOverPanel.visible = true

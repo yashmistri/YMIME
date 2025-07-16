@@ -4,9 +4,12 @@
 [ext_resource type="PackedScene" uid="uid://cvxvs2mwwew38" path="res://Scenes/tile_collider.tscn" id="2_h3wpt"]
 
 [node name="AreaDamage" type="Area2D"]
+visible = false
 y_sort_enabled = true
 collision_layer = 0
 collision_mask = 2
+monitoring = false
+monitorable = false
 script = ExtResource("1_1tqb5")
 
 [node name="CollisionPolygon2D" parent="." instance=ExtResource("2_h3wpt")]
@@ -15,4 +18,15 @@ script = ExtResource("1_1tqb5")
 color = Color(0.920226, 0.806242, 0.337862, 1)
 polygon = PackedVector2Array(0, -50, 99, 0, 2, 51, -102, 2)
 
+[node name="ActivationTimer" type="Timer" parent="."]
+wait_time = 0.486
+one_shot = true
+autostart = true
+
+[node name="DurationTimer" type="Timer" parent="."]
+wait_time = 0.107
+one_shot = true
+
 [connection signal="area_entered" from="." to="." method="_on_area_entered"]
+[connection signal="timeout" from="ActivationTimer" to="." method="_on_activation_timer_timeout"]
+[connection signal="timeout" from="DurationTimer" to="." method="_on_duration_timer_timeout"]

@@ -9,11 +9,16 @@ func _ready():
 	hitbox.set_collision_layer_value(2, true)
 	set_collision_layer_value(2, true)
 	$hurtbox.dmg = damage
+	connect("character_die", $"/root/Main"._on_enemy_die)
+	
+	super._ready()
 
 func _physics_process(delta: float) -> void:
 	var direction: Vector2
-	
-	nav_agent.target_position = $"../Player".position
+	var player := $"../Player"
+	if player != null:
+		nav_agent.target_position = player.position
+		$body.target = to_local(player.position)
 	if not nav_agent.is_navigation_finished():
 		direction = nav_agent.get_next_path_position() - position
 		direction = direction.normalized()
@@ -25,6 +30,3 @@ func _physics_process(delta: float) -> void:
 
 	velocity *= Global.iso_warp_factor
 	move_and_slide()
-
-func _process(delta: float) -> void:
-	$body.target = to_local($"../Player".position)

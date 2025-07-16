@@ -1,14 +1,16 @@
 extends CharacterBody2D
 class_name Character
 
-@export var speed = 50
+@export var speed: float = 50
 @export var max_health: float = 100
-@export var damage = 50
+@export var damage:float = 50
 var current_health: float
+
+signal character_die
 
 func _ready() -> void:
 	
-	pass
+	current_health = max_health
 
 func take_damage(damage: float):
 	current_health = clampf(current_health-damage, 0,max_health)
@@ -17,4 +19,6 @@ func take_damage(damage: float):
 		die()
 
 func die():
+	emit_signal("character_die")
 	print("die")
+	queue_free()

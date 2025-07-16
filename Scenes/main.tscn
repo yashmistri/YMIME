@@ -1,9 +1,10 @@
-[gd_scene load_steps=6 format=4 uid="uid://b3e2ije72ksjg"]
+[gd_scene load_steps=7 format=4 uid="uid://b3e2ije72ksjg"]
 
 [ext_resource type="Script" uid="uid://cjmqxwwp1md8a" path="res://Scripts/main.gd" id="1_21xkr"]
 [ext_resource type="PackedScene" uid="uid://dj4bns2rylix3" path="res://Scenes/character.tscn" id="1_kry3j"]
 [ext_resource type="Script" uid="uid://uot4kl8l4743" path="res://Scripts/player.gd" id="3_jjvhh"]
 [ext_resource type="TileSet" uid="uid://bm1kjgj3dp0xo" path="res://tiles.tres" id="4_jjvhh"]
+[ext_resource type="Script" uid="uid://ci2g0avrni1ui" path="res://Scenes/Menu1.gd" id="4_kry3j"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_6bp64"]
 vertices = PackedVector2Array(384, 243.906, 256, 307.906, -103.82, 128, 253.297, -50.5625, 2077.51, -776.859, -512, 332.094, -152.18, 512, -509.297, 690.563, -896, 524.094, 2167.67, 1524.2, 637.297, 525.438, 637.297, 370.563, -509.297, 845.438, -2032.59, 1508.16, 253.297, -205.438, -256, 972.094, -1149.3, 397.438, -2067.75, -782.523, -1149.3, 242.563, 0, -332.094)
@@ -18,10 +19,42 @@ script = ExtResource("1_21xkr")
 [node name="Player" parent="." instance=ExtResource("1_kry3j")]
 position = Vector2(576, 75)
 script = ExtResource("3_jjvhh")
-speed = 200
+speed = 100.0
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
 zoom = Vector2(0.3, 0.3)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="Player/Camera2D"]
+process_mode = 3
+script = ExtResource("4_kry3j")
+
+[node name="GameOverPanel" type="Panel" parent="Player/Camera2D/CanvasLayer"]
+visible = false
+offset_right = 1154.0
+offset_bottom = 652.0
+
+[node name="GameOverMenu" type="VBoxContainer" parent="Player/Camera2D/CanvasLayer/GameOverPanel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -107.0
+offset_top = -66.5
+offset_right = 106.0
+offset_bottom = 66.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="GameOver" type="Label" parent="Player/Camera2D/CanvasLayer/GameOverPanel/GameOverMenu"]
+layout_mode = 2
+text = "Game Over"
+horizontal_alignment = 1
+
+[node name="NewGame" type="Button" parent="Player/Camera2D/CanvasLayer/GameOverPanel/GameOverMenu"]
+layout_mode = 2
+text = "New Game"
 
 [node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
 y_sort_enabled = true
@@ -36,3 +69,5 @@ z_index = 1
 y_sort_enabled = true
 tile_map_data = PackedByteArray("AAD8/wQAAAAAAAAAAgD8/wMAAAAAAAAAAgD9/wIAAAAAAAAAAgD9/wEAAAAAAAAAAgD+/wAAAAAAAAAAAgD+////AAAAAAAAAgD///7/AAAAAAAAAgD///3/AAAAAAAAAgD+/wIAAAAAAAAAAgD+/wMAAAAAAAAAAgD//wQAAAAAAAAAAgD//wUAAAAAAAAAAgAAAAYAAAAAAAAAAgD+/wsAAAAAAAAAAgD//woAAAAAAAAAAgD//wkAAAAAAAAAAgAAAAgAAAAAAAAAAgAAAAcAAAAAAAAAAgABAAYAAAAAAAAAAgAEAP//AAAAAAAAAwA=")
 tile_set = ExtResource("4_jjvhh")
+
+[connection signal="pressed" from="Player/Camera2D/CanvasLayer/GameOverPanel/GameOverMenu/NewGame" to="Player/Camera2D/CanvasLayer" method="_on_new_game_pressed"]
