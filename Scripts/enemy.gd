@@ -9,6 +9,7 @@ func _ready():
 	hitbox.set_collision_layer_value(2, true)
 	set_collision_layer_value(2, true)
 	$hurtbox.dmg = damage
+	$hurtbox.attacker = self
 	connect("character_die", $"/root/Main"._on_enemy_die)
 	
 	super._ready()

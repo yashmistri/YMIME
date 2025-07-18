@@ -19,12 +19,15 @@ func _process(delta: float) -> void:
 	pass
 
 func spawn():
+	if count >= max_count:
+		return
+	
 	var e:= enemy.instantiate()
 	e.position = global_position
 	get_node("/root/Main").call_deferred("add_child", e)
 	emit_signal("enemy_spawned")
-	
-	await get_tree().create_timer(2.0).timeout
-	if count < max_count:
-		spawn()
-		count += 1
+	count += 1
+
+
+func _on_timer_timeout() -> void:
+	spawn()

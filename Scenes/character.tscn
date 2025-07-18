@@ -14,7 +14,7 @@
 [ext_resource type="Texture2D" uid="uid://c2rvddbxrtg38" path="res://Assets/kenney_isometricPrototypeTiles/Characters/Human/Human_0_Run7.png" id="12_1r1pa"]
 [ext_resource type="Texture2D" uid="uid://b342frs7nnybk" path="res://Assets/kenney_isometricPrototypeTiles/Characters/Human/Human_0_Run8.png" id="13_hvi53"]
 [ext_resource type="Texture2D" uid="uid://kejqcc4vrwps" path="res://Assets/kenney_isometricPrototypeTiles/Characters/Human/Human_0_Run9.png" id="14_rr203"]
-[ext_resource type="Script" uid="uid://c03g3yle7caag" path="res://body.gd" id="15_sm1rv"]
+[ext_resource type="Script" uid="uid://c03g3yle7caag" path="res://Scripts/body.gd" id="15_sm1rv"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_344ge"]
 animations = [{

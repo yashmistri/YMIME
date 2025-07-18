@@ -20,9 +20,10 @@ func _ready():
 func _process(delta: float) -> void:
 	pass
 
-func spawn_area_dmg(tile: Node2D, dmg: float):
+func spawn_area_dmg(tile: Node2D, dmg: float, attacker: Character):
 	var a := area_dmg.instantiate()
 	a.dmg = dmg
+	a.attacker = attacker
 	tile.call_deferred("add_child", a)
 	
 
@@ -62,4 +63,8 @@ func end_game(is_win: bool):
 	else:
 		print("lose")
 	get_tree().paused = true
-	$Player/Camera2D/CanvasLayer/GameOverPanel.visible = true
+	$Player/Camera2D/GameOverLayer.visible = true
+	
+	$Player/Camera2D/GameOverLayer/GameOverPanel/HBoxContainer/Stats/dmgDone.text = "Damage Done: {0}".format([$Player.damage_done])
+	$Player/Camera2D/GameOverLayer/GameOverPanel/HBoxContainer/Stats/dmgTaken.text = "Damage Taken: {0}".format([$Player.damage_taken])
+	$Player/Camera2D/GameOverLayer/GameOverPanel/HBoxContainer/Stats/enemiesDestroyed.text = "Enemies Defeated: {0}".format([enemies_defeated])

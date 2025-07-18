@@ -24,37 +24,61 @@ speed = 100.0
 [node name="Camera2D" type="Camera2D" parent="Player"]
 zoom = Vector2(0.3, 0.3)
 
-[node name="CanvasLayer" type="CanvasLayer" parent="Player/Camera2D"]
+[node name="GameOverLayer" type="CanvasLayer" parent="Player/Camera2D"]
 process_mode = 3
 script = ExtResource("4_kry3j")
 
-[node name="GameOverPanel" type="Panel" parent="Player/Camera2D/CanvasLayer"]
-visible = false
+[node name="GameOverPanel" type="Panel" parent="Player/Camera2D/GameOverLayer"]
 offset_right = 1154.0
 offset_bottom = 652.0
 
-[node name="GameOverMenu" type="VBoxContainer" parent="Player/Camera2D/CanvasLayer/GameOverPanel"]
+[node name="HBoxContainer" type="HBoxContainer" parent="Player/Camera2D/GameOverLayer/GameOverPanel"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -107.0
-offset_top = -66.5
-offset_right = 106.0
-offset_bottom = 66.5
+offset_left = -200.0
+offset_top = -113.5
+offset_right = 200.0
+offset_bottom = 113.5
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_constants/separation = 90
+alignment = 1
 
-[node name="GameOver" type="Label" parent="Player/Camera2D/CanvasLayer/GameOverPanel/GameOverMenu"]
+[node name="GameOverMenu" type="VBoxContainer" parent="Player/Camera2D/GameOverLayer/GameOverPanel/HBoxContainer"]
+layout_mode = 2
+
+[node name="GameOver" type="Label" parent="Player/Camera2D/GameOverLayer/GameOverPanel/HBoxContainer/GameOverMenu"]
 layout_mode = 2
 text = "Game Over"
 horizontal_alignment = 1
 
-[node name="NewGame" type="Button" parent="Player/Camera2D/CanvasLayer/GameOverPanel/GameOverMenu"]
+[node name="NewGame" type="Button" parent="Player/Camera2D/GameOverLayer/GameOverPanel/HBoxContainer/GameOverMenu"]
 layout_mode = 2
 text = "New Game"
+
+[node name="Stats" type="VBoxContainer" parent="Player/Camera2D/GameOverLayer/GameOverPanel/HBoxContainer"]
+layout_mode = 2
+
+[node name="Label4" type="Label" parent="Player/Camera2D/GameOverLayer/GameOverPanel/HBoxContainer/Stats"]
+layout_mode = 2
+text = "Stats"
+horizontal_alignment = 1
+
+[node name="dmgDone" type="Label" parent="Player/Camera2D/GameOverLayer/GameOverPanel/HBoxContainer/Stats"]
+layout_mode = 2
+text = "Damage Done:"
+
+[node name="dmgTaken" type="Label" parent="Player/Camera2D/GameOverLayer/GameOverPanel/HBoxContainer/Stats"]
+layout_mode = 2
+text = "Damage Taken:"
+
+[node name="enemiesDestroyed" type="Label" parent="Player/Camera2D/GameOverLayer/GameOverPanel/HBoxContainer/Stats"]
+layout_mode = 2
+text = "Enemies Destroyed:"
 
 [node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
 y_sort_enabled = true
@@ -70,4 +94,4 @@ y_sort_enabled = true
 tile_map_data = PackedByteArray("AAD8/wQAAAAAAAAAAgD8/wMAAAAAAAAAAgD9/wIAAAAAAAAAAgD9/wEAAAAAAAAAAgD+/wAAAAAAAAAAAgD+////AAAAAAAAAgD///7/AAAAAAAAAgD///3/AAAAAAAAAgD+/wIAAAAAAAAAAgD+/wMAAAAAAAAAAgD//wQAAAAAAAAAAgD//wUAAAAAAAAAAgAAAAYAAAAAAAAAAgD+/wsAAAAAAAAAAgD//woAAAAAAAAAAgD//wkAAAAAAAAAAgAAAAgAAAAAAAAAAgAAAAcAAAAAAAAAAgABAAYAAAAAAAAAAgAEAP//AAAAAAAAAwA=")
 tile_set = ExtResource("4_jjvhh")
 
-[connection signal="pressed" from="Player/Camera2D/CanvasLayer/GameOverPanel/GameOverMenu/NewGame" to="Player/Camera2D/CanvasLayer" method="_on_new_game_pressed"]
+[connection signal="pressed" from="Player/Camera2D/GameOverLayer/GameOverPanel/HBoxContainer/GameOverMenu/NewGame" to="Player/Camera2D/GameOverLayer" method="_on_new_game_pressed"]
