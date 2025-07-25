@@ -3,7 +3,7 @@ class_name Main
 
 var area_dmg: PackedScene = preload("res://Scenes/AreaDamage.tscn")
 var enemies_alive := 0
-var total_enemies := 0
+var enemies_defeated_goal := 10
 var enemies_defeated := 0
 
 func _ready():
@@ -51,7 +51,7 @@ func _on_enemy_spawned():
 func _on_enemy_die():
 	enemies_defeated += 1
 	enemies_alive -= 1
-	if enemies_defeated >= total_enemies:
+	if enemies_defeated >= enemies_defeated_goal:
 		end_game(true)
 
 func _on_player_die():

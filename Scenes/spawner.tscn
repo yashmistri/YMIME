@@ -1,7 +1,31 @@
-[gd_scene load_steps=3 format=3 uid="uid://cqjpmiog6cnfd"]
+[gd_scene load_steps=5 format=3 uid="uid://cqjpmiog6cnfd"]
 
 [ext_resource type="Texture2D" uid="uid://dbabj1mpst508" path="res://Assets/kenney_isometricPrototypeTiles/Isometric/column_E.png" id="1_mdv8j"]
 [ext_resource type="Script" uid="uid://duy0clom3rkrq" path="res://Scripts/spawner.gd" id="2_2ydn3"]
+
+[sub_resource type="Animation" id="Animation_mdv8j"]
+resource_name = "pattern1"
+length = 20.0
+loop_mode = 1
+tracks/0/type = "method"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [10],
+"method": &"add_to_count"
+}]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_xhbpr"]
+_data = {
+&"pattern1": SubResource("Animation_mdv8j")
+}
 
 [node name="spawner" type="Sprite2D"]
 modulate = Color(1, 0.196078, 1, 0.388235)
@@ -11,7 +35,11 @@ offset = Vector2(0, -192)
 script = ExtResource("2_2ydn3")
 
 [node name="Timer" type="Timer" parent="."]
-wait_time = 2.654
 autostart = true
+
+[node name="Pattern" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_xhbpr")
+}
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
