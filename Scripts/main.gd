@@ -21,10 +21,11 @@ func _process(delta: float) -> void:
 	pass
 
 func spawn_area_dmg(tile: Node2D, dmg: float, attacker: Character):
-	var a := area_dmg.instantiate()
-	a.dmg = dmg
-	a.attacker = attacker
-	tile.call_deferred("add_child", a)
+	if !tile:
+		return
+	if !tile.has_node("AreaDamage"):
+		return
+	tile.get_node("AreaDamage").activate(dmg, attacker)
 	
 
 func get_clicked_tile(pos: Vector2):

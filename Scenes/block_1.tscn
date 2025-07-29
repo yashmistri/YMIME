@@ -4,7 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://cvxvs2mwwew38" path="res://Scenes/tile_collider.tscn" id="2_ytqwo"]
 
 [node name="Block1" type="Sprite2D"]
-y_sort_enabled = true
+z_index = 1
 texture = ExtResource("1_51j2o")
 offset = Vector2(0, -192)
 

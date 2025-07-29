@@ -36,6 +36,8 @@ TODO:
 				rewards fast and efficient attacks and combos
 			
 	visuals:
+		highlight tile below cursor
+			highlight circle of tiles around cursor
 		animate meteor falling to tiles on casting damage area spell
 			small meteors travel from target tile to far away tiles on impact
 		short fire animation for one cell

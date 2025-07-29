@@ -3,10 +3,10 @@ extends Area2D
 var dmg:= 1
 var attacker: Character = null
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
-
+func activate(d, att):
+	dmg = d
+	attacker = att
+	$ActivationTimer.start()
 
 func _on_body_entered(body: Character) -> void:
 	print("enter")
@@ -18,14 +18,15 @@ func _on_area_entered(area: Area2D) -> void:
 	var ch: Character = area.get_parent()
 	ch.take_damage(dmg, attacker)
 	set_deferred("monitoring", false)
-	visible =false
 
 
 func _on_activation_timer_timeout() -> void:
 	monitoring = true
 	visible = true
+	if has_node("Explosion"):
+		$Explosion.emitting = true
 	$DurationTimer.start()
 
 
 func _on_duration_timer_timeout() -> void:
-	queue_free()
+	monitoring = false
