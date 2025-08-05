@@ -9,6 +9,7 @@ radius = 103.005
 
 [node name="Enemy" instance=ExtResource("1_afpow")]
 script = ExtResource("2_287tu")
+speed = 100.0
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="." index="4"]
 

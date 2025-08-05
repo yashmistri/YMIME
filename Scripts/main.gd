@@ -47,7 +47,7 @@ func get_tile_node(tile_map_layer: TileMapLayer, child_coord: Vector2i) -> Node2
 	
 func _on_enemy_spawned():
 	enemies_alive += 1
-	print("enemies alive: " + str(enemies_alive))
+	#print("enemies alive: " + str(enemies_alive))
 	
 func _on_enemy_die():
 	enemies_defeated += 1
