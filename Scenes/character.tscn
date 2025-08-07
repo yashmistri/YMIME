@@ -1,5 +1,6 @@
-[gd_scene load_steps=19 format=3 uid="uid://dj4bns2rylix3"]
+[gd_scene load_steps=24 format=3 uid="uid://dj4bns2rylix3"]
 
+[ext_resource type="Shader" uid="uid://d1bqc03acixfi" path="res://Scenes/character.gdshader" id="1_dm6ib"]
 [ext_resource type="Texture2D" uid="uid://cn3pub7e7e1ms" path="res://Assets/kenney_isometricPrototypeTiles/Characters/Human/Human_0_Idle0.png" id="2_wa5vi"]
 [ext_resource type="Texture2D" uid="uid://dawcmernt7xjs" path="res://Assets/kenney_isometricPrototypeTiles/Characters/Human/Human_1_Idle0.png" id="2_x1sy7"]
 [ext_resource type="Texture2D" uid="uid://dklwsmt1ktjvg" path="res://Assets/kenney_isometricPrototypeTiles/Characters/Human/Human_2_Idle0.png" id="3_sm1rv"]
@@ -15,6 +16,12 @@
 [ext_resource type="Texture2D" uid="uid://b342frs7nnybk" path="res://Assets/kenney_isometricPrototypeTiles/Characters/Human/Human_0_Run8.png" id="13_hvi53"]
 [ext_resource type="Texture2D" uid="uid://kejqcc4vrwps" path="res://Assets/kenney_isometricPrototypeTiles/Characters/Human/Human_0_Run9.png" id="14_rr203"]
 [ext_resource type="Script" uid="uid://c03g3yle7caag" path="res://Scripts/body.gd" id="15_sm1rv"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_q5mnj"]
+resource_local_to_scene = true
+shader = ExtResource("1_dm6ib")
+shader_parameter/flash_color = Color(1, 0, 0, 1)
+shader_parameter/flash_value = 0.0
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_344ge"]
 animations = [{
@@ -100,9 +107,47 @@ radius = 42.2966
 [sub_resource type="CircleShape2D" id="CircleShape2D_mvyft"]
 radius = 117.398
 
+[sub_resource type="Animation" id="Animation_w85my"]
+resource_name = "flash_red"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:material:shader_parameter/flash_value")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [1.0, 0.0]
+}
+
+[sub_resource type="Animation" id="Animation_et0tf"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:material:shader_parameter/flash_value")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_hgna0"]
+_data = {
+&"RESET": SubResource("Animation_et0tf"),
+&"flash_red": SubResource("Animation_w85my")
+}
+
 [node name="Character" type="CharacterBody2D"]
 z_index = 1
 y_sort_enabled = true
+material = SubResource("ShaderMaterial_q5mnj")
 collision_layer = 4
 collision_mask = 4
 motion_mode = 1
@@ -127,6 +172,7 @@ position = Vector2(0, -49)
 shape = SubResource("CircleShape2D_mvyft")
 
 [node name="body" type="Node2D" parent="."]
+use_parent_material = true
 script = ExtResource("15_sm1rv")
 
 [node name="arm_holder" type="Node2D" parent="body"]
@@ -139,18 +185,22 @@ color = Color(0.340339, 0.340339, 0.340339, 1)
 polygon = PackedVector2Array(118, -8, 32, -10, 33, 20, 116, 20)
 
 [node name="face_front" type="Polygon2D" parent="body"]
+use_parent_material = true
 polygon = PackedVector2Array(-76, -166, -54, -217, -32, -165, 28, -166, 56, -219, 80, -168, 44, -121, 69, -79, 32, -38, -36, -40, -86, -79, -48, -122)
 
 [node name="eye_left" type="Polygon2D" parent="body/face_front"]
+use_parent_material = true
 color = Color(0, 0, 0, 1)
 polygon = PackedVector2Array(-37, -126, -24, -140, -13, -125, -28, -112)
 
 [node name="eye_right" type="Polygon2D" parent="body/face_front"]
+use_parent_material = true
 color = Color(0, 0, 0, 1)
 polygon = PackedVector2Array(11, -124, 23, -142, 36, -119, 23, -105)
 
 [node name="face_back" type="Polygon2D" parent="body"]
 visible = false
+use_parent_material = true
 polygon = PackedVector2Array(-76, -166, -54, -217, -32, -165, 28, -166, 56, -219, 80, -168, 44, -121, 69, -79, 32, -38, -36, -40, -86, -79, -48, -122)
 
 [node name="shadow" type="Polygon2D" parent="body"]
@@ -158,3 +208,8 @@ visible = false
 z_index = -1
 color = Color(0, 0, 0, 0.4)
 polygon = PackedVector2Array(-69, 1, -43, -19, 31, -21, 71, 2, 26, 18, -42, 21)
+
+[node name="Anim" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_hgna0")
+}

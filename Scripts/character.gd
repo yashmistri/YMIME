@@ -19,6 +19,8 @@ func take_damage(damage: float, attacker: Character):
 	print(name + " took %d" % damage)
 	# counts damage taken past zero
 	damage_taken += damage
+	var anim : AnimationPlayer= $Anim
+	anim.play("flash_red")
 	if attacker:
 		attacker.damage_done += damage
 	if current_health == 0:
