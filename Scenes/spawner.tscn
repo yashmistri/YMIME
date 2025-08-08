@@ -1,7 +1,6 @@
-[gd_scene load_steps=6 format=3 uid="uid://cqjpmiog6cnfd"]
+[gd_scene load_steps=5 format=3 uid="uid://cqjpmiog6cnfd"]
 
 [ext_resource type="Texture2D" uid="uid://dxvp13vpkmv2x" path="res://Assets/kenney_isometricPrototypeTiles/Isometric/floor_E.png" id="1_xhbpr"]
-[ext_resource type="Script" uid="uid://duy0clom3rkrq" path="res://Scripts/spawner.gd" id="2_2ydn3"]
 [ext_resource type="Texture2D" uid="uid://cvobvkw5mga45" path="res://Assets/kenney_isometricPrototypeTiles/Isometric/pole_N.png" id="3_2ydn3"]
 
 [sub_resource type="Animation" id="Animation_mdv8j"]
@@ -28,14 +27,12 @@ _data = {
 &"pattern1": SubResource("Animation_mdv8j")
 }
 
-[node name="spawner" type="Sprite2D"]
+[node name="spawner" type="Sprite2D" groups=["Spawner"]]
 y_sort_enabled = true
 texture = ExtResource("1_xhbpr")
 offset = Vector2(0, -192)
-script = ExtResource("2_2ydn3")
 
 [node name="Timer" type="Timer" parent="."]
-autostart = true
 
 [node name="Pattern" type="AnimationPlayer" parent="."]
 libraries = {

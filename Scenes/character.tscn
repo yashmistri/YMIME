@@ -1,6 +1,6 @@
 [gd_scene load_steps=24 format=3 uid="uid://dj4bns2rylix3"]
 
-[ext_resource type="Shader" uid="uid://d1bqc03acixfi" path="res://Scenes/character.gdshader" id="1_dm6ib"]
+[ext_resource type="Shader" uid="uid://d1bqc03acixfi" path="res://character.gdshader" id="1_dm6ib"]
 [ext_resource type="Texture2D" uid="uid://cn3pub7e7e1ms" path="res://Assets/kenney_isometricPrototypeTiles/Characters/Human/Human_0_Idle0.png" id="2_wa5vi"]
 [ext_resource type="Texture2D" uid="uid://dawcmernt7xjs" path="res://Assets/kenney_isometricPrototypeTiles/Characters/Human/Human_1_Idle0.png" id="2_x1sy7"]
 [ext_resource type="Texture2D" uid="uid://dklwsmt1ktjvg" path="res://Assets/kenney_isometricPrototypeTiles/Characters/Human/Human_2_Idle0.png" id="3_sm1rv"]
@@ -107,6 +107,21 @@ radius = 42.2966
 [sub_resource type="CircleShape2D" id="CircleShape2D_mvyft"]
 radius = 117.398
 
+[sub_resource type="Animation" id="Animation_et0tf"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:material:shader_parameter/flash_value")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
 [sub_resource type="Animation" id="Animation_w85my"]
 resource_name = "flash_red"
 length = 0.2
@@ -121,21 +136,6 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [1.0, 0.0]
-}
-
-[sub_resource type="Animation" id="Animation_et0tf"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:material:shader_parameter/flash_value")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [0.0]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_hgna0"]

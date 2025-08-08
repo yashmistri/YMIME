@@ -20,6 +20,7 @@ TODO:
 				vfx: magical spikes 
 			or trigger one tile to damage on a delay while a projectile is animated from character to target
 			make sure target only gets damaged once per cast
+		fire projectile and make big tile explosion on collision
 		cast damaging area on tiles around cursor
 			restrict range to radius r
 		cast expanding rings that trigger damage tiles
@@ -36,6 +37,8 @@ TODO:
 				rewards fast and efficient attacks and combos
 			
 	visuals:
+		explosion warps circle area:
+			use white circle texture as input to shader warp pixel and then expand circle
 		highlight tile below cursor
 			highlight circle of tiles around cursor
 		animate meteor falling to tiles on casting damage area spell

@@ -3,8 +3,12 @@ class_name Main
 
 var area_dmg: PackedScene = preload("res://Scenes/AreaDamage.tscn")
 var enemies_alive := 0
-var enemies_defeated_goal := 10
+var enemies_defeated_goal := 30
 var enemies_defeated := 0
+var max_enemies_alive := 10
+var spawners : Array[Node2D] = []
+var enemy : PackedScene = preload("res://Scenes/enemy.tscn")
+
 
 func _ready():
 	# tiles are not ready during main _ready() despite being descended from Main therefore update tilemaplayer state
@@ -12,13 +16,25 @@ func _ready():
 	# set each tile name to location in order to easily find them later
 	for child in $NavigationRegion2D/Ground.get_children():
 		child.name = "{0}_{1}".format([int(child.position.x), int(child.position.y)])
+		if child.is_in_group("Spawner"):
+			spawners.append(child)
 		#print(child.name)
 	
 	get_tree().paused = false
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	pass
+	spawn_enemy()
+
+func spawn_enemy():
+	if enemies_alive >= max_enemies_alive or not $EnemySpawnTimer.is_stopped():
+		return
+	var e:= enemy.instantiate()
+	var picked := spawners[randi_range(0,spawners.size()-1)]
+	e.position = picked.global_position
+	call_deferred("add_child", e)
+	enemies_alive += 1
+	$EnemySpawnTimer.start()
 
 func spawn_area_dmg(tile: Node2D, dmg: float, attacker: Character):
 	if !tile:
@@ -69,3 +85,8 @@ func end_game(is_win: bool):
 	$Player/Camera2D/GameOverLayer/GameOverPanel/HBoxContainer/Stats/dmgDone.text = "Damage Done: {0}".format([$Player.damage_done])
 	$Player/Camera2D/GameOverLayer/GameOverPanel/HBoxContainer/Stats/dmgTaken.text = "Damage Taken: {0}".format([$Player.damage_taken])
 	$Player/Camera2D/GameOverLayer/GameOverPanel/HBoxContainer/Stats/enemiesDestroyed.text = "Enemies Defeated: {0}".format([enemies_defeated])
+
+
+func _on_enemy_spawn_timer_timeout() -> void:
+	
+	spawn_enemy()

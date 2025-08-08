@@ -19,6 +19,10 @@ config/icon="res://icon.svg"
 
 Global="*res://Scripts/global.gd"
 
+[global_group]
+
+Spawner="can spawn enemies at this tile's location"
+
 [input]
 
 left={
