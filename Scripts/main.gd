@@ -20,7 +20,7 @@ func _ready():
 			spawners.append(child)
 		#print(child.name)
 	
-	get_tree().paused = false
+	get_tree().paused = true
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:

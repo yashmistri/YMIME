@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=4 uid="uid://b3e2ije72ksjg"]
+[gd_scene load_steps=10 format=4 uid="uid://b3e2ije72ksjg"]
 
 [ext_resource type="Script" uid="uid://cjmqxwwp1md8a" path="res://Scripts/main.gd" id="1_21xkr"]
 [ext_resource type="PackedScene" uid="uid://dj4bns2rylix3" path="res://Scenes/character.tscn" id="1_kry3j"]
@@ -6,6 +6,7 @@
 [ext_resource type="Script" uid="uid://uot4kl8l4743" path="res://Scripts/player.gd" id="3_jjvhh"]
 [ext_resource type="TileSet" uid="uid://bm1kjgj3dp0xo" path="res://tiles.tres" id="4_jjvhh"]
 [ext_resource type="Script" uid="uid://ci2g0avrni1ui" path="res://Scripts/Menu1.gd" id="4_kry3j"]
+[ext_resource type="Script" uid="uid://d2ye5rx3haqrf" path="res://Scenes/main_menu.gd" id="6_6bp64"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_6bp64"]
 resource_local_to_scene = true
@@ -36,7 +37,6 @@ zoom = Vector2(0.3, 0.3)
 
 [node name="GameOverLayer" type="CanvasLayer" parent="Player/Camera2D"]
 process_mode = 3
-visible = false
 script = ExtResource("4_kry3j")
 
 [node name="GameOverPanel" type="Panel" parent="Player/Camera2D/GameOverLayer"]
@@ -67,9 +67,9 @@ layout_mode = 2
 text = "Game Over"
 horizontal_alignment = 1
 
-[node name="NewGame" type="Button" parent="Player/Camera2D/GameOverLayer/GameOverPanel/HBoxContainer/GameOverMenu"]
+[node name="Menu" type="Button" parent="Player/Camera2D/GameOverLayer/GameOverPanel/HBoxContainer/GameOverMenu"]
 layout_mode = 2
-text = "New Game"
+text = "To Menu"
 
 [node name="Stats" type="VBoxContainer" parent="Player/Camera2D/GameOverLayer/GameOverPanel/HBoxContainer"]
 layout_mode = 2
@@ -91,6 +91,38 @@ text = "Damage Taken:"
 layout_mode = 2
 text = "Enemies Destroyed:"
 
+[node name="MainMenu" type="CanvasLayer" parent="Player/Camera2D"]
+process_mode = 3
+visible = false
+script = ExtResource("6_6bp64")
+
+[node name="Panel" type="Panel" parent="Player/Camera2D/MainMenu"]
+offset_right = 1157.0
+offset_bottom = 653.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Player/Camera2D/MainMenu/Panel"]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -125.73
+offset_top = -20.0
+offset_right = -85.73
+offset_bottom = 20.0
+grow_horizontal = 0
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="Player/Camera2D/MainMenu/Panel/VBoxContainer"]
+layout_mode = 2
+text = "YMIME Test"
+
+[node name="Button" type="Button" parent="Player/Camera2D/MainMenu/Panel/VBoxContainer"]
+layout_mode = 2
+text = "Start Game
+"
+
 [node name="A1Recharge" type="Timer" parent="Player"]
 wait_time = 2.0
 one_shot = true
@@ -107,6 +139,7 @@ tile_set = ExtResource("4_jjvhh")
 [node name="EnemySpawnTimer" type="Timer" parent="."]
 one_shot = true
 
-[connection signal="pressed" from="Player/Camera2D/GameOverLayer/GameOverPanel/HBoxContainer/GameOverMenu/NewGame" to="Player/Camera2D/GameOverLayer" method="_on_new_game_pressed"]
+[connection signal="pressed" from="Player/Camera2D/GameOverLayer/GameOverPanel/HBoxContainer/GameOverMenu/Menu" to="Player/Camera2D/GameOverLayer" method="_on_new_game_pressed"]
+[connection signal="pressed" from="Player/Camera2D/MainMenu/Panel/VBoxContainer/Button" to="Player/Camera2D/MainMenu" method="_on_button_pressed"]
 [connection signal="timeout" from="Player/A1Recharge" to="Player" method="_on_a_1_recharge_timeout"]
 [connection signal="timeout" from="EnemySpawnTimer" to="." method="_on_enemy_spawn_timer_timeout"]
