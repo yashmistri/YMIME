@@ -45,7 +45,15 @@ func spawn_area_dmg(tile: Node2D, dmg: float, attacker: Character) -> bool:
 	if tile.get_node("AreaDamage").is_activated():
 		return false
 	tile.get_node("AreaDamage").activate(dmg, attacker)
+	spawn_text("EXPLOSION", tile.global_position)
 	return true
+
+func spawn_text(str: String, pos: Vector2):
+	var text := load("res://Scenes/FloatingText.tscn")
+	var instance :FloatingText = text.instantiate()
+	instance.set_text(str)
+	instance.position = pos
+	call_deferred("add_child", instance)
 	
 
 func get_clicked_tile(pos: Vector2):

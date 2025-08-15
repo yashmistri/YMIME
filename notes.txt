@@ -2,10 +2,10 @@ TODO:
 	misc:
 		x make enemy into scene
 		x have Main keep count of enemies alive, enemies eliminated
-		limit number of enemies alive at one time?
+		x limit number of enemies alive at one time?
 		
-		make sure tiles with an ongoing attack or state can't trigger a new attack
-			make attack into child of tile and check if tile has attack child before triggering another attack
+		x make sure tiles with an ongoing attack or state can't trigger a new attack
+			x make attack into child of tile and check if tile has attack child before triggering another attack
 	character:
 		have stats: health, damage, speed, level
 	enemy:
@@ -90,8 +90,8 @@ TODO:
 			goal is survive for as long as possible while enemies get stronger
 			player gets stronger by eliminating enemies
 Bugs:
-	prevent area damage from spawning on walls
-	area damage not showing above tiles north of some location
+	x prevent area damage from spawning on walls
+	x area damage not showing above tiles north of some location
 		make them children of tile
 	enemy hurtbox disabled after hitting player
 Notes:

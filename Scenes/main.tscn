@@ -6,8 +6,8 @@
 [ext_resource type="Script" uid="uid://uot4kl8l4743" path="res://Scripts/player.gd" id="3_jjvhh"]
 [ext_resource type="TileSet" uid="uid://bm1kjgj3dp0xo" path="res://tiles.tres" id="4_jjvhh"]
 [ext_resource type="Script" uid="uid://ci2g0avrni1ui" path="res://Scripts/Menu1.gd" id="4_kry3j"]
-[ext_resource type="Script" uid="uid://d2ye5rx3haqrf" path="res://Scenes/main_menu.gd" id="6_6bp64"]
-[ext_resource type="Script" uid="uid://f2irqd4i5xgm" path="res://Scenes/ui.gd" id="7_344ge"]
+[ext_resource type="Script" uid="uid://d2ye5rx3haqrf" path="res://Scripts/main_menu.gd" id="6_6bp64"]
+[ext_resource type="Script" uid="uid://f2irqd4i5xgm" path="res://Scripts/ui.gd" id="7_344ge"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_6bp64"]
 resource_local_to_scene = true
