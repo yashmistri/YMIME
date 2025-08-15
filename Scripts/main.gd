@@ -25,6 +25,7 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	spawn_enemy()
+	
 
 func spawn_enemy():
 	if enemies_alive >= max_enemies_alive or not $EnemySpawnTimer.is_stopped():

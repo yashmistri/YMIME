@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=4 uid="uid://b3e2ije72ksjg"]
+[gd_scene load_steps=12 format=4 uid="uid://b3e2ije72ksjg"]
 
 [ext_resource type="Script" uid="uid://cjmqxwwp1md8a" path="res://Scripts/main.gd" id="1_21xkr"]
 [ext_resource type="PackedScene" uid="uid://dj4bns2rylix3" path="res://Scenes/character.tscn" id="1_kry3j"]
@@ -7,12 +7,19 @@
 [ext_resource type="TileSet" uid="uid://bm1kjgj3dp0xo" path="res://tiles.tres" id="4_jjvhh"]
 [ext_resource type="Script" uid="uid://ci2g0avrni1ui" path="res://Scripts/Menu1.gd" id="4_kry3j"]
 [ext_resource type="Script" uid="uid://d2ye5rx3haqrf" path="res://Scenes/main_menu.gd" id="6_6bp64"]
+[ext_resource type="Script" uid="uid://f2irqd4i5xgm" path="res://Scenes/ui.gd" id="7_344ge"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_6bp64"]
 resource_local_to_scene = true
 shader = ExtResource("3_21xkr")
 shader_parameter/flash_color = Color(1, 0, 0, 1)
 shader_parameter/flash_value = 0.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_344ge"]
+bg_color = Color(0.0979991, 0.190779, 0.230109, 1)
+border_width_bottom = 25
+border_color = Color(0.581033, 0.581033, 0.581033, 1)
+border_blend = true
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_6bp64"]
 vertices = PackedVector2Array(3044.3, 317.992, 3649.93, 167.281, 257.93, 1969.52, 1508.3, 1213.99, 2816, 432.141, 1280, 1328.14, 283.703, 829.992, 100.297, 1405.99, 100.297, 1282.01, -1124.3, -642.008, -864.281, -512, -1764.3, -61.9922, -3151.46, 315.453, 1664, 143.859, 1120.28, -128, 1636.3, -386.008, 2304, -176.141, 667.703, -642.008, 1055.72, -448, 539.703, -189.992, -996.297, 61.9922, -224.281, 448, -612.297, 642.008, -1536, 176.141, -512, -688.141, -859.078, -861.68, 365.391, -1490.45, 512, -1200.14, 740.297, -1085.99, 1664, 496.141, 2304, 176.141, 1508.3, 1090.01, -1124.3, -725.492, 740.297, -962.008, 3044.3, 194.008, -2276.3, 322.008, -1764.3, 61.9922, -2048, 207.859, 512, 591.859, 612.297, 381.992, -384, 880.141, 283.703, 706.008, -612.297, 765.992, -128, 1520.14, -2276.3, 445.992, 612.297, 258.008, 539.703, -66.0078, 384, 143.859, -996.297, -61.9922, -768, -176.141, 128, 271.859, 667.703, -765.992, 1636.3, -509.992, 896, -880.141)
@@ -122,6 +129,27 @@ text = "YMIME Test"
 layout_mode = 2
 text = "Start Game
 "
+
+[node name="UI" type="CanvasLayer" parent="Player/Camera2D"]
+script = ExtResource("7_344ge")
+
+[node name="Panel" type="Panel" parent="Player/Camera2D/UI"]
+offset_right = 1154.0
+offset_bottom = 50.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_344ge")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Player/Camera2D/UI/Panel"]
+offset_right = 190.0
+offset_bottom = 40.0
+theme_override_constants/separation = 75
+
+[node name="HealthLabel" type="Label" parent="Player/Camera2D/UI/Panel/HBoxContainer"]
+layout_mode = 2
+text = "Health"
+
+[node name="Charges" type="Label" parent="Player/Camera2D/UI/Panel/HBoxContainer"]
+layout_mode = 2
+text = "Charges"
 
 [node name="A1Recharge" type="Timer" parent="Player"]
 wait_time = 2.0
