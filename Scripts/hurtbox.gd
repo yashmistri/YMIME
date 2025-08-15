@@ -8,6 +8,9 @@ func activate(d, att):
 	attacker = att
 	$ActivationTimer.start()
 
+func is_activated():
+	return not $ActivationTimer.is_stopped()
+
 func _on_body_entered(body: Character) -> void:
 	print("enter")
 	body.take_damage(dmg, attacker)
@@ -18,6 +21,7 @@ func _on_area_entered(area: Area2D) -> void:
 	var ch: Character = area.get_parent()
 	ch.take_damage(dmg, attacker)
 	set_deferred("monitoring", false)
+
 
 
 func _on_activation_timer_timeout() -> void:

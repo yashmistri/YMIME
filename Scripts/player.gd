@@ -44,9 +44,10 @@ func die():
 func ability1(t: Node2D):
 	if ability1_charges == 0:
 		return
-	main.spawn_area_dmg(t, damage * ability1_damage_scaling + 5*level, self)
-	ability1_charges -= 1
-	$A1Recharge.start()
+	var success: bool = main.spawn_area_dmg(t, damage * ability1_damage_scaling + 5*level, self)
+	if success:
+		ability1_charges -= 1
+		$A1Recharge.start()
 
 func _on_a_1_recharge_timeout() -> void:
 	ability1_charges += 1

@@ -37,12 +37,15 @@ func spawn_enemy():
 	enemies_alive += 1
 	$EnemySpawnTimer.start()
 
-func spawn_area_dmg(tile: Node2D, dmg: float, attacker: Character):
+func spawn_area_dmg(tile: Node2D, dmg: float, attacker: Character) -> bool:
 	if !tile:
-		return
+		return false
 	if !tile.has_node("AreaDamage"):
-		return
+		return false
+	if tile.get_node("AreaDamage").is_activated():
+		return false
 	tile.get_node("AreaDamage").activate(dmg, attacker)
+	return true
 	
 
 func get_clicked_tile(pos: Vector2):
