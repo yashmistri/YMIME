@@ -69,6 +69,7 @@ func _on_enemy_spawned():
 func _on_enemy_die():
 	enemies_defeated += 1
 	enemies_alive -= 1
+	$Player.give_xp(1)
 	if enemies_defeated >= enemies_defeated_goal:
 		end_game(true)
 

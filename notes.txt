@@ -37,6 +37,7 @@ TODO:
 				rewards fast and efficient attacks and combos
 			
 	visuals:
+		level up text 
 		explosion warps circle area:
 			use white circle texture as input to shader warp pixel and then expand circle
 		highlight tile below cursor

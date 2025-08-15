@@ -5,6 +5,8 @@ class_name Character
 @export var max_health: float = 100
 @export var damage:float = 50
 var current_health: float
+var level: int = 1
+var xp: int = 0
 var damage_taken: float = 0
 var damage_done: float = 0
 
@@ -25,6 +27,12 @@ func take_damage(damage: float, attacker: Character):
 		attacker.damage_done += damage
 	if current_health == 0:
 		die()
+
+
+
+func give_xp(xp_value: int):
+	xp += xp_value
+	level = 1 + xp / 4
 
 func die():
 	emit_signal("character_die")
