@@ -15,6 +15,7 @@ signal character_die
 func _ready() -> void:
 	
 	current_health = max_health
+	$HPBar.value = current_health/max_health
 
 func take_damage(damage: float, attacker: Character):
 	current_health = clampf(current_health-damage, 0,max_health)
@@ -23,6 +24,7 @@ func take_damage(damage: float, attacker: Character):
 	damage_taken += damage
 	var anim : AnimationPlayer= $Anim
 	anim.play("flash_red")
+	$HPBar.value = current_health/max_health
 	if attacker:
 		attacker.damage_done += damage
 	if current_health == 0:

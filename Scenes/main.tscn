@@ -140,6 +140,7 @@ offset_bottom = 50.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_344ge")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Player/Camera2D/UI/Panel"]
+layout_mode = 0
 offset_right = 190.0
 offset_bottom = 40.0
 theme_override_constants/separation = 75
@@ -155,6 +156,10 @@ text = "Charges"
 [node name="Level" type="Label" parent="Player/Camera2D/UI/Panel/HBoxContainer"]
 layout_mode = 2
 text = "Player Level:"
+
+[node name="Enemies" type="Label" parent="Player/Camera2D/UI/Panel/HBoxContainer"]
+layout_mode = 2
+text = "Enemies"
 
 [node name="A1Recharge" type="Timer" parent="Player"]
 wait_time = 2.0

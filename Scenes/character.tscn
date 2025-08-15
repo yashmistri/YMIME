@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://dj4bns2rylix3"]
+[gd_scene load_steps=28 format=3 uid="uid://dj4bns2rylix3"]
 
 [ext_resource type="Shader" uid="uid://d1bqc03acixfi" path="res://character.gdshader" id="1_dm6ib"]
 [ext_resource type="Texture2D" uid="uid://cn3pub7e7e1ms" path="res://Assets/kenney_isometricPrototypeTiles/Characters/Human/Human_0_Idle0.png" id="2_wa5vi"]
@@ -144,6 +144,20 @@ _data = {
 &"flash_red": SubResource("Animation_w85my")
 }
 
+[sub_resource type="Gradient" id="Gradient_dm6ib"]
+offsets = PackedFloat32Array(0)
+colors = PackedColorArray(0, 0, 0, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_q5mnj"]
+gradient = SubResource("Gradient_dm6ib")
+
+[sub_resource type="Gradient" id="Gradient_w85my"]
+offsets = PackedFloat32Array(0)
+colors = PackedColorArray(1, 1, 1, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_et0tf"]
+gradient = SubResource("Gradient_w85my")
+
 [node name="Character" type="CharacterBody2D"]
 z_index = 1
 y_sort_enabled = true
@@ -213,3 +227,20 @@ polygon = PackedVector2Array(-69, 1, -43, -19, 31, -21, 71, 2, 26, 18, -42, 21)
 libraries = {
 &"": SubResource("AnimationLibrary_hgna0")
 }
+
+[node name="HPBar" type="TextureProgressBar" parent="."]
+z_index = 2
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -76.0
+offset_top = -248.0
+offset_right = 78.0
+offset_bottom = -227.0
+grow_horizontal = 2
+max_value = 1.0
+step = 0.01
+nine_patch_stretch = true
+texture_under = SubResource("GradientTexture1D_q5mnj")
+texture_progress = SubResource("GradientTexture1D_et0tf")
+tint_progress = Color(0.410333, 1, 0.39, 1)
