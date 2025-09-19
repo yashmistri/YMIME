@@ -14,7 +14,6 @@ func _ready() -> void:
 	var hitbox: Area2D = $hitbox
 	main = $".."
 	hitbox.set_collision_layer_value(1, true)
-	
 	connect("character_die", $"/root/Main"._on_player_die)
 	super._ready()
 	

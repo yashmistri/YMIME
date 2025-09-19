@@ -44,7 +44,9 @@ func spawn_area_dmg(tile: Node2D, dmg: float, attacker: Character) -> bool:
 		return false
 	if tile.get_node("AreaDamage").is_activated():
 		return false
-	tile.get_node("AreaDamage").activate(dmg, attacker)
+	var ad : AreaDamage = tile.get_node("AreaDamage")
+	ad.set_collision_mask_value(3, true)
+	ad.activate(dmg, attacker, 1, 0.5, -1)
 	spawn_text("EXPLOSION", tile.global_position)
 	return true
 

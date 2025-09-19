@@ -10,7 +10,7 @@ offset = Vector2(0, -192)
 
 [node name="static" type="StaticBody2D" parent="."]
 z_index = 1
-collision_layer = 4
-collision_mask = 4
+collision_layer = 8
+collision_mask = 8
 
 [node name="CollisionPolygon2D" parent="static" instance=ExtResource("2_ytqwo")]

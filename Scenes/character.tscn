@@ -162,8 +162,8 @@ gradient = SubResource("Gradient_w85my")
 z_index = 1
 y_sort_enabled = true
 material = SubResource("ShaderMaterial_q5mnj")
-collision_layer = 4
-collision_mask = 4
+collision_layer = 0
+collision_mask = 8
 motion_mode = 1
 wall_min_slide_angle = 1.93382
 

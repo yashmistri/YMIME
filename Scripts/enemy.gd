@@ -5,11 +5,14 @@ var nav_agent: NavigationAgent2D
 
 func _ready():
 	nav_agent = $NavigationAgent2D
-	var hitbox: Area2D = $hitbox
+	var hurtbox: AreaDamage = $AreaDamage
+	var hitbox:= $hitbox
 	hitbox.set_collision_layer_value(2, true)
-	set_collision_layer_value(2, true)
-	$hurtbox.dmg = damage
-	$hurtbox.attacker = self
+	#hurtbox.set_collision_layer_value(2, true)
+	# set_collision_layer_value(2, true)
+	hurtbox.activate(damage, self, -1, 0, -1)
+	hurtbox.dmg = damage
+	hurtbox.attacker = self
 	connect("character_die", $"/root/Main"._on_enemy_die)
 	
 	super._ready()
