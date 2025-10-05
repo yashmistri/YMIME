@@ -14,6 +14,7 @@ func _ready():
 	hurtbox.dmg = damage
 	hurtbox.attacker = self
 	connect("character_die", $"/root/Main"._on_enemy_die)
+	$LevelLabel.text = str(level)
 	
 	super._ready()
 

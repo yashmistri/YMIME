@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://c3r8kgek20uot"]
+[gd_scene load_steps=7 format=3 uid="uid://c3r8kgek20uot"]
 
 [ext_resource type="PackedScene" uid="uid://dj4bns2rylix3" path="res://Scenes/character.tscn" id="1_afpow"]
 [ext_resource type="Script" uid="uid://ypvnx5slxopf" path="res://Scripts/enemy.gd" id="2_287tu"]
@@ -10,6 +10,11 @@ resource_local_to_scene = true
 shader = ExtResource("2_0830c")
 shader_parameter/flash_color = Color(1, 0, 0, 1)
 shader_parameter/flash_value = 0.0
+
+[sub_resource type="LabelSettings" id="LabelSettings_287tu"]
+font_size = 30
+outline_size = 7
+outline_color = Color(0, 0, 0, 1)
 
 [node name="Enemy" instance=ExtResource("1_afpow")]
 material = SubResource("ShaderMaterial_ghaa6")
@@ -24,3 +29,14 @@ damage = 20.0
 [node name="AreaDamage" parent="." index="7" instance=ExtResource("4_287tu")]
 collision_layer = 4
 collision_mask = 1
+
+[node name="LevelLabel" type="Label" parent="." index="8"]
+offset_left = -132.0
+offset_top = -263.0
+offset_right = -80.0
+offset_bottom = -212.0
+text = "1"
+label_settings = SubResource("LabelSettings_287tu")
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2

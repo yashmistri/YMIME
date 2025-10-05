@@ -1,11 +1,13 @@
 TODO:
 	misc:
-		x make enemy into scene
-		x have Main keep count of enemies alive, enemies eliminated
-		x limit number of enemies alive at one time?
-		
-		x make sure tiles with an ongoing attack or state can't trigger a new attack
-			x make attack into child of tile and check if tile has attack child before triggering another attack
+		cheats system:
+			toggle to enable cheats
+			player invincible, etc
+			keyboard shortcuts to enable individual cheats
+		enemies level up every 5 enemies defeated
+			doesn't affect spawned enemies
+			show enemy level next to hp
+			enemy level scales stats
 	character:
 		have stats: health, damage, speed, level
 	enemy:
@@ -93,7 +95,7 @@ Bugs:
 	x prevent area damage from spawning on walls
 	x area damage not showing above tiles north of some location
 		make them children of tile
-	enemy hurtbox disabled after hitting player
+	x enemy hurtbox disabled after hitting player
 Notes:
 Ideas:
 	level is 2d sprites but characters are 3d models. need separate lights for 2d and 3d and some way to set both positions correctly

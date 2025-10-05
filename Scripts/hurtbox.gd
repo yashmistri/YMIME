@@ -37,6 +37,8 @@ func is_activated():
 
 func damage_char(area: Area2D) -> void:
 	#print("dmg'd")
+	if number_of_hits == 0:
+		queue_free()
 	if number_of_hits == 0 or !can_attack:
 		return
 	var ch: Character = area.get_parent()
@@ -56,6 +58,7 @@ func _on_activation_timer_timeout() -> void:
 
 func _on_duration_timer_timeout() -> void:
 	can_attack = false
+	queue_free()
 	#print("duration ended")
 
 

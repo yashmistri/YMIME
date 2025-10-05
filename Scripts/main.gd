@@ -1,6 +1,7 @@
 extends Node2D
 class_name Main
 
+@export var player_invincible: bool = false
 var area_dmg: PackedScene = preload("res://Scenes/AreaDamage.tscn")
 var enemies_alive := 0
 var enemies_defeated_goal := 30
@@ -8,7 +9,6 @@ var enemies_defeated := 0
 var max_enemies_alive := 10
 var spawners : Array[Node2D] = []
 var enemy : PackedScene = preload("res://Scenes/enemy.tscn")
-
 
 func _ready():
 	# tiles are not ready during main _ready() despite being descended from Main therefore update tilemaplayer state
@@ -19,7 +19,7 @@ func _ready():
 		if child.is_in_group("Spawner"):
 			spawners.append(child)
 		#print(child.name)
-	
+	$Player.is_invincible = player_invincible
 	get_tree().paused = true
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -30,9 +30,10 @@ func _process(delta: float) -> void:
 func spawn_enemy():
 	if enemies_alive >= max_enemies_alive or not $EnemySpawnTimer.is_stopped():
 		return
-	var e:= enemy.instantiate()
+	var e:Enemy= enemy.instantiate()
 	var picked := spawners[randi_range(0,spawners.size()-1)]
 	e.position = picked.global_position
+	e.level = (enemies_defeated+1)%5
 	call_deferred("add_child", e)
 	enemies_alive += 1
 	$EnemySpawnTimer.start()
@@ -46,7 +47,7 @@ func spawn_area_dmg(tile: Node2D, dmg: float, attacker: Character) -> bool:
 		return false
 	var ad : AreaDamage = tile.get_node("AreaDamage")
 	ad.set_collision_mask_value(3, true)
-	ad.activate(dmg, attacker, 1, 0.5, -1)
+	ad.activate(dmg, attacker, 1, 0.5, 0.01)
 	spawn_text("EXPLOSION", tile.global_position)
 	return true
 
