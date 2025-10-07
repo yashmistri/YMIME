@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=4 uid="uid://b3e2ije72ksjg"]
+[gd_scene load_steps=16 format=4 uid="uid://b3e2ije72ksjg"]
 
 [ext_resource type="Script" uid="uid://cjmqxwwp1md8a" path="res://Scripts/main.gd" id="1_21xkr"]
 [ext_resource type="PackedScene" uid="uid://dj4bns2rylix3" path="res://Scenes/character.tscn" id="1_kry3j"]
@@ -20,6 +20,24 @@ bg_color = Color(0.0979991, 0.190779, 0.230109, 1)
 border_width_bottom = 25
 border_color = Color(0.581033, 0.581033, 0.581033, 1)
 border_blend = true
+
+[sub_resource type="Gradient" id="Gradient_344ge"]
+offsets = PackedFloat32Array(0, 0.1921824, 0.27687296, 0.43322477, 0.45928338, 0.65798044, 0.66775244, 0.7491857)
+colors = PackedColorArray(1, 1, 1, 1, 0.83, 0.83, 0.83, 1, 0.35, 0.35, 0.35, 1, 0.26295647, 0.26295647, 0.26295647, 1, 0.2, 0.2, 0.2, 1, 0.05143916, 0.05143916, 0.05143916, 1, 0.029928237, 0.029928237, 0.029928237, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_344ge"]
+gradient = SubResource("Gradient_344ge")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+
+[sub_resource type="Gradient" id="Gradient_ynf5e"]
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_ynf5e"]
+gradient = SubResource("Gradient_ynf5e")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(0.8119658, 0.23076923)
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_6bp64"]
 vertices = PackedVector2Array(3024, 305.4375, 3950.3438, 224.47656, 240.57031, 2068.8594, 1488, 1201.4375, 2816, 409.4375, 1280, 1305.4375, 304, 817.4375, 80, 1393.4375, 80, 1294.5625, 3104.1094, -214.47656, 3024, 206.5625, 1664, 166.5625, 1074.8828, -128, 1616, -398.5625, 2304, -153.4375, -976, 49.4375, -178.88281, 448, -592, 654.5625, -1536, 153.4375, 688, -654.5625, 1101.1172, -448, 560, -177.4375, -1104, -654.5625, -818.8828, -512, -1744, -49.4375, 1664, 473.4375, 2304, 153.4375, 1488, 1102.5625, 2908.2188, -312.45313, 3036.211, -248.45313, 720, -974.5625, 720, -1073.4375, -128, 1497.4375, -3373.0078, 314.9375, -2256, 433.4375, -2256, 334.5625, -2591.3672, -86.86719, -2524.2188, -120.453125, 512, 614.5625, 592, 369.4375, -384, 857.4375, 304, 718.5625, -2048, 230.5625, -592, 753.4375, -1744, 49.4375, -1104, -753.4375, 592, 270.5625, 560, -78.5625, 384, 166.5625, 384, -1574.5625, 512, -1177.4375, -512, -665.4375, -896, -857.4375, -976, -49.4375, -768, -153.4375, 128, 294.5625, 688, -753.4375, 1616, -497.4375, 896, -857.4375)
@@ -167,6 +185,24 @@ text = "Enemies"
 wait_time = 2.0
 one_shot = true
 
+[node name="PlayerLight" type="PointLight2D" parent="Player"]
+position = Vector2(0, -36)
+scale = Vector2(38.125, 38.125)
+color = Color(0.99999994, 0.93989784, 0.72150487, 1)
+energy = 1.18
+shadow_enabled = true
+texture = SubResource("GradientTexture2D_344ge")
+
+[node name="BlockLight" type="PointLight2D" parent="Player"]
+position = Vector2(0, -302.5001)
+scale = Vector2(10.843749, 12.48438)
+color = Color(0.9498628, 0.93495476, 7.70092e-07, 1)
+energy = 1.27
+range_item_cull_mask = 2
+shadow_enabled = true
+shadow_item_cull_mask = 2
+texture = SubResource("GradientTexture2D_ynf5e")
+
 [node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
 y_sort_enabled = true
 navigation_polygon = SubResource("NavigationPolygon_6bp64")
@@ -178,6 +214,9 @@ tile_set = ExtResource("4_jjvhh")
 
 [node name="EnemySpawnTimer" type="Timer" parent="."]
 one_shot = true
+
+[node name="CanvasModulate" type="CanvasModulate" parent="."]
+color = Color(0, 0, 0, 1)
 
 [connection signal="pressed" from="Player/Camera2D/GameOverLayer/GameOverPanel/HBoxContainer/GameOverMenu/Menu" to="Player/Camera2D/GameOverLayer" method="_on_new_game_pressed"]
 [connection signal="pressed" from="Player/Camera2D/MainMenu/Panel/VBoxContainer/Button" to="Player/Camera2D/MainMenu" method="_on_button_pressed"]

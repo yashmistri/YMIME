@@ -1,8 +1,14 @@
 TODO:
 	misc:
+		2d lighting:
+			3 lights at different sizes and intensities
+			circle light makes all enemy types look like the same blob
+			cone light faces cursor and fully illuminates enemies
+			how to make lights illuminate south part of walls when south of walls only
 		cheats system:
 			toggle to enable cheats
-			player invincible, etc
+			player invincible 'I'
+			infinite abilties 'U'
 			keyboard shortcuts to enable individual cheats
 		enemies level up every 5 enemies defeated
 			doesn't affect spawned enemies

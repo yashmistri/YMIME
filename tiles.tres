@@ -12,4 +12,5 @@ scenes/3/scene = ExtResource("3_5tqp5")
 [resource]
 tile_shape = 1
 tile_size = Vector2i(256, 128)
+occlusion_layer_0/light_mask = 1
 sources/0 = SubResource("TileSetScenesCollectionSource_4bllh")
