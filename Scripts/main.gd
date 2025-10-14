@@ -20,6 +20,7 @@ func _ready():
 			spawners.append(child)
 		#print(child.name)
 	$Player.is_invincible = player_invincible
+	$Darkness.visible = true
 	get_tree().paused = true
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

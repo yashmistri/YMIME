@@ -88,7 +88,7 @@ animations = [{
 }]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ynf5e"]
-radius = 65.00769
+radius = 108.07405
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_mvyft"]
 radius = 117.398
@@ -131,7 +131,6 @@ _data = {
 }
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_ushfy"]
-light_mode = 1
 
 [sub_resource type="Gradient" id="Gradient_dm6ib"]
 offsets = PackedFloat32Array(0)

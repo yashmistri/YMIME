@@ -49,7 +49,10 @@ TODO:
 		animate:
 			enemies breathing
 			light size
+		multiple lights around player to make fuzzy shadows
 		put normal maps on blocks then put directional light?
+		make columns put lamp sprite high up and point light at bottom
+		slow projectiles with lights pulsing with brightness color and size
 		level up text 
 		explosion warps circle area:
 			use white circle texture as input to shader warp pixel and then expand circle
