@@ -3,7 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://ch7uhr8j2xa3v" path="res://Scenes/block_1.tscn" id="1_4tuu5"]
 
 [node name="Block1" instance=ExtResource("1_4tuu5")]
-face_dir = 0
+face_dir = 3
 
 [node name="Dir" parent="." index="1"]
-text = "D"
+text = "U"
