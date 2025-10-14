@@ -1,7 +1,7 @@
 [gd_scene load_steps=9 format=3 uid="uid://ch7uhr8j2xa3v"]
 
 [ext_resource type="Texture2D" uid="uid://dh7hn1nb4tk77" path="res://Sprites/wall.png" id="1_ytqwo"]
-[ext_resource type="Script" uid="uid://cw4fwrax1lyh" path="res://Scenes/block.gd" id="2_uldf3"]
+[ext_resource type="Script" uid="uid://cw4fwrax1lyh" path="res://Scripts/block.gd" id="2_uldf3"]
 [ext_resource type="PackedScene" uid="uid://cvxvs2mwwew38" path="res://Scenes/tile_collider.tscn" id="2_ytqwo"]
 
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_uldf3"]
@@ -46,7 +46,6 @@ occluder = SubResource("OccluderPolygon2D_nkhg1")
 occluder_light_mask = 2
 
 [node name="RightFacingOccluder" type="LightOccluder2D" parent="static"]
-visible = false
 light_mask = 0
 occluder = SubResource("OccluderPolygon2D_i5hhw")
 occluder_light_mask = 2
@@ -58,5 +57,5 @@ offset_left = -87.0
 offset_top = -141.0
 offset_right = 177.0
 offset_bottom = 5.0
-text = "DIR"
+text = "R"
 label_settings = SubResource("LabelSettings_uldf3")

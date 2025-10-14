@@ -29,5 +29,5 @@ func _ready():
 	#print("face dir left {0} right {1}".format([ face_dir ^0b01, face_dir^0b10]))
 	$static/LeftFacingOccluder.visible = face_dir & 0b01
 	$static/RightFacingOccluder.visible = face_dir & 0b10
-	print("face dir left {0} right {1}".format([ $static/LeftFacingOccluder.visible, $static/RightFacingOccluder.visible]))
+	#print("face dir left {0} right {1}".format([ $static/LeftFacingOccluder.visible, $static/RightFacingOccluder.visible]))
 	

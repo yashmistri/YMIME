@@ -5,6 +5,8 @@ TODO:
 			circle light makes all enemy types look like the same blob
 			cone light faces cursor and fully illuminates enemies
 			how to make lights illuminate south part of walls when south of walls only
+			cast shadows on enemies and objects?
+			flashlight
 		cheats system:
 			toggle to enable cheats
 			player invincible 'I'
@@ -34,6 +36,10 @@ TODO:
 			restrict range to radius r
 		cast expanding rings that trigger damage tiles
 	game:
+		have places that player has to go to in a time limit
+			show trail to place
+				animate pulse going from player to goal
+			place changes when player reaches and time limit decreases
 		menu: start, gameover, pause
 		UI: health, abilities
 		status effects: attach a node to a character when a status effect is applied
@@ -49,10 +55,18 @@ TODO:
 		animate:
 			enemies breathing
 			light size
-		multiple lights around player to make fuzzy shadows
+			orb light gradient colors: shift all positions right and loop
+		tiles:
+			use terrain sets to automatically set correct directions for tiles
+			make a unique tile and sprite for every part of wall?:
+				lone block
+				face right and face left while connected on either side
+				corners north south east west
+				t joints
+		x multiple lights around player to make fuzzy shadows
 		put normal maps on blocks then put directional light?
 		make columns put lamp sprite high up and point light at bottom
-		slow projectiles with lights pulsing with brightness color and size
+		slow projectiles with red lights pulsing with brightness color and size
 		level up text 
 		explosion warps circle area:
 			use white circle texture as input to shader warp pixel and then expand circle

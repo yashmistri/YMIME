@@ -1,7 +1,9 @@
 extends Node2D
 class_name Main
 
+@export_category("Cheats")
 @export var player_invincible: bool = false
+@export var peaceful: bool = false
 var area_dmg: PackedScene = preload("res://Scenes/AreaDamage.tscn")
 var enemies_alive := 0
 var enemies_defeated_goal := 30
@@ -29,7 +31,7 @@ func _process(delta: float) -> void:
 	
 
 func spawn_enemy():
-	if enemies_alive >= max_enemies_alive or not $EnemySpawnTimer.is_stopped():
+	if peaceful or enemies_alive >= max_enemies_alive or not $EnemySpawnTimer.is_stopped():
 		return
 	var e:Enemy= enemy.instantiate()
 	var picked := spawners[randi_range(0,spawners.size()-1)]
