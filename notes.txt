@@ -20,6 +20,7 @@ TODO:
 		x spawn function
 		x spawn node
 		x damage player on contact
+		
 	player:
 		fire projectile
 			damage each tile in a line from player to max range
@@ -45,6 +46,10 @@ TODO:
 				rewards fast and efficient attacks and combos
 			
 	visuals:
+		animate:
+			enemies breathing
+			light size
+		put normal maps on blocks then put directional light?
 		level up text 
 		explosion warps circle area:
 			use white circle texture as input to shader warp pixel and then expand circle

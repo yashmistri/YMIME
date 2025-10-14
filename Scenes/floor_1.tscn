@@ -1,6 +1,6 @@
 [gd_scene load_steps=9 format=3 uid="uid://c4kjgvjlufubh"]
 
-[ext_resource type="Texture2D" uid="uid://dxvp13vpkmv2x" path="res://Assets/kenney_isometricPrototypeTiles/Isometric/floor_E.png" id="1_yr7qn"]
+[ext_resource type="Texture2D" uid="uid://c1t3cab4amaks" path="res://Sprites/floor1.png" id="1_3ropc"]
 [ext_resource type="PackedScene" uid="uid://be7o4g8eqag73" path="res://Scenes/AreaDamage.tscn" id="2_3ropc"]
 [ext_resource type="Texture2D" uid="uid://s8s7emsunfbl" path="res://white orb.png" id="3_vur88"]
 
@@ -38,8 +38,7 @@ turbulence_influence_max = 0.154
 
 [node name="Floor1" type="Sprite2D"]
 y_sort_enabled = true
-texture = ExtResource("1_yr7qn")
-offset = Vector2(0, -192)
+texture = ExtResource("1_3ropc")
 
 [node name="AreaDamage" parent="." instance=ExtResource("2_3ropc")]
 

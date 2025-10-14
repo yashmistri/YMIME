@@ -1,20 +1,6 @@
-[gd_scene load_steps=28 format=3 uid="uid://dj4bns2rylix3"]
+[gd_scene load_steps=15 format=3 uid="uid://dj4bns2rylix3"]
 
 [ext_resource type="Shader" uid="uid://d1bqc03acixfi" path="res://character.gdshader" id="1_dm6ib"]
-[ext_resource type="Texture2D" uid="uid://cn3pub7e7e1ms" path="res://Assets/kenney_isometricPrototypeTiles/Characters/Human/Human_0_Idle0.png" id="2_wa5vi"]
-[ext_resource type="Texture2D" uid="uid://dawcmernt7xjs" path="res://Assets/kenney_isometricPrototypeTiles/Characters/Human/Human_1_Idle0.png" id="2_x1sy7"]
-[ext_resource type="Texture2D" uid="uid://dklwsmt1ktjvg" path="res://Assets/kenney_isometricPrototypeTiles/Characters/Human/Human_2_Idle0.png" id="3_sm1rv"]
-[ext_resource type="Texture2D" uid="uid://ky0jxu345ag8" path="res://Assets/kenney_isometricPrototypeTiles/Characters/Human/Human_3_Idle0.png" id="4_jx0ln"]
-[ext_resource type="Texture2D" uid="uid://cwqb1ll10t8le" path="res://Assets/kenney_isometricPrototypeTiles/Characters/Human/Human_0_Run0.png" id="5_lpiy1"]
-[ext_resource type="Texture2D" uid="uid://dxkgchatguros" path="res://Assets/kenney_isometricPrototypeTiles/Characters/Human/Human_0_Run1.png" id="6_88tkl"]
-[ext_resource type="Texture2D" uid="uid://cp71fhlt3pvqt" path="res://Assets/kenney_isometricPrototypeTiles/Characters/Human/Human_0_Run2.png" id="7_y0ipg"]
-[ext_resource type="Texture2D" uid="uid://ck6hsvp3ilvu7" path="res://Assets/kenney_isometricPrototypeTiles/Characters/Human/Human_0_Run3.png" id="8_kjduu"]
-[ext_resource type="Texture2D" uid="uid://h8p14bgylalo" path="res://Assets/kenney_isometricPrototypeTiles/Characters/Human/Human_0_Run4.png" id="9_3d8aq"]
-[ext_resource type="Texture2D" uid="uid://buw7kekk7x8dv" path="res://Assets/kenney_isometricPrototypeTiles/Characters/Human/Human_0_Run5.png" id="10_8i6g0"]
-[ext_resource type="Texture2D" uid="uid://b2kxdff2xlxah" path="res://Assets/kenney_isometricPrototypeTiles/Characters/Human/Human_0_Run6.png" id="11_r5wlx"]
-[ext_resource type="Texture2D" uid="uid://c2rvddbxrtg38" path="res://Assets/kenney_isometricPrototypeTiles/Characters/Human/Human_0_Run7.png" id="12_1r1pa"]
-[ext_resource type="Texture2D" uid="uid://b342frs7nnybk" path="res://Assets/kenney_isometricPrototypeTiles/Characters/Human/Human_0_Run8.png" id="13_hvi53"]
-[ext_resource type="Texture2D" uid="uid://kejqcc4vrwps" path="res://Assets/kenney_isometricPrototypeTiles/Characters/Human/Human_0_Run9.png" id="14_rr203"]
 [ext_resource type="Script" uid="uid://c03g3yle7caag" path="res://Scripts/body.gd" id="15_sm1rv"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_q5mnj"]
@@ -27,7 +13,7 @@ shader_parameter/flash_value = 0.0
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("2_wa5vi")
+"texture": null
 }],
 "loop": true,
 "name": &"default",
@@ -35,7 +21,7 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("2_wa5vi")
+"texture": null
 }],
 "loop": true,
 "name": &"idle0",
@@ -43,7 +29,7 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("2_x1sy7")
+"texture": null
 }],
 "loop": true,
 "name": &"idle1",
@@ -51,7 +37,7 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("3_sm1rv")
+"texture": null
 }],
 "loop": true,
 "name": &"idle2",
@@ -59,7 +45,7 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("4_jx0ln")
+"texture": null
 }],
 "loop": true,
 "name": &"idle3",
@@ -67,34 +53,34 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("5_lpiy1")
+"texture": null
 }, {
 "duration": 1.0,
-"texture": ExtResource("6_88tkl")
+"texture": null
 }, {
 "duration": 1.0,
-"texture": ExtResource("7_y0ipg")
+"texture": null
 }, {
 "duration": 1.0,
-"texture": ExtResource("8_kjduu")
+"texture": null
 }, {
 "duration": 1.0,
-"texture": ExtResource("9_3d8aq")
+"texture": null
 }, {
 "duration": 1.0,
-"texture": ExtResource("10_8i6g0")
+"texture": null
 }, {
 "duration": 1.0,
-"texture": ExtResource("11_r5wlx")
+"texture": null
 }, {
 "duration": 1.0,
-"texture": ExtResource("12_1r1pa")
+"texture": null
 }, {
 "duration": 1.0,
-"texture": ExtResource("13_hvi53")
+"texture": null
 }, {
 "duration": 1.0,
-"texture": ExtResource("14_rr203")
+"texture": null
 }],
 "loop": true,
 "name": &"run0",
@@ -143,6 +129,9 @@ _data = {
 &"RESET": SubResource("Animation_et0tf"),
 &"flash_red": SubResource("Animation_w85my")
 }
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_ushfy"]
+light_mode = 1
 
 [sub_resource type="Gradient" id="Gradient_dm6ib"]
 offsets = PackedFloat32Array(0)
@@ -229,7 +218,9 @@ libraries = {
 }
 
 [node name="HPBar" type="TextureProgressBar" parent="."]
+light_mask = 4
 z_index = 2
+material = SubResource("CanvasItemMaterial_ushfy")
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
@@ -240,6 +231,7 @@ offset_bottom = -227.0
 grow_horizontal = 2
 max_value = 1.0
 step = 0.01
+value = 0.52
 nine_patch_stretch = true
 texture_under = SubResource("GradientTexture1D_q5mnj")
 texture_progress = SubResource("GradientTexture1D_et0tf")

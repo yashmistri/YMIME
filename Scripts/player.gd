@@ -12,6 +12,8 @@ var ability1_recharge_time := 2.0
 func _ready() -> void:
 	ability1_charges = ability1_max_charges
 	var hitbox: Area2D = $hitbox
+	var anim: AnimationPlayer = $LightAnim
+	anim.play("LightBreathe")
 	main = $".."
 	hitbox.set_collision_layer_value(1, true)
 	connect("character_die", $"/root/Main"._on_player_die)

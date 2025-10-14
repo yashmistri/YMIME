@@ -1,17 +1,17 @@
 [gd_scene load_steps=4 format=3 uid="uid://ch7uhr8j2xa3v"]
 
-[ext_resource type="Texture2D" uid="uid://im6oylvf3eth" path="res://Assets/kenney_isometricPrototypeTiles/Isometric/block_E.png" id="1_51j2o"]
+[ext_resource type="Texture2D" uid="uid://dh7hn1nb4tk77" path="res://Sprites/wall.png" id="1_ytqwo"]
 [ext_resource type="PackedScene" uid="uid://cvxvs2mwwew38" path="res://Scenes/tile_collider.tscn" id="2_ytqwo"]
 
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_ytqwo"]
 cull_mode = 1
-polygon = PackedVector2Array(0, -221, 127, -157, 128, 0, 1, 63, -126, 0, -131, -155)
+polygon = PackedVector2Array(-1, -191, 128, -128, 128, 0, 1, 63, -126, 0, -130, -129)
 
 [node name="Block1" type="Sprite2D"]
 light_mask = 2
 z_index = 1
-texture = ExtResource("1_51j2o")
-offset = Vector2(0, -192)
+texture = ExtResource("1_ytqwo")
+offset = Vector2(0, -64)
 
 [node name="static" type="StaticBody2D" parent="."]
 z_index = 1
