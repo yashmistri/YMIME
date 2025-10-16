@@ -10,7 +10,7 @@
 [ext_resource type="Script" uid="uid://d2ye5rx3haqrf" path="res://Scripts/main_menu.gd" id="6_6bp64"]
 [ext_resource type="Script" uid="uid://f2irqd4i5xgm" path="res://Scripts/ui.gd" id="7_344ge"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_6bp64"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ynf5e"]
 resource_local_to_scene = true
 shader = ExtResource("3_21xkr")
 shader_parameter/flash_color = Color(1, 0, 0, 1)
@@ -116,7 +116,7 @@ peaceful = true
 
 [node name="Player" parent="." instance=ExtResource("1_kry3j")]
 y_sort_enabled = false
-material = SubResource("ShaderMaterial_6bp64")
+material = SubResource("ShaderMaterial_ynf5e")
 position = Vector2(2714, 446)
 collision_layer = 1
 script = ExtResource("3_jjvhh")
@@ -260,7 +260,7 @@ one_shot = true
 position = Vector2(0, -36)
 scale = Vector2(36.28, 36.28)
 color = Color(1, 0.921903, 0.6290392, 1)
-energy = 0.11
+energy = 0.71
 shadow_enabled = true
 texture = SubResource("GradientTexture2D_344ge")
 

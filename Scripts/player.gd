@@ -36,7 +36,13 @@ func _physics_process(delta):
 	move_and_slide()
 	
 func _process(delta):
-	$body.target = get_local_mouse_position()
+	target = get_local_mouse_position()
+	$body.target = target
+	var mouse_pos = target
+	var mouse_dir = mouse_pos-to_local(position)
+	var model: Node3D = $SubViewportContainer/SubViewport/Model
+	model.transform.basis = Basis.IDENTITY
+	model.rotate_y(-mouse_dir.angle())
 	
 func die():
 	emit_signal("character_die")

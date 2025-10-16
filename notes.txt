@@ -63,6 +63,8 @@ TODO:
 				face right and face left while connected on either side
 				corners north south east west
 				t joints
+		lights:
+			make algorithm to get blocks that would be lit by flashlight and light them individually
 		x multiple lights around player to make fuzzy shadows
 		put normal maps on blocks then put directional light?
 		make columns put lamp sprite high up and point light at bottom
