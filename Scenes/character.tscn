@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://dj4bns2rylix3"]
+[gd_scene load_steps=13 format=3 uid="uid://dj4bns2rylix3"]
 
 [ext_resource type="Script" uid="uid://c03g3yle7caag" path="res://Scripts/body.gd" id="15_sm1rv"]
 
@@ -81,7 +81,7 @@ animations = [{
 }]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ynf5e"]
-radius = 108.07405
+radius = 38.63936
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_mvyft"]
 radius = 117.398
@@ -138,10 +138,6 @@ colors = PackedColorArray(1, 1, 1, 1)
 
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_et0tf"]
 gradient = SubResource("Gradient_w85my")
-
-[sub_resource type="BoxMesh" id="BoxMesh_ejsiy"]
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ushfy"]
 
 [node name="Character" type="CharacterBody2D"]
 z_index = 1
@@ -232,39 +228,6 @@ nine_patch_stretch = true
 texture_under = SubResource("GradientTexture1D_q5mnj")
 texture_progress = SubResource("GradientTexture1D_et0tf")
 tint_progress = Color(0.410333, 1, 0.39, 1)
-
-[node name="SubViewportContainer" type="SubViewportContainer" parent="."]
-visibility_layer = 0
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -254.0
-offset_top = -317.0
-offset_right = 258.0
-offset_bottom = 195.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="SubViewport" type="SubViewport" parent="SubViewportContainer"]
-transparent_bg = true
-handle_input_locally = false
-render_target_update_mode = 4
-
-[node name="Camera3D" type="Camera3D" parent="SubViewportContainer/SubViewport"]
-transform = Transform3D(1, 0, 0, 0, 0.8660254, 0.5, 0, -0.5, 0.8660254, 0, 2.1671598, 3.6741252)
-projection = 1
-current = true
-size = 3.0
-
-[node name="Model" type="MeshInstance3D" parent="SubViewportContainer/SubViewport"]
-gi_mode = 2
-mesh = SubResource("BoxMesh_ejsiy")
-surface_material_override/0 = SubResource("StandardMaterial3D_ushfy")
-
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="SubViewportContainer/SubViewport"]
-transform = Transform3D(0.8510405, 0, 0.52510047, -0.3812916, 0.68755656, 0.6179666, -0.36103633, -0.726131, 0.5851385, 0, 0, 0)
-light_energy = 0.248
-sky_mode = 1
 
 [node name="3DProjection" type="Sprite2D" parent="."]
 z_index = 3

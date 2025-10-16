@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=4 uid="uid://b3e2ije72ksjg"]
+[gd_scene load_steps=27 format=4 uid="uid://b3e2ije72ksjg"]
 
 [ext_resource type="Script" uid="uid://cjmqxwwp1md8a" path="res://Scripts/main.gd" id="1_21xkr"]
 [ext_resource type="PackedScene" uid="uid://dj4bns2rylix3" path="res://Scenes/character.tscn" id="1_kry3j"]
@@ -108,16 +108,26 @@ fill = 1
 fill_from = Vector2(0.5, 0.5)
 fill_to = Vector2(0.8162393, 0.7692308)
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_hptm8"]
+albedo_color = Color(0.45999998, 1, 0.64900005, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_ynf5e"]
+material = SubResource("StandardMaterial3D_hptm8")
+size = Vector3(1, 2, 1)
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_ynf5e"]
+viewport_path = NodePath("SubViewportContainer/SubViewport")
+
 [node name="Main" type="Node2D"]
 y_sort_enabled = true
 script = ExtResource("1_21xkr")
 player_invincible = true
-peaceful = true
+nomenu = true
 
 [node name="Player" parent="." instance=ExtResource("1_kry3j")]
 y_sort_enabled = false
 material = SubResource("ShaderMaterial_ynf5e")
-position = Vector2(2714, 446)
+position = Vector2(2931, 490)
 collision_layer = 1
 script = ExtResource("3_jjvhh")
 speed = 200.0
@@ -136,6 +146,7 @@ zoom = Vector2(0.3, 0.3)
 
 [node name="GameOverLayer" type="CanvasLayer" parent="Player/Camera2D"]
 process_mode = 3
+visible = false
 script = ExtResource("4_kry3j")
 
 [node name="GameOverPanel" type="Panel" parent="Player/Camera2D/GameOverLayer"]
@@ -339,6 +350,41 @@ energy = 1.61
 shadow_enabled = true
 texture = SubResource("GradientTexture2D_6iyac")
 texture_scale = 4.04
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="."]
+visibility_layer = 0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -254.0
+offset_top = -317.0
+offset_right = 258.0
+offset_bottom = 195.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="SubViewport" type="SubViewport" parent="SubViewportContainer"]
+transparent_bg = true
+handle_input_locally = false
+size = Vector2i(10000, 10000)
+render_target_update_mode = 4
+
+[node name="PlayerModel" type="MeshInstance3D" parent="SubViewportContainer/SubViewport"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+mesh = SubResource("BoxMesh_ynf5e")
+
+[node name="Camera3D" type="Camera3D" parent="SubViewportContainer/SubViewport"]
+transform = Transform3D(1, 0, 0, 0, 0.8660254, 0.5, 0, -0.5, 0.8660254, 0, 23.452042, 40.691456)
+projection = 1
+current = true
+size = 100.0
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="SubViewportContainer/SubViewport"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 8.970526)
+
+[node name="Proj3D" type="Sprite2D" parent="."]
+z_index = 2
+texture = SubResource("ViewportTexture_ynf5e")
 
 [connection signal="pressed" from="Player/Camera2D/GameOverLayer/GameOverPanel/HBoxContainer/GameOverMenu/Menu" to="Player/Camera2D/GameOverLayer" method="_on_new_game_pressed"]
 [connection signal="pressed" from="Player/Camera2D/MainMenu/Panel/VBoxContainer/Button" to="Player/Camera2D/MainMenu" method="_on_button_pressed"]

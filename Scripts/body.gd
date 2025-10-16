@@ -8,6 +8,6 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	var mouse_pos = target
-	var mouse_dir = mouse_pos-position
-	$arm_holder/wand.rotation = mouse_dir.angle()
+	var pos = target
+	var dir = pos-position
+	$arm_holder/wand.rotation = dir.angle()

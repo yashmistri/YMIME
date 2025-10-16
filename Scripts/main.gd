@@ -4,6 +4,7 @@ class_name Main
 @export_category("Cheats")
 @export var player_invincible: bool = false
 @export var peaceful: bool = false
+@export var nomenu:= false
 var area_dmg: PackedScene = preload("res://Scenes/AreaDamage.tscn")
 var enemies_alive := 0
 var enemies_defeated_goal := 30
@@ -11,6 +12,10 @@ var enemies_defeated := 0
 var max_enemies_alive := 10
 var spawners : Array[Node2D] = []
 var enemy : PackedScene = preload("res://Scenes/enemy.tscn")
+var enemy_model : PackedScene = preload("res://Scenes/enemy_model.tscn")
+@export_category("misc")
+@export
+var model_y_scale: = 2
 
 func _ready():
 	# tiles are not ready during main _ready() despite being descended from Main therefore update tilemaplayer state
@@ -22,22 +27,37 @@ func _ready():
 			spawners.append(child)
 		#print(child.name)
 	$Player.is_invincible = player_invincible
+	$Player.model = $SubViewportContainer/SubViewport/PlayerModel
+	await RenderingServer.frame_post_draw
+	var p : Sprite2D = $Proj3D
+	p.texture = $SubViewportContainer/SubViewport.get_texture()
 	$Darkness.visible = true
-	get_tree().paused = true
+	if not nomenu:
+		$Player/Camera2D/MainMenu.visible = true
+		get_tree().paused = true
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	spawn_enemy()
 	
+	#print("Player pos: {0} Model pos: {1}".format([$Player.position, pmodel.position]))
 
+# TODO x add model as child of viewport
+# x give reference of model to enemy
+# have enemy modify position of model
 func spawn_enemy():
 	if peaceful or enemies_alive >= max_enemies_alive or not $EnemySpawnTimer.is_stopped():
 		return
+	
+	var m:Node3D = enemy_model.instantiate()
+	
 	var e:Enemy= enemy.instantiate()
 	var picked := spawners[randi_range(0,spawners.size()-1)]
 	e.position = picked.global_position
 	e.level = (enemies_defeated+1)%5
+	e.model = m
 	call_deferred("add_child", e)
+	$SubViewportContainer/SubViewport.call_deferred("add_child", m)
 	enemies_alive += 1
 	$EnemySpawnTimer.start()
 

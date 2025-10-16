@@ -11,6 +11,7 @@ var damage_taken: float = 0
 var damage_done: float = 0
 var is_invincible:= false
 var target: Vector2
+var model: Node3D
 
 signal character_die
 
@@ -20,15 +21,16 @@ func _ready() -> void:
 	$HPBar.value = current_health/max_health
 	# set viewport texture to sprite to show 3d model
 	
-	await RenderingServer.frame_post_draw
-	var p : Sprite2D = $"3DProjection"
-	p.texture = $SubViewportContainer/SubViewport.get_texture()
 	
 
-func _process(delta):
-	var mouse_pos = target
-	var mouse_dir = mouse_pos-position
-	$arm_holder/wand.rotation = mouse_dir.angle()
+func _process(delta: float) -> void:
+	
+	$body.target = target
+	model.position = Vector3(position.x/(100 * Global.iso_warp_factor.x), model.position.y , position.y/(100 * Global.iso_warp_factor.y))
+	
+	var dir = target-to_local(position)
+	model.transform.basis = Basis.IDENTITY
+	model.rotate_y(-dir.angle())
 
 func take_damage(damage: float, attacker: Character):
 	var applied_dmg =  0 if is_invincible else damage

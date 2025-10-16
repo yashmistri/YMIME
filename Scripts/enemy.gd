@@ -23,7 +23,7 @@ func _physics_process(delta: float) -> void:
 	var player := $"../Player"
 	if player != null:
 		nav_agent.target_position = player.position
-		$body.target = to_local(player.position)
+		target = to_local(player.position)
 	if not nav_agent.is_navigation_finished():
 		direction = nav_agent.get_next_path_position() - position
 		direction = direction.normalized()
