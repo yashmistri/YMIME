@@ -68,6 +68,10 @@ mouse1={
 2d_physics/layer_3="enemy_hurtbox"
 2d_physics/layer_4="wall"
 
+[physics]
+
+common/physics_interpolation=true
+
 [rendering]
 
 renderer/rendering_method="mobile"

@@ -39,17 +39,15 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
+	#print("fps: " + str(Engine.get_frames_per_second()))
 	spawn_enemy()
 	$SubViewportContainer/SubViewport/CamHolder.position = $SubViewportContainer/SubViewport/PlayerModel.position
-	queue_redraw()
+	draw_models()
 	#draw_models()
 	#var cam2: Node2D = $Player/Camera2D
 	#var cam3: Node3D = $SubViewportContainer/SubViewport/Camera3D
 	#cam3.position = Vector3(cam2.position.x/(10*Global.iso_warp_factor.x), cam3.position.y, cam2.position.y/(10*Global.iso_warp_factor.y))
 	#print("Player pos: {0} Model pos: {1}".format([$Player.position, pmodel.position]))
-
-func _draw():
-	draw_models()
 
 # draws models to individual sprites for each model
 # 
@@ -57,9 +55,11 @@ func _draw():
 #in one frame:
 # todo
 # get list of chars and modify their models and at the same time set the sprite that each model projects to
+
+@export_category("cutout size and offset")
+var rect_offset: Vector2 = Vector2(-45,-125)
+var rect_size: Vector2 = Vector2(90,150)
 func draw_models():
-	var rect_offset: Vector2 = Vector2(-100,-260)
-	var rect_size: Vector2 = Vector2(200,500)
 	var vp : SubViewport = $SubViewportContainer/SubViewport
 	var cam: Camera3D = $SubViewportContainer/SubViewport/CamHolder/Camera3D
 	var cam_frame: Image = vp.get_texture().get_image()
@@ -67,13 +67,16 @@ func draw_models():
 	
 	for c in c_arr:
 		if c.is_class("CharacterBody2D"):
+			
 			var m = c.model
 			var sprite :Sprite2D = c.get_node("3DProjection")
 			var screen_pos := cam.unproject_position(m.position)
 			var char_bb := Rect2(screen_pos+rect_offset, rect_size)
+			
+			#cam_frame.fill_rect(char_bb, Color.ALICE_BLUE)
 			var cutout : Image =cam_frame.get_region(char_bb)
 			sprite.texture = ImageTexture.create_from_image(cutout)
-			#cam_frame.fill_rect(char_bb, Color.ALICE_BLUE)
+			
 			#todo find a way to mark all models on viewport not main
 			# player 2900 440
 			#screen_pos = Vector2(screen_pos.x/(Global.scale3D * Global.iso_warp_factor.x), screen_pos.y/(Global.scale3D * Global.iso_warp_factor.y))

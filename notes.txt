@@ -40,6 +40,7 @@ TODO:
 				make it size of 2d camera
 				move 3d camera with 2d camera
 				
+		increase performance on laptops
 		cheats system:
 			toggle to enable cheats
 			player invincible 'I'
@@ -52,6 +53,8 @@ TODO:
 	character:
 		have stats: health, damage, speed, level
 	enemy:
+		turret with sweeping narrow red light cone
+		floating heads with two independent moving eyes with lights attached
 		x spawn function
 		x spawn node
 		x damage player on contact
@@ -85,6 +88,9 @@ TODO:
 				rewards fast and efficient attacks and combos
 			
 	visuals:
+		models:
+			enemy:
+				floating monster head: skeleton, man, monster
 		animate:
 			enemies breathing
 			light size

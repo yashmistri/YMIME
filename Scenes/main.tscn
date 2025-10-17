@@ -96,11 +96,11 @@ _data = {
 }
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_6bp64"]
-vertices = PackedVector2Array(3024, 305.4375, 3950.3438, 224.47656, 240.57031, 2068.8594, 1488, 1201.4375, 2816, 409.4375, 1280, 1305.4375, 304, 817.4375, 80, 1393.4375, 80, 1294.5625, 3104.1094, -214.47656, 3024, 206.5625, 1664, 166.5625, 1074.8828, -128, 1616, -398.5625, 2304, -153.4375, -976, 49.4375, -178.88281, 448, -592, 654.5625, -1536, 153.4375, 688, -654.5625, 1101.1172, -448, 560, -177.4375, -1104, -654.5625, -818.8828, -512, -1744, -49.4375, 1664, 473.4375, 2304, 153.4375, 1488, 1102.5625, 2908.2188, -312.45313, 3036.211, -248.45313, 720, -974.5625, 720, -1073.4375, -128, 1497.4375, -3373.0078, 314.9375, -2256, 433.4375, -2256, 334.5625, -2591.3672, -86.86719, -2524.2188, -120.453125, 512, 614.5625, 592, 369.4375, -384, 857.4375, 304, 718.5625, -2048, 230.5625, -592, 753.4375, -1744, 49.4375, -1104, -753.4375, 592, 270.5625, 560, -78.5625, 384, 166.5625, 384, -1574.5625, 512, -1177.4375, -512, -665.4375, -896, -857.4375, -976, -49.4375, -768, -153.4375, 128, 294.5625, 688, -753.4375, 1616, -497.4375, 896, -857.4375)
-polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4), PackedInt32Array(5, 3, 2), PackedInt32Array(6, 5, 2, 7, 8), PackedInt32Array(9, 1, 0, 10), PackedInt32Array(11, 12, 13, 14), PackedInt32Array(15, 16, 17, 18), PackedInt32Array(19, 20, 21), PackedInt32Array(22, 23, 24), PackedInt32Array(25, 26, 4, 3, 27), PackedInt32Array(28, 29, 9, 10, 14, 30, 31), PackedInt32Array(32, 7, 2), PackedInt32Array(32, 2, 33, 34), PackedInt32Array(35, 34, 33, 36, 37), PackedInt32Array(25, 27, 38, 39), PackedInt32Array(40, 39, 38, 41), PackedInt32Array(40, 41, 6, 8), PackedInt32Array(40, 8, 42, 43), PackedInt32Array(17, 43, 42, 44, 18), PackedInt32Array(42, 35, 37, 45, 22, 24), PackedInt32Array(25, 39, 46), PackedInt32Array(47, 25, 46, 48), PackedInt32Array(49, 28, 31, 50), PackedInt32Array(49, 50, 51, 52), PackedInt32Array(37, 49, 52, 45), PackedInt32Array(42, 24, 44), PackedInt32Array(53, 15, 18), PackedInt32Array(53, 18, 30, 54), PackedInt32Array(48, 55, 54, 30, 56), PackedInt32Array(14, 13, 57), PackedInt32Array(30, 14, 57), PackedInt32Array(30, 57, 58), PackedInt32Array(30, 58, 56), PackedInt32Array(48, 56, 19, 21), PackedInt32Array(48, 21, 47)])
+vertices = PackedVector2Array(3059.0938, 327.1328, 3872.8516, 223.8125, 240.38281, 2029.7734, 1523.0938, 1223.1328, 2816, 448.67188, 1280, 1344.6719, 115.09375, 1415.1328, 1100.5313, 1254.9375, -128, 1536.6719, 3087.6797, -183.46875, 3059.0938, 184.86719, 268.90625, 839.1328, 115.09375, 1272.8672, 652.90625, -632.8672, 1022.64844, -448, 524.90625, -199.13281, -588.53125, -102.9375, -1356.5313, 102.9375, -1011.09375, 71.13281, -257.35156, 448, -627.09375, 632.8672, -1536, 192.67188, 1740.5313, 89.0625, 1664, 127.32031, 1587.4688, 89.0625, 1153.3516, -128, 1651.0938, -376.8672, 2124.5313, -102.9375, -766.64844, -191.99219, -716.53125, -217.0625, 755.09375, -952.8672, 652.90625, -775.1328, 2636.5313, 358.9375, 1523.0938, 1080.8672, 2380.5313, 230.9375, -1011.09375, -69.78125, 1651.0938, -519.1328, 3020.5313, -217.0625, 2483.4688, -102.9375, 2304, -192.67188, 2304, 192.67188, 2227.4688, 230.9375, 1843.4688, 422.9375, 1664, 512.6719, -307.46875, 1446.9375, -3294.5078, 314.03906, -2291.0938, 455.1328, -2291.0938, 312.8672, -2576.0313, -55.289063, -2508.5234, -89.0625, -2380.5313, -153.0625, 524.90625, -56.867188, 1484.5313, 422.9375, 691.46875, 665.0625, 512, 575.3281, -2048, 191.32813, -1779.0938, -71.13281, 755.09375, -1095.1328, 896, -896.6719, 460.53125, -1497.0625, 512, -1216.6719, 307.46875, -1497.0625, 384, -1535.3203, 332.53125, -1126.9375, -1779.0938, 71.13281, -1868.5313, 281.0625, -627.09375, 775.1328, -384, 896.6719, -204.53125, 806.9375, 268.90625, 696.8672, 371.09375, 519.1328, 371.09375, 376.8672, 1075.4688, -806.9375)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4), PackedInt32Array(5, 3, 2), PackedInt32Array(6, 7, 5, 2, 8), PackedInt32Array(9, 1, 0, 10), PackedInt32Array(11, 7, 6, 12), PackedInt32Array(13, 14, 15, 16), PackedInt32Array(17, 18, 19, 20, 21), PackedInt32Array(22, 23, 24, 25, 26, 27), PackedInt32Array(16, 28, 29, 30, 31), PackedInt32Array(32, 4, 3, 33), PackedInt32Array(34, 32, 33), PackedInt32Array(17, 35, 18), PackedInt32Array(36, 37, 9, 10, 38, 39), PackedInt32Array(40, 34, 33, 41), PackedInt32Array(42, 41, 33), PackedInt32Array(43, 42, 33), PackedInt32Array(44, 8, 2, 45, 46), PackedInt32Array(47, 46, 45, 48, 49, 50), PackedInt32Array(51, 52, 43, 33, 53, 54), PackedInt32Array(55, 47, 50, 56), PackedInt32Array(30, 57, 37, 58), PackedInt32Array(59, 37, 57, 60), PackedInt32Array(50, 61, 62, 59, 60, 63, 56), PackedInt32Array(55, 56, 64, 65), PackedInt32Array(12, 65, 64, 21, 66), PackedInt32Array(21, 20, 66), PackedInt32Array(12, 66, 67), PackedInt32Array(11, 12, 67, 68, 69), PackedInt32Array(69, 68, 70, 54), PackedInt32Array(51, 54, 70, 71), PackedInt32Array(51, 71, 16, 15), PackedInt32Array(31, 13, 16), PackedInt32Array(58, 31, 30), PackedInt32Array(72, 58, 37, 36), PackedInt32Array(36, 39, 27, 26)])
 outlines = Array[PackedVector2Array]([PackedVector2Array(-3552, 317, 393, -1711, 4127, 226, 241, 2158)])
 parsed_geometry_type = 1
-agent_radius = 80.0
+agent_radius = 115.09
 
 [sub_resource type="Gradient" id="Gradient_d1ilt"]
 offsets = PackedFloat32Array(0, 0.2801303, 0.37785017, 0.6807818, 0.8175896)
@@ -145,6 +145,8 @@ limit_left = -3730
 limit_top = -1825
 limit_right = 4240
 limit_bottom = 2240
+position_smoothing_enabled = true
+position_smoothing_speed = 2.0
 
 [node name="GameOverLayer" type="CanvasLayer" parent="Player/Camera2D"]
 process_mode = 3
@@ -340,6 +342,7 @@ tile_set = ExtResource("4_jjvhh")
 one_shot = true
 
 [node name="Darkness" type="CanvasModulate" parent="."]
+visible = false
 color = Color(0, 0, 0, 1)
 
 [node name="DirectionalLight2D" type="DirectionalLight2D" parent="."]
@@ -368,11 +371,12 @@ offset_bottom = 600.0
 grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(2, 2)
+stretch = true
 
 [node name="SubViewport" type="SubViewport" parent="SubViewportContainer"]
 transparent_bg = true
 handle_input_locally = false
-size = Vector2i(2400, 1200)
+size = Vector2i(1200, 600)
 render_target_update_mode = 4
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="SubViewportContainer/SubViewport"]
