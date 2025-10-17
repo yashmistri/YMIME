@@ -5,10 +5,10 @@ albedo_color = Color(1, 0.6279864, 0.5713508, 1)
 
 [sub_resource type="BoxMesh" id="BoxMesh_xgr6b"]
 material = SubResource("StandardMaterial3D_xgr6b")
-size = Vector3(1, 2.045, 1)
+size = Vector3(1, 2, 1)
 
-[node name="Node3D" type="Node3D"]
+[node name="Root" type="Node3D"]
 
-[node name="EnemyModel" type="MeshInstance3D" parent="."]
+[node name="Model" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 mesh = SubResource("BoxMesh_xgr6b")

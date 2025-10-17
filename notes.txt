@@ -7,6 +7,39 @@ TODO:
 			how to make lights illuminate south part of walls when south of walls only
 			cast shadows on enemies and objects?
 			flashlight
+			make chars occlude 2d lights
+		3d:
+			how to make models y sort with walls properly
+				separate each char model into a separate sprite by cutting up the viewport or the sprite
+					prob doesnt work nicely if models overlap
+						design game so models dont overlap
+						use AABB to get exact bounding box in 2d?
+						use bounding box algo to use one sprite for overlapping models?
+					use alpha mask and shaders to send pixels to a texture for each model
+					make only one model visible at a time and capture before moving on to next model
+				one camera per model, each model lives in a separate world with all lights copied
+				cut out parts of walls and move them up in z to cover models behidn them
+			
+			steps v2:
+				get camera viewport texture and convert to image
+				get position of model in camera space
+				put dot on model
+				put box around each model use fill_rect()
+				cut out box in image and send each to a sprite child of each character
+				design game so no characters ever overlap
+					less enemies? enemies stay away from each other?
+				
+			
+			steps
+			in one frame:
+				move camera in front of each model
+				capture and send image to each models corresponding sprite
+				seems updating camera 2+ times a frame is not feasible
+			
+			x current vp texture is 10k x 10k even though most is invisible
+				make it size of 2d camera
+				move 3d camera with 2d camera
+				
 		cheats system:
 			toggle to enable cheats
 			player invincible 'I'

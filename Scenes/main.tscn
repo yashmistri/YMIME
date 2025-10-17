@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=4 uid="uid://b3e2ije72ksjg"]
+[gd_scene load_steps=26 format=4 uid="uid://b3e2ije72ksjg"]
 
 [ext_resource type="Script" uid="uid://cjmqxwwp1md8a" path="res://Scripts/main.gd" id="1_21xkr"]
 [ext_resource type="PackedScene" uid="uid://dj4bns2rylix3" path="res://Scenes/character.tscn" id="1_kry3j"]
@@ -9,12 +9,17 @@
 [ext_resource type="Texture2D" uid="uid://b6m02kwklh2u7" path="res://Sprites/gradientray.png" id="5_ynf5e"]
 [ext_resource type="Script" uid="uid://d2ye5rx3haqrf" path="res://Scripts/main_menu.gd" id="6_6bp64"]
 [ext_resource type="Script" uid="uid://f2irqd4i5xgm" path="res://Scripts/ui.gd" id="7_344ge"]
+[ext_resource type="PackedScene" uid="uid://cfx0dwkmulm7a" path="res://Scenes/enemy_model.tscn" id="10_hptm8"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_ynf5e"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_hptm8"]
 resource_local_to_scene = true
 shader = ExtResource("3_21xkr")
 shader_parameter/flash_color = Color(1, 0, 0, 1)
 shader_parameter/flash_value = 0.0
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_d1ilt"]
+resource_local_to_scene = true
+polygon = PackedVector2Array(54, -166, -47, -166, -116, -99, -44, -40, 60, -41, 114, -104)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_344ge"]
 bg_color = Color(0.0979991, 0.190779, 0.230109, 1)
@@ -108,16 +113,6 @@ fill = 1
 fill_from = Vector2(0.5, 0.5)
 fill_to = Vector2(0.8162393, 0.7692308)
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_hptm8"]
-albedo_color = Color(0.45999998, 1, 0.64900005, 1)
-
-[sub_resource type="BoxMesh" id="BoxMesh_ynf5e"]
-material = SubResource("StandardMaterial3D_hptm8")
-size = Vector3(1, 2, 1)
-
-[sub_resource type="ViewportTexture" id="ViewportTexture_ynf5e"]
-viewport_path = NodePath("SubViewportContainer/SubViewport")
-
 [node name="Main" type="Node2D"]
 y_sort_enabled = true
 script = ExtResource("1_21xkr")
@@ -126,7 +121,7 @@ nomenu = true
 
 [node name="Player" parent="." instance=ExtResource("1_kry3j")]
 y_sort_enabled = false
-material = SubResource("ShaderMaterial_ynf5e")
+material = SubResource("ShaderMaterial_hptm8")
 position = Vector2(2931, 490)
 collision_layer = 1
 script = ExtResource("3_jjvhh")
@@ -141,8 +136,15 @@ shadow_enabled = true
 texture = ExtResource("5_ynf5e")
 texture_scale = 15.63
 
+[node name="LightOccluder2D" parent="Player" index="7"]
+occluder = SubResource("OccluderPolygon2D_d1ilt")
+
 [node name="Camera2D" type="Camera2D" parent="Player"]
-zoom = Vector2(0.3, 0.3)
+zoom = Vector2(0.5, 0.5)
+limit_left = -3730
+limit_top = -1825
+limit_right = 4240
+limit_bottom = 2240
 
 [node name="GameOverLayer" type="CanvasLayer" parent="Player/Camera2D"]
 process_mode = 3
@@ -276,6 +278,7 @@ shadow_enabled = true
 texture = SubResource("GradientTexture2D_344ge")
 
 [node name="PlayerLight2" type="PointLight2D" parent="Player/PlayerLight"]
+visible = false
 position = Vector2(1, 0)
 scale = Vector2(1.0000001, 1.0000001)
 color = Color(0.99999994, 0.91235316, 0.5838508, 1)
@@ -284,6 +287,7 @@ shadow_enabled = true
 texture = SubResource("GradientTexture2D_hptm8")
 
 [node name="PlayerLight3" type="PointLight2D" parent="Player/PlayerLight"]
+visible = false
 position = Vector2(-1, 0)
 scale = Vector2(1.0000001, 1.0000001)
 color = Color(0.99999994, 0.91235316, 0.5838508, 1)
@@ -292,6 +296,7 @@ shadow_enabled = true
 texture = SubResource("GradientTexture2D_hptm8")
 
 [node name="PlayerLight4" type="PointLight2D" parent="Player/PlayerLight"]
+visible = false
 position = Vector2(0, 1)
 scale = Vector2(1.0000001, 1.0000001)
 color = Color(0.99999994, 0.91235316, 0.5838508, 1)
@@ -300,6 +305,7 @@ shadow_enabled = true
 texture = SubResource("GradientTexture2D_hptm8")
 
 [node name="PlayerLight5" type="PointLight2D" parent="Player/PlayerLight"]
+visible = false
 position = Vector2(0, -1)
 scale = Vector2(1.0000001, 1.0000001)
 color = Color(0.99999994, 0.91235316, 0.5838508, 1)
@@ -342,6 +348,7 @@ light_mask = 0
 range_item_cull_mask = 4
 
 [node name="Orb" type="Node2D" parent="."]
+visible = false
 position = Vector2(1333, 554)
 
 [node name="PointLight2D" type="PointLight2D" parent="Orb"]
@@ -356,35 +363,36 @@ visibility_layer = 0
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -254.0
-offset_top = -317.0
-offset_right = 258.0
-offset_bottom = 195.0
+offset_right = 1200.0
+offset_bottom = 600.0
 grow_horizontal = 2
 grow_vertical = 2
+scale = Vector2(2, 2)
 
 [node name="SubViewport" type="SubViewport" parent="SubViewportContainer"]
 transparent_bg = true
 handle_input_locally = false
-size = Vector2i(10000, 10000)
+size = Vector2i(2400, 1200)
 render_target_update_mode = 4
 
-[node name="PlayerModel" type="MeshInstance3D" parent="SubViewportContainer/SubViewport"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
-mesh = SubResource("BoxMesh_ynf5e")
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="SubViewportContainer/SubViewport"]
+transform = Transform3D(0.6404583, -0.61372536, 0.46168643, 0, 0.6011597, 0.7991289, -0.767993, -0.5118087, 0.3850177, 7.913962, 4.7407436, 6.3274612)
+visible = false
 
-[node name="Camera3D" type="Camera3D" parent="SubViewportContainer/SubViewport"]
-transform = Transform3D(1, 0, 0, 0, 0.8660254, 0.5, 0, -0.5, 0.8660254, 0, 23.452042, 40.691456)
+[node name="CamHolder" type="Node3D" parent="SubViewportContainer/SubViewport"]
+
+[node name="Camera3D" type="Camera3D" parent="SubViewportContainer/SubViewport/CamHolder"]
+transform = Transform3D(0.9999998, 0, 0, 0, 0.8660255, 0.5, 0, -0.50000006, 0.8660254, -3.8146966e-06, 15.906957, 27.792854)
 projection = 1
 current = true
-size = 100.0
+size = 10.0
 
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="SubViewportContainer/SubViewport"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 8.970526)
+[node name="PlayerModel" parent="SubViewportContainer/SubViewport" instance=ExtResource("10_hptm8")]
 
-[node name="Proj3D" type="Sprite2D" parent="."]
-z_index = 2
-texture = SubResource("ViewportTexture_ynf5e")
+[node name="PlayerLight" type="OmniLight3D" parent="SubViewportContainer/SubViewport/PlayerModel"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.9011502, 3.1785784, 0)
+omni_range = 6.539
+omni_attenuation = 2.0
 
 [connection signal="pressed" from="Player/Camera2D/GameOverLayer/GameOverPanel/HBoxContainer/GameOverMenu/Menu" to="Player/Camera2D/GameOverLayer" method="_on_new_game_pressed"]
 [connection signal="pressed" from="Player/Camera2D/MainMenu/Panel/VBoxContainer/Button" to="Player/Camera2D/MainMenu" method="_on_button_pressed"]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://dj4bns2rylix3"]
+[gd_scene load_steps=14 format=3 uid="uid://dj4bns2rylix3"]
 
 [ext_resource type="Script" uid="uid://c03g3yle7caag" path="res://Scripts/body.gd" id="15_sm1rv"]
 
@@ -139,6 +139,10 @@ colors = PackedColorArray(1, 1, 1, 1)
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_et0tf"]
 gradient = SubResource("Gradient_w85my")
 
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_lkv7d"]
+resource_local_to_scene = true
+polygon = PackedVector2Array(54, -166, -47, -166, -116, -99, -44, -40, 60, -41, 114, -104)
+
 [node name="Character" type="CharacterBody2D"]
 z_index = 1
 y_sort_enabled = true
@@ -230,4 +234,8 @@ texture_progress = SubResource("GradientTexture1D_et0tf")
 tint_progress = Color(0.410333, 1, 0.39, 1)
 
 [node name="3DProjection" type="Sprite2D" parent="."]
-z_index = 3
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="."]
+visible = false
+occluder = SubResource("OccluderPolygon2D_lkv7d")
+occluder_light_mask = 2

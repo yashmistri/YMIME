@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://c3r8kgek20uot"]
+[gd_scene load_steps=8 format=3 uid="uid://c3r8kgek20uot"]
 
 [ext_resource type="PackedScene" uid="uid://dj4bns2rylix3" path="res://Scenes/character.tscn" id="1_afpow"]
 [ext_resource type="Script" uid="uid://ypvnx5slxopf" path="res://Scripts/enemy.gd" id="2_287tu"]
@@ -15,6 +15,10 @@ shader_parameter/flash_value = 0.0
 font_size = 30
 outline_size = 7
 outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_287tu"]
+resource_local_to_scene = true
+polygon = PackedVector2Array(54, -166, -47, -166, -116, -99, -44, -40, 60, -41, 114, -104)
 
 [node name="Enemy" instance=ExtResource("1_afpow")]
 material = SubResource("ShaderMaterial_ghaa6")
@@ -40,3 +44,6 @@ label_settings = SubResource("LabelSettings_287tu")
 horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 2
+
+[node name="LightOccluder2D" parent="." index="10"]
+occluder = SubResource("OccluderPolygon2D_287tu")

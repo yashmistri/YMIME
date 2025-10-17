@@ -26,7 +26,7 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	
 	$body.target = target
-	model.position = Vector3(position.x/(100 * Global.iso_warp_factor.x), model.position.y , position.y/(100 * Global.iso_warp_factor.y))
+	model.position = Vector3(position.x/(Global.scale3D * Global.iso_warp_factor.x), model.position.y , position.y/(Global.scale3D * Global.iso_warp_factor.y))
 	
 	var dir = target-to_local(position)
 	model.transform.basis = Basis.IDENTITY

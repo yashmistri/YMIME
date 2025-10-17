@@ -19,6 +19,12 @@ config/icon="res://icon.svg"
 
 Global="*res://Scripts/global.gd"
 
+[display]
+
+window/size/viewport_width=1200
+window/size/viewport_height=600
+window/size/resizable=false
+
 [global_group]
 
 Spawner="can spawn enemies at this tile's location"
