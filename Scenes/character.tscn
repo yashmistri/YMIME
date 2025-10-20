@@ -1,6 +1,9 @@
-[gd_scene load_steps=14 format=3 uid="uid://dj4bns2rylix3"]
+[gd_scene load_steps=15 format=3 uid="uid://dj4bns2rylix3"]
 
 [ext_resource type="Script" uid="uid://c03g3yle7caag" path="res://Scripts/body.gd" id="15_sm1rv"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_lkv7d"]
+light_mode = 1
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_344ge"]
 animations = [{
@@ -81,7 +84,7 @@ animations = [{
 }]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ynf5e"]
-radius = 110.81967
+radius = 55.03635
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_mvyft"]
 radius = 117.398
@@ -124,6 +127,7 @@ _data = {
 }
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_ushfy"]
+light_mode = 1
 
 [sub_resource type="Gradient" id="Gradient_dm6ib"]
 offsets = PackedFloat32Array(0)
@@ -146,6 +150,7 @@ polygon = PackedVector2Array(54, -166, -47, -166, -116, -99, -44, -40, 60, -41, 
 [node name="Character" type="CharacterBody2D"]
 z_index = 1
 y_sort_enabled = true
+material = SubResource("CanvasItemMaterial_lkv7d")
 collision_layer = 0
 collision_mask = 8
 motion_mode = 1
@@ -175,7 +180,7 @@ script = ExtResource("15_sm1rv")
 
 [node name="arm_holder" type="Node2D" parent="body"]
 z_index = 1
-position = Vector2(0, -82)
+position = Vector2(0, -25)
 scale = Vector2(1, 0.5)
 
 [node name="wand" type="Polygon2D" parent="body/arm_holder"]
@@ -234,6 +239,7 @@ texture_progress = SubResource("GradientTexture1D_et0tf")
 tint_progress = Color(0.410333, 1, 0.39, 1)
 
 [node name="3DProjection" type="Sprite2D" parent="."]
+scale = Vector2(2, 2)
 
 [node name="LightOccluder2D" type="LightOccluder2D" parent="."]
 visible = false

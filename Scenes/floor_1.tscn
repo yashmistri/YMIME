@@ -37,6 +37,7 @@ turbulence_influence_min = 0.0
 turbulence_influence_max = 0.154
 
 [node name="Floor1" type="Sprite2D"]
+light_mask = 4
 y_sort_enabled = true
 texture = ExtResource("1_3ropc")
 
