@@ -58,7 +58,7 @@ func _process(delta: float) -> void:
 
 @export_category("cutout size and offset")
 var rect_offset: Vector2 = Vector2(-45,-125)
-var rect_size: Vector2 = Vector2(90,150)
+var rect_size: Vector2 = Vector2(200,300)
 func draw_models():
 	var vp : SubViewport = $SubViewportContainer/SubViewport
 	var cam: Camera3D = $SubViewportContainer/SubViewport/CamHolder/Camera3D
@@ -71,7 +71,7 @@ func draw_models():
 			var m = c.model
 			var sprite :Sprite2D = c.get_node("3DProjection")
 			var screen_pos := cam.unproject_position(m.position)
-			var char_bb := Rect2(screen_pos+rect_offset, rect_size)
+			var char_bb := Rect2(screen_pos.x-rect_size.x/2, screen_pos.y-rect_size.y/2,  rect_size.x, rect_size.y)
 			
 			#cam_frame.fill_rect(char_bb, Color.ALICE_BLUE)
 			var cutout : Image =cam_frame.get_region(char_bb)

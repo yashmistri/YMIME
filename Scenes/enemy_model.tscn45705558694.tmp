@@ -1,0 +1,72 @@
+[gd_scene load_steps=7 format=3 uid="uid://cfx0dwkmulm7a"]
+
+[ext_resource type="Script" uid="uid://dbaj3ji123evv" path="res://Scenes/enemy_model.gd" id="1_cwoyp"]
+[ext_resource type="PackedScene" uid="uid://8pekw5vu4qhl" path="res://robot.glb" id="2_cwoyp"]
+
+[sub_resource type="Curve" id="Curve_cwoyp"]
+_data = [Vector2(0, 0), 0.0, 1.4, 0, 0, Vector2(0.49790794, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xgr6b"]
+albedo_color = Color(1, 0.6279864, 0.5713508, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_xgr6b"]
+material = SubResource("StandardMaterial3D_xgr6b")
+size = Vector3(0.305, 0.18, 0.545)
+
+[sub_resource type="PrismMesh" id="PrismMesh_kjlpa"]
+left_to_right = -0.1
+size = Vector3(0.48, 0.29, 0.145)
+
+[node name="Root" type="Node3D"]
+script = ExtResource("1_cwoyp")
+arc = SubResource("Curve_cwoyp")
+
+[node name="robot" parent="." instance=ExtResource("2_cwoyp")]
+transform = Transform3D(-1.639177e-08, 0, -0.375, 0, 0.375, 0, 0.375, 0, -1.639177e-08, 0, 0, 0)
+
+[node name="Skeleton3D" parent="robot/Armature" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.792806, 0)
+
+[node name="lowerleg_L" parent="robot/Armature/Skeleton3D" index="3"]
+transform = Transform3D(-0.93293697, -0.33348584, -0.13574523, 0.24580984, -0.86539984, 0.4366566, -0.2630903, 0.37400705, 0.8893379, -1.1715081, -1.9723811, -0.42304993)
+
+[node name="thigh_L" parent="robot/Armature/Skeleton3D" index="4"]
+transform = Transform3D(-0.821867, -0.45536688, -0.3423255, 0.56655806, -0.7162353, -0.40746856, -0.059637293, -0.52882683, 0.84664226, -0.46686608, -0.8640672, 0.39526504)
+
+[node name="LeftIK" type="SkeletonIK3D" parent="robot/Armature/Skeleton3D" index="10"]
+root_bone = &"thigh.L"
+tip_bone = &"footIK.L"
+use_magnet = true
+magnet = Vector3(0, 0.29, 0)
+target_node = NodePath("../../../../LeftFoot")
+
+[node name="Model" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.7205505, 0)
+mesh = SubResource("BoxMesh_xgr6b")
+
+[node name="RightFoot" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.3305359)
+top_level = true
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="RightFoot"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.13, 0)
+mesh = SubResource("PrismMesh_kjlpa")
+skeleton = NodePath("../..")
+
+[node name="RightFootTrack" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.34)
+
+[node name="LeftFoot" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.080444336, 0, -0.6820698)
+top_level = true
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="LeftFoot"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.13, 0)
+mesh = SubResource("PrismMesh_kjlpa")
+skeleton = NodePath("../..")
+
+[node name="LeftFootTrack" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.99999994, 0, 0, 0, 1, 0, 0, -0.9218482)
+
+[editable path="robot"]

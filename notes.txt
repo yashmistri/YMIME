@@ -4,8 +4,11 @@ TODO:
 			x shadow casting on wall showing over player sprite
 		x put normal maps on blocks and use only one light mask may fix sprites turning black
 			learn about specular texture
-		make humanoid in blender then port to godot and setup skeleton
+		x make humanoid in blender then port to godot and setup skeleton
+			setup ik 
 		use procedural animation to animate walking
+			x works with placeholder feet
+			make humanoid follow placeholder feet position
 	week 10/26
 		make shadows out of sprites using copy of sprite make black and set z level and skew
 		add more 2d lights to scene with corresponding 3d lights
@@ -26,6 +29,7 @@ TODO:
 			use procedural animation to animate character walking and running:
 				foot stays while body moves until certain distance then foot moves in direction of movement
 				use IK system
+				slowly blends to special running curves and parameters when running
 			how to make models y sort with walls properly
 				separate each char model into a separate sprite by cutting up the viewport or the sprite
 					prob doesnt work nicely if models overlap
