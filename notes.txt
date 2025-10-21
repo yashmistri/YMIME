@@ -6,9 +6,14 @@ TODO:
 			learn about specular texture
 		x make humanoid in blender then port to godot and setup skeleton
 			setup ik 
+			make node for knees to bend toward set as ik magnet in code
 		use procedural animation to animate walking
 			x works with placeholder feet
-			make humanoid follow placeholder feet position
+			x make humanoid follow placeholder feet position
+			make path for feet to follow when moving that mimics natural foot movement
+			make sure rotation of feet only happens in y
+		improve performance or fix stuttering on low spec machine:
+			lock 3d world to low fps?
 	week 10/26
 		make shadows out of sprites using copy of sprite make black and set z level and skew
 		add more 2d lights to scene with corresponding 3d lights

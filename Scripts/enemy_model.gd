@@ -2,8 +2,8 @@ extends Node3D
 
 var current_tween: Tween
 @export
-var max_stride_length :float = 0.5
-var stride_length:float = 0.4
+var max_stride_length :float = 1.5
+var stride_length:float = 1.4
 var stride_height:float = 1.0
 var max_rotation: float = PI/2
 var stride_time:float = 0.3
@@ -14,8 +14,11 @@ var path_follow:PathFollow3D
 
 #todo make curve and make it parabola and make foot naturally rise and lower when moving
 #make lower torso move up and down and rotate naturally
+#	torso height is inv proportional to distance between feet
 #make upper torso rotate to look at mouse
 #make hands move with procedural anim like feet while hands are empty
+#how to smoother steps:
+#	max stride length starts short, then long on first step, then remains long until foot returns to center then becomes short again
 func _ready() -> void:
 	# tween is not null
 	current_tween = get_tree().create_tween()
@@ -58,9 +61,22 @@ func move(foot : Node3D, foot_track : Node3D) -> void:
 		
 		current_tween.tween_callback(current_tween.kill)
 
+func move_torso():
+	#dist between feet
+	#feet dist range is {0.2,2.2}
+	var d: float = $RightFoot.global_position.distance_to($LeftFoot.global_position)
+	#print(d)
+	var default_y:= 0.0
+	var shift_range:= 0.5
+	var shift_amount := remap(d, 0.2, 2.2, default_y, default_y-shift_range)
+	$robot.position.y = shift_amount
+	
 func _process(delta: float) -> void:
 	move($RightFoot,$RightFootTrack)
 	move($LeftFoot,$LeftFootTrack)
+	move_torso()
+	#$robot/Armature/Skeleton3D/LeftIK.magnet = $LeftFoot/LeftMagnet.global_position - global_position
+	#$robot/Armature/Skeleton3D/RightIK.magnet = $robot/Armature/Skeleton3D/lowerleg_R/RightMagnet.global_position - global_position
 	#
 	#var skel :Skeleton3D = $robot/Armature/Skeleton3D
 	#var skel_final_pos :Transform3D = skel.global_transform * skel.get_bone_global_pose(skel.find_bone("footIK.L"))

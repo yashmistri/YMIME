@@ -399,6 +399,10 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.9011502, 3.1785784, 0)
 omni_range = 6.539
 omni_attenuation = 2.0
 
+[node name="PlayerLight2" type="OmniLight3D" parent="SubViewportContainer/SubViewport/PlayerModel"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.2646282, 1.519721, 0)
+omni_range = 6.539
+
 [connection signal="pressed" from="Player/Camera2D/GameOverLayer/GameOverPanel/HBoxContainer/GameOverMenu/Menu" to="Player/Camera2D/GameOverLayer" method="_on_new_game_pressed"]
 [connection signal="pressed" from="Player/Camera2D/MainMenu/Panel/VBoxContainer/Button" to="Player/Camera2D/MainMenu" method="_on_button_pressed"]
 [connection signal="timeout" from="Player/A1Recharge" to="Player" method="_on_a_1_recharge_timeout"]
