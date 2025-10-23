@@ -23,6 +23,8 @@ func _ready():
 	# set each tile name to location in order to easily find them later
 	for child in $NavigationRegion2D/Ground.get_children():
 		child.name = "{0}_{1}".format([int(child.position.x), int(child.position.y)])
+		if child.has_method("set_player"):
+			child.set_player($Player)
 		if child.is_in_group("Spawner"):
 			spawners.append(child)
 		#print(child.name)

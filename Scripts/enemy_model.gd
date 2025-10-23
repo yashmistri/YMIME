@@ -2,11 +2,12 @@ extends Node3D
 
 var current_tween: Tween
 @export
-var max_stride_length :float = 1.5
-var stride_length:float = 1.4
+var max_stride_length :float = 1.2
+var stride_length:float = 1.1
 var stride_height:float = 1.0
 var max_rotation: float = PI/2
 var stride_time:float = 0.3
+var reset_time:float = 0.1
 @export
 var curve:Curve3D
 var path:Path3D
@@ -18,7 +19,9 @@ var path_follow:PathFollow3D
 #make upper torso rotate to look at mouse
 #make hands move with procedural anim like feet while hands are empty
 #how to smoother steps:
-#	max stride length starts short, then long on first step, then remains long until foot returns to center then becomes short again
+#	? max stride length starts short, then long on first step, then remains long until foot returns to center then becomes short again
+# 	quickly reset feet to middle  after not moving for a moment or when turning
+# 	one foot moves immediately on moving after reset
 func _ready() -> void:
 	# tween is not null
 	current_tween = get_tree().create_tween()

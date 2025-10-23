@@ -238,6 +238,12 @@ texture_under = SubResource("GradientTexture1D_q5mnj")
 texture_progress = SubResource("GradientTexture1D_et0tf")
 tint_progress = Color(0.410333, 1, 0.39, 1)
 
+[node name="Shadow" type="Sprite2D" parent="."]
+visible = false
+z_index = -1
+rotation = -1.1152654
+scale = Vector2(2, 1)
+
 [node name="3DProjection" type="Sprite2D" parent="."]
 scale = Vector2(2, 2)
 

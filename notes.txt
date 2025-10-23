@@ -3,34 +3,58 @@ TODO:
 		x fix sprites turning black where overlap wall
 			x shadow casting on wall showing over player sprite
 		x put normal maps on blocks and use only one light mask may fix sprites turning black
-			learn about specular texture
 		x make humanoid in blender then port to godot and setup skeleton
-			setup ik 
-			make node for knees to bend toward set as ik magnet in code
+			x setup ik 
 		use procedural animation to animate walking
 			x works with placeholder feet
 			x make humanoid follow placeholder feet position
-			make path for feet to follow when moving that mimics natural foot movement
+			direction of foot movement should be in direction of movement not crossing middle
 			make sure rotation of feet only happens in y
-		improve performance or fix stuttering on low spec machine:
-			lock 3d world to low fps?
+		
+		hide walls in front of player
+			have each wall keep track of player position and go transparent as player approaches a certain point
+			put something beneath walls when they dissapear?
+			just scrap tile system? just place environment freehand?
+			just scrap walls?
+			proc gen whole env? isometric 3d perlin noise islands? with slope tiles?
+				how to "sell" illusion of 3d: player elevation is increased when moving up slope
+				just dont use slope tiles and change elevation abruptly
+				change iso view to -60 deg?
+			player moves using navigation system? maybe makes multiple levels possible
 	week 10/26
-		make shadows out of sprites using copy of sprite make black and set z level and skew
-		add more 2d lights to scene with corresponding 3d lights
+		make middle torso mesh as root and lower and upper torso both rotate freely
+		proc anim for hands
+			walking
+			swinging sword
+			shooting
+			reload gun? 
+		
+		add more 2d lights to scene with corresponding 3d lights?
 		add 3d blocks to 3d world where 2d walls are in order to block light correctly
+		make decorations in blender
+			put all static objects renders and normals in the same png spritesheet
+		model guns and swords and characters
+		
+	week 11/2
+		make shadows out of sprites using copy of sprite make black and set z level and skew
+		make path for feet to follow when moving that mimics natural foot movement
+		proc anim for accessories
+			springy antennae?
+			floating light orb that orbits?
 	misc:
 		2d lighting:
-			3 lights at different sizes and intensities
 			circle light makes all enemy types look like the same blob
 			cone light faces cursor and fully illuminates enemies
-			how to make lights illuminate south part of walls when south of walls only
 			cast shadows on enemies and objects?
-			flashlight
+			light coming from above
 			make chars occlude 2d lights
 			use 3d proj sprite for making a shadow for each light. start with only players flashlight
 			put normal maps on blocks; simplify occluder system to just one block type
+			sparks fly in 2d when 3d weapons hit
 		3d:
+			learn about specular texture
 			keep models out of GitHub repo?
+				make default/placeholder assets and commit those and load those if actual assets arent present
 			use procedural animation to animate character walking and running:
 				foot stays while body moves until certain distance then foot moves in direction of movement
 				use IK system

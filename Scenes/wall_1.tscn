@@ -10,7 +10,7 @@ diffuse_texture = ExtResource("1_xghsi")
 normal_texture = ExtResource("2_ew77b")
 
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_uldf3"]
-polygon = PackedVector2Array(118.09525, -1317.1431, 122, 3, 0, 64, -122, 3, -119.04764, -1319.0477)
+polygon = PackedVector2Array(122, 3, 0, 64, -122, 3, 0, -64.76191)
 
 [node name="wall" type="Sprite2D"]
 z_index = 1
