@@ -8,20 +8,32 @@ var stride_height:float = 1.0
 var max_rotation: float = PI/2
 var stride_time:float = 0.3
 var reset_time:float = 0.1
+var velocity:Vector3
 @export
 var curve:Curve3D
 var path:Path3D
 var path_follow:PathFollow3D
+enum State {STANDING, WALKING}
+var current_state :State = State.STANDING
 
 #todo make curve and make it parabola and make foot naturally rise and lower when moving
 #make lower torso move up and down and rotate naturally
 #	torso height is inv proportional to distance between feet
+#	make torso lean forward and to lead foot while walking
+#	torso leans more at higher move speed
 #make upper torso rotate to look at mouse
 #make hands move with procedural anim like feet while hands are empty
 #how to smoother steps:
 #	? max stride length starts short, then long on first step, then remains long until foot returns to center then becomes short again
 # 	quickly reset feet to middle  after not moving for a moment or when turning
 # 	one foot moves immediately on moving after reset
+#	how to get velocity/direction of movement?
+#reset motion:
+#	timer starts after reaching zero velocity or (zero move input?) and resets on moving
+#	if timer reaches end call reset function which starts a tween that moves feet to start
+#	and makes max stride length really small for the first step only
+#use states? standing and walking
+# if on slope set foot position to slope and rotation to slope normal
 func _ready() -> void:
 	# tween is not null
 	current_tween = get_tree().create_tween()
@@ -47,12 +59,22 @@ func _ready() -> void:
 #how to give foot movement natural parabola
 #	instead of tween whole transform tween x,z,basis normally and tween y with parabola
 #	not possible so make path between start and end and tween that for position
+#walking state:
+#	foottrack node position changes based on movement vector
+#	distance foot travels before triggering move also changes
+#		use vector from max drag before move to max stride vector
+#		vector changes with both move direction and rotation
+#		use dot product to determine when foot drags too far
+#		display debug vector first before implementing rest of function
+#		start with circle for vector orientations then do ellipse
+#	forward: 
 func move(foot : Node3D, foot_track : Node3D) -> void:
 	var vec: Vector3 = foot_track.global_position - foot.global_position
 	var d :float = vec.length()
 	var r :float = foot.global_basis.x.angle_to(foot_track.global_basis.x)
 	var move_foot:bool = false # if foot needs to move
 	var final_transform:Transform3D
+#	todo branch based on current state
 	if d > max_stride_length or r > max_rotation:
 		# length of this will be huge at start therefore keep to standard length
 		final_transform = Transform3D(foot_track.global_basis, foot_track.global_position + vec.limit_length(stride_length))
@@ -75,13 +97,13 @@ func move_torso():
 	$robot.position.y = shift_amount
 	
 func _process(delta: float) -> void:
+	velocity = $"..".velocity
+	#keep restarting until stop moving, then let timer finish
+	if velocity.length() > 0.1:
+		$Reset.start()
 	move($RightFoot,$RightFootTrack)
 	move($LeftFoot,$LeftFootTrack)
 	move_torso()
-	#$robot/Armature/Skeleton3D/LeftIK.magnet = $LeftFoot/LeftMagnet.global_position - global_position
-	#$robot/Armature/Skeleton3D/RightIK.magnet = $robot/Armature/Skeleton3D/lowerleg_R/RightMagnet.global_position - global_position
-	#
-	#var skel :Skeleton3D = $robot/Armature/Skeleton3D
-	#var skel_final_pos :Transform3D = skel.global_transform * skel.get_bone_global_pose(skel.find_bone("footIK.L"))
-	#skel_final_pos = $LeftFoot.global_transform
-	#skel.set_bone_global_pose(skel.find_bone("footIK.L"),skel.global_transform.affine_inverse() * skel_final_pos)
+
+func _on_reset_timeout() -> void:
+	print("reset")

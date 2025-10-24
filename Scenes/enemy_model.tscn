@@ -18,13 +18,22 @@ size = Vector3(0.48, 0.29, 0.145)
 script = ExtResource("1_cwoyp")
 
 [node name="robot" parent="." instance=ExtResource("2_cwoyp")]
-transform = Transform3D(-1.8140225e-08, 0, -0.415, 0, 0.415, 0, 0.415, 0, -1.8140225e-08, 0, -0.185, 0)
+transform = Transform3D(0.415, 0, 0, 0, 0.415, 0, 0, 0, 0.415, 0, -0.185, 0)
+
+[node name="body_001" parent="robot/Armature/Skeleton3D/upperspine" index="0"]
+transform = Transform3D(1.0146511, 0.020694766, 0.00033279136, -0.031747095, 0.6552655, -0.042904787, -0.0034356671, 0.05681169, 0.49474213, 0.059532583, 0.43306446, -0.034626354)
+
+[node name="foot_L" parent="robot/Armature/Skeleton3D" index="8"]
+transform = Transform3D(0.9170685, -0.029945334, -0.3976164, 0.39499095, -0.068277374, 0.9161461, -0.05458211, -0.99722934, -0.050786003, -0.44618002, -4.344337, 0.44400656)
 
 [node name="head_001" parent="robot/Armature/Skeleton3D/foot_L" index="0"]
-transform = Transform3D(0.0147945415, 0.07497999, -0.3153169, 0.028997112, 0.41966045, 0.057614785, 0.27230445, -0.048762374, 0.010996181, 0.5253514, -0.20736563, 0.08603695)
+transform = Transform3D(0.250321, 0.16760089, 0.038330883, 0.043029957, -0.027948663, -0.3160637, -0.103427425, 0.39400947, -0.038724568, -0.08485368, 0.3113082, 0.08603697)
+
+[node name="foot_R" parent="robot/Armature/Skeleton3D" index="11"]
+transform = Transform3D(0.94133484, -0.08910916, -0.32549697, 0.3187585, -0.081962265, 0.944286, -0.110822, -0.9926523, -0.048749246, 0.5114652, -4.3999043, 0.51732)
 
 [node name="head_002" parent="robot/Armature/Skeleton3D/foot_R" index="0"]
-transform = Transform3D(0.008235607, 0.0030335234, -0.3205769, 0.021300796, 0.42777044, 0.0030100571, -0.2732909, 0.03343267, -0.009426005, 0.761379, -0.027478633, 0.07562518)
+transform = Transform3D(-0.24752687, 0.1389212, -0.09101425, 0.07485185, -0.03408197, -0.3074984, 0.091307886, 0.4045415, 0.0053484207, 0.120661415, 0.36915463, 0.07562519)
 
 [node name="LeftIK" type="SkeletonIK3D" parent="robot/Armature/Skeleton3D" index="15"]
 transform = Transform3D(0.37500006, 0, -7.1054274e-15, 0, 0.37500006, 0, 7.1054274e-15, 0, 0.37500006, 0, 0, 0)
@@ -91,5 +100,12 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.750536, 1.922879, 2.384185
 
 [node name="LeftHandTarget" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.304313, 1.922879, -0.1611991)
+
+[node name="Reset" type="Timer" parent="."]
+process_callback = 0
+one_shot = true
+autostart = true
+
+[connection signal="timeout" from="Reset" to="." method="_on_reset_timeout"]
 
 [editable path="robot"]
