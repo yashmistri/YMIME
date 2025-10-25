@@ -3,18 +3,25 @@ extends Node3D
 var current_tween: Tween
 @export
 var max_stride_length :float = 1.2
-var stride_length:float = 1.1
+#sets track vector scale
+@export
+var stride_length:float = 1.5
 var stride_height:float = 1.0
 var max_rotation: float = PI/2
-var stride_time:float = 0.1
+#multiplies with speed to create strict rhythm of steps
+@export
+var stride_time_factor:float = 0.15
 var reset_time:float = 0.01
 var velocity:Vector3
+var forward_lean:float = PI/4
+var side_lean:float = PI/8
 @export
 var curve:Curve3D
 var path:Path3D
 var path_follow:PathFollow3D
 enum State {STANDING, WALKING}
 var current_state :State = State.STANDING
+var skel :Skeleton3D
 
 #todo make curve and make it parabola and make foot naturally rise and lower when moving
 #make lower torso move up and down and rotate naturally
@@ -38,9 +45,10 @@ func _ready() -> void:
 	# tween is not null
 	current_tween = get_tree().create_tween()
 	current_tween.kill()
-	$robot/Armature/Skeleton3D/LeftIK.start()
-	$robot/Armature/Skeleton3D/RightIK.start()
 	
+	for c in find_children("", "SkeletonIK3D"):
+		c.start()
+	skel = find_child("Skeleton3D")
 	#path.curve.add_point()
 
 # set top_level but it goes to 0,0
@@ -87,7 +95,7 @@ func move(foot : Node3D, foot_track : Node3D) -> void:
 	if move_foot and not current_tween.is_valid():
 		
 		current_tween =get_tree().create_tween()
-		current_tween.tween_property(foot, "global_position", final_pos, stride_time).set_ease(Tween.EASE_IN_OUT)
+		current_tween.tween_property(foot, "global_position", final_pos, stride_time_factor*velocity.length()).set_ease(Tween.EASE_IN_OUT)
 		
 		current_tween.tween_callback(current_tween.kill)
 
@@ -96,16 +104,33 @@ func move(foot : Node3D, foot_track : Node3D) -> void:
 #	get 2d vector of feet releative to self forward
 #	lead foot is max dot product
 #get basis of torso to lead foot
+#make IK for head and upper torso and set target here
+@export
+var lean_height:float = 1.5
+@export
+var lean_side_factor:float = 0.2
 func move_torso():
-	var r_local_pos :Vector3= $RightFoot.global_position - global_position
-	var l_local_pos :Vector3= $LeftFoot.global_position - global_position
-	print("right {0} left {1}".format([r_local_pos, l_local_pos]))
-	if(r_local_pos.z < l_local_pos.z):
-		pass
+	var torso_target:Node3D = $TorsoTarget
+	var lean_forward:float
+	var r :Vector3= $RightFoot.global_position - global_position
+	var l :Vector3= $LeftFoot.global_position - global_position
+	r.y = 0
+	l.y = 0
+	r = r.normalized()
+	l = l.normalized()
+	var forward :Vector3 = -global_basis.z
+	var r_dot := r.dot(forward)
+	var l_dot := l.dot(forward)
+	var lean_factor :float= max(r_dot, l_dot)
+	lean_forward = clamp(remap(lean_factor, 0.5,1.0,0.4,0.6),0.0,1.0)
+	var lean_side = remap(r_dot-l_dot, -2,2, -lean_side_factor, lean_side_factor)
+	torso_target.position = Vector3(lean_side,lean_height,-lean_forward)
+
+	#print("right {0} left {1} forward {2}".format([r_dot, l_dot, forward]))
 	
 	#dist between feet
 	#feet dist range is {0.2,2.2}
-	var d: float = r_local_pos.distance_to(l_local_pos)
+	var d: float = $RightFoot.global_position.distance_to($LeftFoot.global_position)
 	#print(d)
 	var default_y:= 0.0
 	var shift_range:= 0.5
@@ -116,16 +141,18 @@ func move_torso():
 #todo change stride time with speed
 func _process(delta: float) -> void:
 	velocity = $"..".velocity
+	$RightFootTrack.scale = Vector3(0.5,1,1)* stride_length
+	$LeftFootTrack.scale = Vector3(0.5,1,1)* stride_length
 	#keep restarting until stop moving, then let timer finish
 	if velocity.length() > 0.1:
 		$Reset.start()
 		#rotate tracker vec holder to movement direction independent of look direction
 		$RightFootTrack/Holder.rotation.y = Vector3.FORWARD.signed_angle_to(velocity,Vector3.UP) - rotation.y
 		$LeftFootTrack/Holder.rotation.y = Vector3.FORWARD.signed_angle_to(velocity,Vector3.UP) - rotation.y
-	else:
-		$RightFootTrack/Holder.rotation.y = 0
-		$LeftFootTrack/Holder.rotation.y = 0
-	
+	#else:
+		#$RightFootTrack/Holder.rotation.y = 0
+		#$LeftFootTrack/Holder.rotation.y = 0
+	#
 	move($RightFoot,$RightFootTrack)
 	move($LeftFoot,$LeftFootTrack)
 	move_torso()

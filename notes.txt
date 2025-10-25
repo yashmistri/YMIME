@@ -8,9 +8,11 @@ TODO:
 		use procedural animation to animate walking
 			x works with placeholder feet
 			x make humanoid follow placeholder feet position
-			direction of foot movement should be in direction of movement not crossing middle
+			x direction of foot movement should be in direction of movement not crossing middle
 			make sure rotation of feet only happens in y
 			characters have a stat that determines how much they lean forward or backward
+			x redesign model to have root and pelvis and lower torso be independent
+			rotate pelvis to align with feet?
 		
 	week 10/26
 		make middle torso mesh as root and lower and upper torso both rotate freely

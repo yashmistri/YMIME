@@ -2,7 +2,7 @@ class_name Character3d
 extends CharacterBody3D
 
 
-const SPEED = 5.0
+const SPEED = 2.0
 var target:Node3D
 var move_dir:Vector2
 
