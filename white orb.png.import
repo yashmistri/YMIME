@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://s8s7emsunfbl"
-path="res://.godot/imported/white orb.png-2e943f5d1a620e56aeac4c35634edb4d.ctex"
+uid="uid://b162dn51hs726"
+path="res://.godot/imported/white orb.png-d0b69d51412074dd133a851eda7439f2.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://white orb.png"
-dest_files=["res://.godot/imported/white orb.png-2e943f5d1a620e56aeac4c35634edb4d.ctex"]
+source_file="res://Scripts/white orb.png"
+dest_files=["res://.godot/imported/white orb.png-d0b69d51412074dd133a851eda7439f2.ctex"]
 
 [params]
 

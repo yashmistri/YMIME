@@ -1,20 +1,43 @@
 TODO:
 	week 10/19
-		x fix sprites turning black where overlap wall
-			x shadow casting on wall showing over player sprite
-		x put normal maps on blocks and use only one light mask may fix sprites turning black
-		x make humanoid in blender then port to godot and setup skeleton
-			x setup ik 
-		use procedural animation to animate walking
-			x works with placeholder feet
-			x make humanoid follow placeholder feet position
-			x direction of foot movement should be in direction of movement not crossing middle
-			make sure rotation of feet only happens in y
-			characters have a stat that determines how much they lean forward or backward
-			x redesign model to have root and pelvis and lower torso be independent
-			rotate pelvis to align with feet?
+	x fix sprites turning black where overlap wall
+		x shadow casting on wall showing over player sprite
+	x put normal maps on blocks and use only one light mask may fix sprites turning black
+	x make humanoid in blender then port to godot and setup skeleton
+		x setup ik 
+	use procedural animation to animate walking
+		x works with placeholder feet
+		x make humanoid follow placeholder feet position
+		x direction of foot movement should be in direction of movement not crossing middle
+		make sure rotation of feet only happens in y
+		characters have a stat that determines how much they lean forward or backward
+		x redesign model to have root and pelvis and lower torso be independent
+		x just trash track vector idea and just trigger foot move by timer?
+		rotate pelvis to align with feet?
+		show char shifting weight over each foot to reduce linear motion in animation
+		make sure enemies only move in 8 directions?
 		
 	week 10/26
+		use procedural animation to animate walking
+			make sure rotation of feet only happens around y
+			rotate pelvis to align with feet?
+			x mouse rotates upper torso some angle before rotating rest of body
+			x character steps more often when turning
+			show char shifting weight over each foot to reduce linear motion in animation
+			x when moving sideways shift lead tracker foot forward?
+				x make holder for both left and right tracker and rotate that
+			should stride time and step tempo increase linearly with speed or some curve?
+				balance stride time, step tempo, and stride length so that 
+				feet dont drag
+				steps look natural
+		make gun system
+			gun braced at shoulder with two spots for each hand IK target maybe change magnet pos?
+			
+		make enemy ai
+			follow player
+			strafe player
+			wander around
+			shoot
 		make middle torso mesh as root and lower and upper torso both rotate freely
 		proc anim for hands
 			walking
@@ -22,21 +45,29 @@ TODO:
 			shooting
 			reload gun? 
 		
-		add more 2d lights to scene with corresponding 3d lights?
-		add 3d blocks to 3d world where 2d walls are in order to block light correctly
 		make decorations in blender
-			put all static objects renders and normals in the same png spritesheet
 		model guns and swords and characters
 		model floors and walls
 			marble pillars
+		
+		make demo level 
 	week 11/2
-		make shadows out of sprites using copy of sprite make black and set z level and skew
+		characters have a stat that determines how much they lean forward or backward?
 		make path for feet to follow when moving that mimics natural foot movement
 		proc anim for accessories
 			springy antennae?
 			floating light orb that orbits?
+	week ?
+		
+		make shadows out of sprites using copy of sprite make black and set z level and skew
+		mouse rotates upper torso some angle before rotating rest of body
+			is buggy
 	misc:
-		2d lighting:
+		2d:
+			
+			put all static objects renders and normals in the same png spritesheet
+			add more 2d lights to scene with corresponding 3d lights?
+			add 3d blocks to 3d world where 2d walls are in order to block light correctly
 			circle light makes all enemy types look like the same blob
 			cone light faces cursor and fully illuminates enemies
 			cast shadows on enemies and objects?

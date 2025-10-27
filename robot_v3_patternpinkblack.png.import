@@ -2,20 +2,24 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b162dn51hs726"
-path="res://.godot/imported/white orb.png-d0b69d51412074dd133a851eda7439f2.ctex"
+uid="uid://cf41y42efeel5"
+path.s3tc="res://.godot/imported/robot_v3_patternpinkblack.png-c88543d5105950b9215ae44783de31c1.s3tc.ctex"
 metadata={
-"vram_texture": false
+"imported_formats": ["s3tc_bptc"],
+"vram_texture": true
+}
+generator_parameters={
+"md5": "a09e402504feaa7bf8fedb90c66434fb"
 }
 
 [deps]
 
-source_file="res://Scripts/white orb.png"
-dest_files=["res://.godot/imported/white orb.png-d0b69d51412074dd133a851eda7439f2.ctex"]
+source_file="res://robot_v3_patternpinkblack.png"
+dest_files=["res://.godot/imported/robot_v3_patternpinkblack.png-c88543d5105950b9215ae44783de31c1.s3tc.ctex"]
 
 [params]
 
-compress/mode=0
+compress/mode=2
 compress/high_quality=false
 compress/lossy_quality=0.7
 compress/uastc_level=0
@@ -23,7 +27,7 @@ compress/rdo_quality_loss=0.0
 compress/hdr_compression=1
 compress/normal_map=0
 compress/channel_pack=0
-mipmaps/generate=false
+mipmaps/generate=true
 mipmaps/limit=-1
 roughness/mode=0
 roughness/src_normal=""
@@ -37,4 +41,4 @@ process/normal_map_invert_y=false
 process/hdr_as_srgb=false
 process/hdr_clamp_exposure=false
 process/size_limit=0
-detect_3d/compress_to=1
+detect_3d/compress_to=0

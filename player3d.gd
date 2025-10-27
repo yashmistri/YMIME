@@ -4,6 +4,7 @@ const RAY_LENGTH = 1000
 func _ready():
 	
 	target = $Mouse
+	super._ready()
 
 func _physics_process(delta):
 	move_dir = Input.get_vector("left", "right", "up", "down")

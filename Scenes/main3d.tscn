@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://bwid2mwtukslq"]
+[gd_scene load_steps=10 format=3 uid="uid://bwid2mwtukslq"]
 
 [ext_resource type="Script" uid="uid://c7t6ujtiquk82" path="res://player3d.gd" id="1_nnj57"]
 [ext_resource type="PackedScene" uid="uid://cfx0dwkmulm7a" path="res://Scenes/enemy_model.tscn" id="2_aftg3"]
@@ -15,6 +15,8 @@ height = 0.4
 albedo_color = Color(1, 0, 0, 1)
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_e688o"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_nnj57"]
 
 [sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_nnj57"]
 
@@ -34,7 +36,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.99107456, 0)
 shape = SubResource("CapsuleShape3D_kjbku")
 
 [node name="Camera3D" type="Camera3D" parent="CharacterBody3D"]
-transform = Transform3D(1, 0, 0, 0, 0.70710677, 0.70710677, 0, -0.70710677, 0.70710677, -0.15984249, 19.172508, 18.41349)
+transform = Transform3D(1, 0, 0, 0, 0.8660253, 0.49999997, 0, -0.49999997, 0.8660253, -0.15984249, 13.354969, 21.77225)
 projection = 1
 size = 5.616
 
@@ -48,6 +50,7 @@ surface_material_override/0 = SubResource("StandardMaterial3D_aftg3")
 [node name="ground" type="MeshInstance3D" parent="."]
 transform = Transform3D(34.318718, 0, 0, 0, 34.318718, 0, 0, 0, 34.318718, 0, 0, 0)
 mesh = SubResource("PlaneMesh_e688o")
+surface_material_override/0 = SubResource("StandardMaterial3D_nnj57")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="ground"]
 collision_layer = 3
@@ -61,6 +64,5 @@ environment = SubResource("Environment_nnj57")
 [node name="OmniLight3D" type="OmniLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.8918457, 0)
 light_color = Color(1, 0.946, 0.64, 1)
-light_energy = 1.645
-omni_range = 12.107421
-omni_attenuation = 2.0
+light_energy = 4.097
+omni_range = 20.706
