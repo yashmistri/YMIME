@@ -103,6 +103,10 @@ TODO:
 		x damage player on contact
 		
 	player:
+		radar that explores rooms and reveals enemies
+			highlights through walls and darkness
+			arrows in directions of enemies
+			
 		fire projectile
 			damage each tile in a line from player to max range
 				make a ray and get all the tiles it intersects
