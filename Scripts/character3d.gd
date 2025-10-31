@@ -7,23 +7,29 @@ var accel = 0.0
 var target:Node3D
 var move_dir:Vector2
 @export
-var max_health: float = 20.0
+var max_health: float = 50.0
 var current_health: float
 var damage:float
 #keep track of when movement changes direction and emit signal if so
 var last_move_dir: Vector2 = Vector2.ZERO
 var last_look_angle:float
+var is_shooting:bool=false
 signal changed_dir
 signal changed_look
 
+var gun:Gun
 func _ready():
 	current_health = max_health
 	connect("changed_dir", $Root._on_changed_dir)
 	connect("changed_look", $Root._on_changed_dir)
-	gun = $Root.find_child("Gun")
+	gun = find_child("Gun")
 
 #self always faces same direction so angles pass from -pi to pi when turning so let model calculate rotation to target
 func _physics_process(delta: float) -> void:
+	if is_shooting:
+		var p=  gun.shoot()
+		if p:
+			$shot.global_position = p
 	#keep track of change to look angle
 	#var a_to_target:float = (-basis.z).signed_angle_to(target.position-position, Vector3.UP)
 	#var diff := a_to_target-last_look_angle
@@ -54,28 +60,7 @@ func _physics_process(delta: float) -> void:
 
 	move_and_slide()
 
-var gun:Gun
-func shoot():
-	#print(gun)
-	#print("shoot")
-	var space_state = get_world_3d().direct_space_state
-	var cam = $Camera3D
-	var mousepos = get_viewport().get_mouse_position()
 
-	var origin = gun.global_position
-	var end = origin + -gun.global_basis.z * gun.range
-	var query = PhysicsRayQueryParameters3D.create(origin, end)
-	query.collide_with_areas = true
-	query.collision_mask = 0b11
-
-	var result = space_state.intersect_ray(query)
-	if result:
-		var c: CollisionObject3D=result.get("collider")
-		if c.is_class("CharacterBody3D"):
-			c.take_damage(gun.damage)
-			#print("cenemy")
-		$shot.global_position = result.get("position")
-	pass
 
 func take_damage(d:float):
 	current_health = clamp(current_health-d, 0.0, max_health)
@@ -87,6 +72,6 @@ var is_dead :bool = false
 func die():
 	print("dead")
 	is_dead = true
-	var t := get_tree().create_tween()
-	t.tween_property()
+	#var t := get_tree().create_tween()
+	#t.tween_property()
 	queue_free()

@@ -2,13 +2,14 @@ extends Character3d
 const RAY_LENGTH = 1000
 
 func _ready():
-	
 	target = $Mouse
 	super._ready()
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("mouse1"):
-		shoot()
+		is_shooting = true
+	elif event.is_action_released("mouse1"):
+		is_shooting = false
 		
 func _physics_process(delta):
 	move_dir = Input.get_vector("left", "right", "up", "down")

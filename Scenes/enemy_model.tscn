@@ -1,8 +1,8 @@
-[gd_scene load_steps=10 format=3 uid="uid://cfx0dwkmulm7a"]
+[gd_scene load_steps=8 format=3 uid="uid://cfx0dwkmulm7a"]
 
 [ext_resource type="Script" uid="uid://dbaj3ji123evv" path="res://Scripts/enemy_model.gd" id="1_cwoyp"]
 [ext_resource type="PackedScene" uid="uid://ctb84yfllt3jf" path="res://robot_v3.glb" id="2_cwoyp"]
-[ext_resource type="Script" uid="uid://g2fwgicetq1f" path="res://Scripts/gun.gd" id="3_kbb0h"]
+[ext_resource type="PackedScene" uid="uid://yqbjw1iifyp8" path="res://Scenes/gun.tscn" id="3_kbb0h"]
 
 [sub_resource type="SphereMesh" id="SphereMesh_cwoyp"]
 
@@ -11,13 +11,6 @@ albedo_color = Color(0.47000003, 1, 0.6908334, 1)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gy5hj"]
 albedo_color = Color(0.47000003, 0.6908334, 1, 1)
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4uij5"]
-albedo_color = Color(0, 0, 0, 1)
-
-[sub_resource type="CylinderMesh" id="CylinderMesh_1mooe"]
-material = SubResource("StandardMaterial3D_4uij5")
-height = 11.524
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_kbb0h"]
 albedo_color = Color(0.94750005, 1, 0.37, 1)
@@ -146,13 +139,8 @@ transform = Transform3D(1, 0, 0, 0, 0.99999994, 0, 0, 0, 0.99999994, 0.41868997,
 
 [node name="GunHolder" type="Node3D" parent="RightHandTarget"]
 
-[node name="Gun" type="Node3D" parent="RightHandTarget/GunHolder"]
+[node name="Gun" parent="RightHandTarget/GunHolder" instance=ExtResource("3_kbb0h")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.4901161e-08, -0.84131336)
-script = ExtResource("3_kbb0h")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="RightHandTarget/GunHolder/Gun"]
-transform = Transform3D(0.14, 0, 0, 0, -6.119594e-09, 0.14, 0, -0.14, -6.119594e-09, 0, 0, 0)
-mesh = SubResource("CylinderMesh_1mooe")
 
 [node name="TorsoTarget" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.21185303, 1.6420898, -0.5572586)

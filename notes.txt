@@ -172,12 +172,28 @@ TODO:
 		cast damaging area on tiles around cursor
 			restrict range to radius r
 		cast expanding rings that trigger damage tiles
+	sounds:
+		higher level enemies have better quality speech synthesis
 	game:
+		gunplay:
+			accuracy system: shots have random spread
+				perlin noise random with seed that resets every level similar to counterstrike?
+				each gun has unique spread every run/level
+				accuracy goes down while moving or while shooting
+			
+			
 		energy system
 			recharges slowly but depletes quickly for abilities/attachments:
 				flashlight, heartbeat sensor, running?, hacking and listening enemy comms
+			passively reduces max energy
+				show damage, healthbars, etc
+				higher move speed
+				more health
+				larger non-blurry radius
+				resistance to debuffs
 			depletes in chunks to deploy devices etc:
 				mines, 
+				dash
 		player moves using navigation system? maybe makes multiple elevations in levels possible
 	
 		have places that player has to go to in a time limit
@@ -259,7 +275,6 @@ TODO:
 			eyes face direction
 			show back when facing up
 			special symbols for xp levels
-	sounds:
 		
 	make/download isometric 2d sprites:
 		angle/dimensions? try 45 degrees
