@@ -19,8 +19,6 @@ TODO:
 		
 	week 10/26
 		use procedural animation to animate walking
-			make sure rotation of feet only happens around y
-			rotate pelvis to align with feet?
 			x mouse rotates upper torso some angle before rotating rest of body
 			x character steps more often when turning
 			show char shifting weight over each foot to reduce linear motion in animation
@@ -30,14 +28,26 @@ TODO:
 				balance stride time, step tempo, and stride length so that 
 				feet dont drag
 				steps look natural
+			body leans in direction of movement
+				make node at floor with child at pelvis height
+				node tilts in direction of velocity
+				root position and rotation is matched with child
+			make lead tracker tip longer than other tip when strafing
+			make heels lift up at very end of drag?
+				animate?
+			forget feet rotation until later!
 		make gun system
 			gun braced at shoulder with two spots for each hand IK target maybe change magnet pos?
-			
+			let mouse ray hit characters?
+			gun points in horizontal direction of look
+			shot is raycast and has a flash of light
 		make enemy ai
 			follow player
 			strafe player
 			wander around
 			shoot
+			keeps track of path traversed
+				if clear line of sight to player, shoot, then retrace steps until out of sight of player
 		make middle torso mesh as root and lower and upper torso both rotate freely
 		proc anim for hands
 			walking
@@ -50,21 +60,35 @@ TODO:
 		model floors and walls
 			marble pillars
 		
-		make demo level 
+		make demo level and take video and post to youtube
 	week 11/2
+		how to calculate proper stride factors?
+			set factors at 3 different speeds to be as natural as possible
+			then try to fit a curve to each variable
+		ragdolls
+			no momentum on death? or take momentum from killing shot?
+			limbs can be separated and be knocked away
 		characters have a stat that determines how much they lean forward or backward?
 		make path for feet to follow when moving that mimics natural foot movement
 		proc anim for accessories
 			springy antennae?
 			floating light orb that orbits?
 	week ?
+		make sure rotation of feet only happens around y
+		rotate pelvis to align with feet?
 		
-		make shadows out of sprites using copy of sprite make black and set z level and skew
-		mouse rotates upper torso some angle before rotating rest of body
-			is buggy
+		x mouse rotates upper torso some angle before rotating rest of body
+			x is buggy
 	misc:
+		animations:
+			more stylized walking:
+				default human like
+				zombie
+				stiff robotic
+				all 4s?
+				
 		2d:
-			
+			make shadows out of sprites using copy of sprite make black and set z level and skew
 			put all static objects renders and normals in the same png spritesheet
 			add more 2d lights to scene with corresponding 3d lights?
 			add 3d blocks to 3d world where 2d walls are in order to block light correctly
@@ -77,6 +101,9 @@ TODO:
 			put normal maps on blocks; simplify occluder system to just one block type
 			sparks fly in 2d when 3d weapons hit
 		3d:
+			heartbeat sensor
+				uses energy at some rate
+			use negative light with shadows to simulate aftermath of explosion?
 			learn about specular texture
 			keep models out of GitHub repo?
 				make default/placeholder assets and commit those and load those if actual assets arent present
@@ -131,9 +158,7 @@ TODO:
 		enemy screams and runs at player from offscreen
 		turret with sweeping narrow red light cone
 		floating heads with two independent moving eyes with lights attached
-		x spawn function
-		x spawn node
-		x damage player on contact
+		enemies talk with speech synthesis, one level of comms is in game another is on radio which can only be listened to if picking a radio up or hacking comms
 		
 	player:
 		fire projectile
@@ -148,6 +173,11 @@ TODO:
 			restrict range to radius r
 		cast expanding rings that trigger damage tiles
 	game:
+		energy system
+			recharges slowly but depletes quickly for abilities/attachments:
+				flashlight, heartbeat sensor, running?, hacking and listening enemy comms
+			depletes in chunks to deploy devices etc:
+				mines, 
 		player moves using navigation system? maybe makes multiple elevations in levels possible
 	
 		have places that player has to go to in a time limit

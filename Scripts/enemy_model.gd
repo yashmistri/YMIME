@@ -1,13 +1,11 @@
 extends Node3D
 
 #multiplies with speed to set track vector scale which is stride length
-@export
-var stride_length_factor:float = 0.5
+var stride_length_factor:float = 1.8
 var stride_height:float = 1.0
 var max_rotation: float = PI/2
 #divides by speed and controls stride time; more =slower stride same for step time
-@export
-var stride_time_factor:float = 1.2
+var stride_time_factor:float = 0.4
 var step_time_factor = 0.6
 
 var reset_time:float = 0.01
@@ -20,7 +18,6 @@ enum State {STANDING, WALKING}
 var current_state :State = State.STANDING
 var skel :Skeleton3D
 var is_left_current:bool = true
-var tracker_scale_factor := Vector3(0.4,1,0.5)
 
 #todo make curve and make it parabola and make foot naturally rise and lower when moving
 #steps are much faster when standing still but dont trigger every change of direction
@@ -46,12 +43,9 @@ func _ready() -> void:
 	for c in find_children("", "SkeletonIK3D"):
 		c.start()
 	skel = find_child("Skeleton3D")
+	make_step()
+	make_step()
 	#path.curve.add_point()
-
-# set top_level but it goes to 0,0
-# save global position then set toplevel then set position to that
-# doesnt work
-# regular foot move algo should take care of it
 
 #foot algo
 #if rotation or distance is too much since last move, reset to foot_track
@@ -77,11 +71,11 @@ func _ready() -> void:
 #	forward: 
 #rotate holder with move direction
 
-var stride_time:float
-var step_time:float
+var stride_time:float = 0.01
+var step_time:float = 0.01
 func move(foot : Node3D, foot_track : Node3D) -> void:
 	#print("move")
-	var tracker_vec_tip = foot_track.get_node("Tip")
+	var tracker_vec_tip :Node3D= foot_track.get_node("Tip")
 	var final_pos: Vector3
 	var final_rot:Vector3
 	final_pos = tracker_vec_tip.global_position 
@@ -91,9 +85,12 @@ func move(foot : Node3D, foot_track : Node3D) -> void:
 		#stride_time = stride_time_factor/2.0
 	#print(step_time)
 	var t =get_tree().create_tween()
-	var rot :Tween = get_tree().create_tween()
+	#var rot :Tween = get_tree().create_tween()
+	#print(stride_time)
 	t.tween_property(foot, "global_position", final_pos, stride_time).set_ease(Tween.EASE_IN)
-	rot.tween_property(foot, "global_rotation", final_rot, stride_time/2)
+	#rot.tween_property(foot, "global_rotation", global_rotation, stride_time)
+	foot.global_rotation = global_rotation
+	foot.rotation.x = -90
 
 #how to lean torso forwards and to the side of lead foot when foot is far forward
 #how to get lead foot:
@@ -104,9 +101,9 @@ func move(foot : Node3D, foot_track : Node3D) -> void:
 #how to get tween progress; tween time elapse divided by stride time
 #set tempo of torso movement in proportion to tween progress
 @export
-var lean_height:float = 1.7
+var lean_height:float = 1.9
 @export
-var lean_side_factor:float = 0.2
+var lean_side_factor:float = 0.1
 func move_torso():
 	var torso_target:Node3D = $TorsoTarget
 	var lean_forward:float
@@ -122,7 +119,7 @@ func move_torso():
 	var r_dot := r.dot(forward)
 	var l_dot := l.dot(forward)
 	var lean_factor :float= max(r_dot, l_dot)
-	lean_forward = clamp(remap(lean_factor, 0.5,1.0,0.5,0.7),0.5,1.0)
+	lean_forward = clamp(remap(lean_factor, 0.5,1.0,0.3,0.7),0.3,1.0)
 	var lean_side = remap(r_dot-l_dot, -2,2, -lean_side_factor, lean_side_factor)
 	torso_target.position = Vector3(lean_side,lean_height,-lean_forward)
 
@@ -132,18 +129,19 @@ func move_torso():
 	#feet dist range is {0.2,2.2}
 	var d: float = $RightFoot.global_position.distance_to($LeftFoot.global_position)
 	#print(d)
-	var default_y:= -0.3
+	var default_y:= -0.1
 	var shift_range:= 0.3
 	var shift_amount := remap(d, 0.2, 2.2, default_y, default_y-shift_range)
 	$robot.position.y = shift_amount
 
 var last_look_a:float
 var angle_acc:float
-var max_turn_before_pivot:float = PI/4
+var max_turn_before_pivot:float = PI
 #calcs angle from current dir to target and sends it to add_rot()
 #also calculates accumulated rotation of lower body and resets feet if body rotates too much
 func look(target:Node3D):
 	$TorsoTarget.look_at(target.global_position)
+	$RightHandTarget.look_at(target.global_position)
 	var target_v: Vector3 = (target.global_position-global_position)
 	target_v.y = 0
 	var upperspine_t :Transform3D = skel.get_bone_global_pose(skel.find_bone("upperspine"))
@@ -172,7 +170,7 @@ func add_rot(a: float):
 	
 	#print("a {0} upperspine_a {1}".format([a, upperspine_a]))
 	#rotate if within range or if is outside range allow rotation towards center 
-	if abs(upperspine_a-a) <= max_upperspine_a:
+	if abs(upperspine_a-a) < max_upperspine_a:
 		#if(a > 0.01): print("here")
 		upperspine_t.basis = upperspine_t.basis.rotated(Vector3.UP, upperspine_a+a)
 		skel.set_bone_global_pose(skel.find_bone("upperspine"), upperspine_t)
@@ -190,7 +188,6 @@ func _process(delta: float) -> void:
 	#sets position of feet end position after move
 	#todo make min ho distance between feet
 	var stride_factor:float = clamp(stride_length_factor*velocity.length(), 0.1,3.0 )
-	$FootTracker.scale = tracker_scale_factor
 	$FootTracker/Holder/LeftFootTrack.scale.z = stride_factor
 	$FootTracker/Holder/RightFootTrack.scale.z =stride_factor
 	#keep restarting until stop moving, then let timer finish
@@ -200,9 +197,9 @@ func _process(delta: float) -> void:
 		#flip if rotation relative to movement is less than -pi/2 or greater than pi/2
 		var a:= Vector3.FORWARD.signed_angle_to(velocity,Vector3.UP)
 		var a_rel := a - rotation.y
-		
-		$FootTracker/Holder.rotation.y = a - rotation.y
-		if a_rel < -PI/2 or a_rel > PI/2:
+		#print(a_rel)
+		$FootTracker/Holder.rotation.y = a_rel
+		if (a_rel < -PI/2 and a_rel >-3*PI/2) or (a_rel > PI/2 and a_rel < 3*PI/2):
 			$FootTracker/Holder.scale.x = -1
 		else:
 			$FootTracker/Holder.scale.x = 1
@@ -210,21 +207,21 @@ func _process(delta: float) -> void:
 		$Step.stop()
 	
 	if velocity.length() > 0.1:
-		step_time = clamp(step_time_factor / (velocity.length()+0.0001), 0.1, 4.0)
-		stride_time = clamp(stride_time_factor/(velocity.length()+0.0001), 0.1, 4.0)
+		#print(step_time_factor / (velocity.length()+0.00001))
+		step_time = clamp(step_time_factor / (velocity.length()+0.0001), 0.01, 4.0)
+		stride_time = clamp(stride_time_factor/(velocity.length()+0.0001), 0.01, 4.0)
+		#print(step_time)
 	else:
 		#step_time = step_time_factor/2.0
 		0
 		#move one foot immediately
 		#make_step()
-	
 	move_torso()
-
-func _on_reset_timeout() -> void:
-	pass
 
 #triggers step for alternating foot
 #call directly on beginning to move and also change move direction and also change look direction
+#on stopping steps go too far forward
+#	recalculate tracker size before making step
 func make_step() -> void:
 	#print("step")
 	if is_left_current:
@@ -232,11 +229,12 @@ func make_step() -> void:
 	else:
 		move($RightFoot,$FootTracker/Holder/RightFootTrack)
 	is_left_current = not is_left_current
-	$Step.start(step_time)
+	$Step.wait_time = step_time
+	$Step.start()
 
 func _on_changed_dir():
 	#print("changeddir")
-	stride_time = 0.1
+	stride_time = 0.2
 	step_time=0.1
 	make_step()
 	pass
