@@ -2,11 +2,11 @@ class_name Character3d
 extends CharacterBody3D
 
 var speed_start = 1.0
-var speed = 3.0
+var speed = 1.0
 var accel = 0.0
-var accel_stat = 0.5
+var accel_stat = 1.0
 var current_energy:float
-var max_energy:float = 100.0
+var max_energy:float = 200.0
 #per second
 var sprint_energy_rate:float = 30.0
 var energy_replete_rate:float = 10.0
@@ -29,6 +29,7 @@ var gun:Gun
 func _ready():
 	current_health = max_health
 	current_energy = max_energy
+	accel = accel_stat
 	connect("changed_dir", $Root._on_changed_dir)
 	connect("changed_look", $Root._on_changed_dir)
 	gun = find_child("Gun")
@@ -37,19 +38,12 @@ func _ready():
 func _physics_process(delta: float) -> void:
 	if gun.is_shooting:
 		var p=  gun.shoot()
-		if p:
+		if p and has_node("shot"):
 			$shot.global_position = p
 	
-	if current_energy > 20.0 and is_exhausted:
-		is_exhausted = false
-	if is_sprinting and current_energy > 0.0 and not gun.is_shooting and not is_exhausted:
-		accel = accel_stat
-		current_energy = move_toward(current_energy, 0.0, sprint_energy_rate*delta)
-	else:
-		is_exhausted = true
-		current_energy = move_toward(current_energy, max_energy, sprint_energy_rate*delta)
-		accel = 0.0
-		speed = speed_start
+	
+		#accel = 0.0
+		#speed = speed_start
 	#print(current_energy)
 	#keep track of change to look angle
 	#var a_to_target:float = (-basis.z).signed_angle_to(target.position-position, Vector3.UP)
@@ -67,20 +61,32 @@ func _physics_process(delta: float) -> void:
 	if last_move_dir != Vector2.ZERO and move_dir == Vector2.ZERO:
 		last_move_dir = move_dir
 	
+	if current_energy ==0.0:
+		is_exhausted=true
+	if current_energy > 20.0 and is_exhausted:
+		is_exhausted = false
 	
 	var direction := (transform.basis * Vector3(move_dir.x, 0, move_dir.y)).normalized()
 	if direction:
-		speed = move_toward(speed, speed_start*2, accel*delta)
+		if is_sprinting and current_energy > 0.0 and not gun.is_shooting and not is_exhausted:
+			current_energy = move_toward(current_energy, 0.0, sprint_energy_rate*delta)
+			
+			speed = move_toward(speed, speed_start*2, accel*delta)
+		else:
+			speed = move_toward(speed, speed_start, accel*delta*1.5)
+			
 		if gun.is_shooting or gun.is_aiming:
-			speed *= 0.5
+			speed *= 1.0
 		velocity.x = direction.x * speed
 		velocity.z = direction.z * speed
 	else:
-		
 		speed = speed_start
 		velocity.x = move_toward(velocity.x, 0, speed)
 		velocity.z = move_toward(velocity.z, 0, speed)
+	if (direction and not is_sprinting) or not direction:
+		current_energy = move_toward(current_energy, max_energy, sprint_energy_rate*delta)
 
+	
 	move_and_slide()
 
 

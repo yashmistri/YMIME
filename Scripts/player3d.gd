@@ -38,3 +38,6 @@ func move_mouse():
 	if result:
 		target = result.get("position")
 		$Mouse.global_position = target
+
+func die():
+	print("Player dead")

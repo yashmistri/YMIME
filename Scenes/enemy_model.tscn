@@ -22,23 +22,23 @@ script = ExtResource("1_cwoyp")
 transform = Transform3D(0.335, 0, 0, 0, 0.335, 0, 0, 0, 0.335, 0, 0, 0)
 
 [node name="hand_L" parent="robot/Armature/Skeleton3D" index="0"]
-transform = Transform3D(0.99999994, -1.0430813e-07, -4.4703484e-08, 2.9802322e-08, 1, 5.9604645e-08, -1.4901161e-08, 0, 0.99999976, 0.50194967, 1.2361264, -1.5373294)
+transform = Transform3D(-0.006030023, 0.80768746, -0.58957934, 0.99258196, -0.06675804, -0.10160598, -0.12142515, -0.58581877, -0.80129373, 0.24375314, 1.6130191, -2.3532777)
 
 [node name="forearm_L" parent="robot/Armature/Skeleton3D" index="1"]
-transform = Transform3D(-0.33178657, 0.93664, 0.112351626, -0.6795753, -0.1547082, -0.71710694, -0.6542896, -0.31427807, 0.68784773, -1.0927347, 1.4995263, -1.0022526)
+transform = Transform3D(-0.7981546, 0.48806015, -0.35319394, 0.37817612, -0.050473727, -0.9243564, -0.4689687, -0.8713491, -0.1442869, -0.58719766, 1.6989535, -0.8697552)
 
 [node name="upperarm_L" parent="robot/Armature/Skeleton3D" index="2"]
-transform = Transform3D(-0.8062977, 0.12995994, -0.57705617, 0.5545613, -0.17330289, -0.8138965, -0.20577943, -0.9762565, 0.06766291, -1.2997525, 1.7755868, 0.5528658)
+transform = Transform3D(-0.7940215, 0.44732094, -0.41162294, 0.4382083, -0.048108358, -0.897585, -0.42131114, -0.89307857, -0.1578207, -1.2997525, 1.7755868, 0.5528658)
 
 [node name="hand_R" parent="robot/Armature/Skeleton3D" index="4"]
-transform = Transform3D(1.0000001, 1.4901161e-08, 9.685755e-08, 8.940697e-08, 1, 2.3841858e-07, -4.0978193e-08, -5.9604645e-08, 1, 0.65433085, 1.3601592, -0.78548694)
+transform = Transform3D(1.0000001, -1.4062971e-07, 1.1920929e-07, 1.5832484e-08, 1.0000001, -5.9604645e-08, 2.3283064e-08, 5.9604645e-08, 0.99999994, 0.65569174, 1.360425, -1.2183692)
 visible = false
 
 [node name="forearm_R" parent="robot/Armature/Skeleton3D" index="5"]
-transform = Transform3D(-0.43129495, -0.8958715, -0.10676408, -0.4854706, 0.33018887, -0.80950177, 0.76046216, -0.29730344, -0.5773283, 2.1796038, 0.79799354, -0.27931058)
+transform = Transform3D(-0.4858033, -0.8739325, 0.0154207535, -0.43114078, 0.22424202, -0.87397563, 0.76033735, -0.43122864, -0.4857252, 2.143612, 0.9786402, -0.4841776)
 
 [node name="upperarm_R" parent="robot/Armature/Skeleton3D" index="6"]
-transform = Transform3D(-0.6464058, 0.572264, 0.5046515, -0.74290025, -0.6228432, -0.24528652, 0.17395017, -0.53346044, 0.82774484, 1.2680218, 1.7901452, 0.5704596)
+transform = Transform3D(-0.57509255, 0.54966944, 0.6059146, -0.8055967, -0.5094385, -0.3024681, 0.14241868, -0.6620698, 0.7357857, 1.2680218, 1.7901452, 0.5704596)
 
 [node name="LeftIK" type="SkeletonIK3D" parent="robot/Armature/Skeleton3D" index="16"]
 transform = Transform3D(0.12375002, 0, -2.3447911e-15, 0, 0.12375002, 0, 2.3447911e-15, 0, 0.12375002, 0, 1.446134, -0.16180757)
@@ -119,12 +119,13 @@ surface_material_override/0 = SubResource("StandardMaterial3D_gy5hj")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.21735764, 1.9243774, 0)
 
 [node name="LeftHandTarget" type="Node3D" parent="RHBase"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.05124736, -0.04189229, -0.67857885)
+transform = Transform3D(-0.006030038, 0.80768776, -0.5895797, 0.9925822, -0.06675798, -0.10160612, -0.12142517, -0.58581907, -0.80129397, -0.05124736, 0.07529521, -1.1033835)
 
 [node name="RightHandTarget" type="Node3D" parent="RHBase"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.42800903)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.57354736)
 
 [node name="GunHolder" type="Node3D" parent="RHBase/RightHandTarget"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.14485168, 0.45651245)
 
 [node name="Gun" parent="RHBase/RightHandTarget/GunHolder" instance=ExtResource("3_kbb0h")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.655)

@@ -61,19 +61,23 @@ TODO:
 		make demo level and take video and post to youtube
 	week 11/2
 		
+		make demo level and take video and post to youtube
 		make gun system
 			model gun in blender
-			gun braced at shoulder with two spots for each hand IK target maybe change magnet pos?
-			limit up and down tilt of gun
+			
+			remember y is forward in blender
+			x gun braced at shoulder with two spots for each hand IK target maybe change magnet pos?
+			x limit up and down tilt of gun
 			puff of smoke?
-			fire from tip
+			x fire from tip
 			only some guns use aim down accuracy
 				pistols get laser
 				charge weapons have hold charge until fire
 				semi auto rifles hold down aim to improve accuracy
 			aim down is on or off and slows down movement but raises accuracy
-			make node at center of torso and child rh target in front 
-				rotate node to face target
+				greater slow  than just shooting
+			x make node at center of torso and child rh target in front 
+				x rotate node to face target
 		model environment
 			ground
 			walls
@@ -83,16 +87,18 @@ TODO:
 		model robot
 			hydraulic limbs and torso etc
 			cables?
+			longer arms
 		make enemy ai
 			follow player
-			limit rotation speed
-				slowly move target position
+			x limit rotation speed
+				x slowly move target position
 				x bug: robot moves backwards towards player before facing player
 			strafe player
 			wander around
+				get random pos on navmesh every time it reaches destination?
 				detect player with view cone or when hit
 			shoot
-		make demo level and take video and post to youtube
+				only if player is in direct line of sight
 		
 	week 11/9:
 		enemy death effect:
@@ -112,6 +118,7 @@ TODO:
 			press interact at enemy death location to pick up loot?
 			enemies drop ammo and health
 		make energy system:
+			every active ability adds to total use rate
 			if energy goes below threshold of exhaustion abilities have to wait for energy to replenish to threshold to use again
 				rate of use abilities: sprint, flashlight, etc
 		make enemy ai
@@ -173,6 +180,7 @@ TODO:
 				zombie
 				stiff robotic
 				all 4s?
+<<<<<<< Updated upstream
 			default is robot walk; self balancing robot
 				arms lean to center of gravity or in direction of acceleration
 		
@@ -184,6 +192,11 @@ TODO:
 				one mesh for char?
 			make light that projects stripes texture to simulate multiple rectangle lights
 			ghosts walk around and can be killed with energy weapon type
+=======
+				
+		
+		3d:
+>>>>>>> Stashed changes
 			stylized graphics: monochrome?
 			heartbeat sensor
 				uses energy at some rate
@@ -260,6 +273,7 @@ TODO:
 		higher level enemies have better quality speech synthesis
 	game:
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 		gunplay:
 			accuracy system: shots have random spread
 				perlin noise random with seed that resets every level similar to counterstrike?
@@ -267,6 +281,10 @@ TODO:
 				accuracy goes down while moving or while shooting
 				aim button readies and focuses weapon over time, fire button shoots
 			
+=======
+		make everything but area around cursor blurry or hidden and show fake hallucinated enemies and real enemies appear as furniture etc
+			A trap triggers this silently
+>>>>>>> Stashed changes
 =======
 		make everything but area around cursor blurry or hidden and show fake hallucinated enemies and real enemies appear as furniture etc
 			A trap triggers this silently
@@ -374,7 +392,10 @@ TODO:
 			show back when facing up
 			special symbols for xp levels
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 =======
+=======
+>>>>>>> Stashed changes
 	2d:
 			make shadows out of sprites using copy of sprite make black and set z level and skew
 			put all static objects renders and normals in the same png spritesheet

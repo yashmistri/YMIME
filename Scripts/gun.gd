@@ -10,14 +10,15 @@ extends Node3D
 @export var aim_speed:float = 1.0
 @export var is_auto:bool = true
 var can_shoot:bool=true
-@export var min_spread:float = 0.05
-@export var max_spread:float = 0.3
+@export var min_spread:float = 0.1
+@export var max_spread:float = 0.1
 var spread:float
 var is_shooting:bool = false
 var is_aiming:bool = false
 var current_mag: int
 var bullet_scene:PackedScene
 var target_pos: Vector3
+signal has_fired
 
 func _ready():
 	current_mag = mag_size
@@ -62,13 +63,14 @@ func shoot():
 		var fd :float= 1.0/rps
 		$FireDelay.start(fd)
 	can_shoot = false
+	emit_signal("has_fired")
 	spawn_bullet()
 	return result.get("position")
 
 func spawn_bullet():
 	var b:Node3D= bullet_scene.instantiate()
-	b.position = global_position
-	b.look_at_from_position(global_position, target_pos)
+	b.position = $Tip.global_position
+	b.look_at_from_position($Tip.global_position, target_pos)
 	#print(target_pos)
 	var t = get_tree().create_tween()
 	t.tween_property(b, "position", target_pos, 0.1)

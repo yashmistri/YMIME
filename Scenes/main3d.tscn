@@ -1,11 +1,13 @@
-[gd_scene load_steps=19 format=3 uid="uid://bwid2mwtukslq"]
+[gd_scene load_steps=21 format=3 uid="uid://bwid2mwtukslq"]
 
 [ext_resource type="Texture2D" uid="uid://bnkshmj5fmynw" path="res://light_path.png" id="1_e688o"]
+[ext_resource type="Script" uid="uid://is7yvnfi002n" path="res://Scenes/main_3d.gd" id="1_idrat"]
 [ext_resource type="Script" uid="uid://bdlpxi8lsg3kh" path="res://Scripts/enemy3d.gd" id="1_kjbku"]
 [ext_resource type="Script" uid="uid://c7t6ujtiquk82" path="res://Scripts/player3d.gd" id="1_nnj57"]
-[ext_resource type="Script" uid="uid://bomtf6r3iodrs" path="res://Scenes/l.gd" id="2_7p81r"]
+[ext_resource type="Script" uid="uid://bomtf6r3iodrs" path="res://l.gd" id="2_7p81r"]
 [ext_resource type="PackedScene" uid="uid://cfx0dwkmulm7a" path="res://Scenes/enemy_model.tscn" id="2_aftg3"]
 [ext_resource type="Texture2D" uid="uid://63nemp80iuqn" path="res://icon.svg" id="3_aftg3"]
+[ext_resource type="Texture2D" uid="uid://dw23006j0q24a" path="res://bar.tres" id="8_3osc8"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_e688o"]
 radius = 0.33984375
@@ -43,6 +45,7 @@ material = SubResource("StandardMaterial3D_kjbku")
 [sub_resource type="BoxShape3D" id="BoxShape3D_nh568"]
 
 [node name="Main3d" type="Node3D"]
+script = ExtResource("1_idrat")
 
 [node name="SpotLight3D" type="SpotLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.8660254, 0.5, 0, -0.5, 0.8660254, 1.3931885, 3.822815, 4.747925)
@@ -68,6 +71,24 @@ metadata/_edit_group_ = true
 
 [node name="Root" parent="Enemy" instance=ExtResource("2_aftg3")]
 
+[node name="hand_L" parent="Enemy/Root/robot/Armature/Skeleton3D" index="0"]
+transform = Transform3D(-0.60237485, -0.79613334, -0.0575798, 0.79680157, -0.59545565, -0.102659985, 0.047444798, -0.10771954, 0.9930485, -3.9109304, -0.21625704, 0.38549882)
+
+[node name="forearm_L" parent="Enemy/Root/robot/Armature/Skeleton3D" index="1"]
+transform = Transform3D(-0.65370435, -0.75614, -0.030367851, 0.7556175, -0.6500066, -0.08082636, 0.04137671, -0.07578306, 0.9962654, -2.6235578, 0.89041704, 0.51452386)
+
+[node name="upperarm_L" parent="Enemy/Root/robot/Armature/Skeleton3D" index="2"]
+transform = Transform3D(-0.55209464, -0.8310451, 0.067490175, 0.81888056, -0.5556835, -0.14370051, 0.15692481, -0.02406992, 0.98731714, -1.2997522, 1.7755868, 0.55286574)
+
+[node name="hand_R" parent="Enemy/Root/robot/Armature/Skeleton3D" index="4"]
+transform = Transform3D(-0.5422562, 0.7878203, 0.2920571, -0.83981836, -0.49754775, -0.21714453, -0.025758535, -0.3630228, 0.931424, 3.871808, -0.11664957, -0.0069589615)
+
+[node name="forearm_R" parent="Enemy/Root/robot/Armature/Skeleton3D" index="5"]
+transform = Transform3D(-0.59178144, 0.7766844, 0.21576834, -0.8060785, -0.56829214, -0.16517183, -0.0056669265, -0.27167183, 0.96237326, 2.549458, 0.85090035, 0.4555779)
+
+[node name="upperarm_R" parent="Enemy/Root/robot/Armature/Skeleton3D" index="6"]
+transform = Transform3D(-0.5766812, 0.80444753, 0.1424883, -0.8043068, -0.5896298, 0.07367172, 0.14328034, -0.07211924, 0.9870509, 1.2680218, 1.7901452, 0.57045954)
+
 [node name="CollisionShape3D2" type="CollisionShape3D" parent="Enemy"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.0070074, 0)
 shape = SubResource("CapsuleShape3D_e688o")
@@ -77,6 +98,9 @@ target_desired_distance = 2.61
 
 [node name="FollowDelay" type="Timer" parent="Enemy"]
 wait_time = 0.3
+one_shot = true
+
+[node name="BurstDelay" type="Timer" parent="Enemy"]
 one_shot = true
 
 [node name="Player" type="CharacterBody3D" parent="."]
@@ -94,7 +118,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.99107456, 0)
 shape = SubResource("CapsuleShape3D_kjbku")
 
 [node name="Camera3D" type="Camera3D" parent="Player"]
-transform = Transform3D(1, 0, 0, 0, 0.4999999, 0.8660253, 0, -0.8660253, 0.4999999, 0, 4.753, 2.186)
+transform = Transform3D(1, 0, 0, 0, 0.49999997, 0.86602545, 0, -0.86602545, 0.49999997, 0, 17.45824, 9.521374)
 projection = 1
 fov = 64.0
 size = 11.001
@@ -153,4 +177,56 @@ shape = SubResource("BoxShape3D_nh568")
 
 [node name="NavigationObstacle3D" type="NavigationObstacle3D" parent="NavigationRegion3D/wall"]
 
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer"]
+anchors_preset = 10
+anchor_right = 1.0
+grow_horizontal = 2
+
+[node name="Control" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 0
+
+[node name="HP" type="TextureProgressBar" parent="CanvasLayer/Control"]
+layout_mode = 0
+offset_left = -176.0
+offset_top = 177.0
+offset_right = 324.0
+offset_bottom = 327.0
+rotation = -0.7853982
+max_value = 1.0
+step = 0.01
+value = 1.0
+fill_mode = 2
+texture_progress = ExtResource("8_3osc8")
+tint_progress = Color(0.48000002, 1, 0.5926667, 1)
+
+[node name="Control2" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 1201.0
+offset_top = -1.0
+offset_right = 1201.0
+offset_bottom = -1.0
+
+[node name="Energy" type="TextureProgressBar" parent="CanvasLayer/Control2"]
+layout_mode = 0
+offset_left = -160.0
+offset_top = -158.0
+offset_right = 340.0
+offset_bottom = -8.0
+rotation = 0.7853982
+max_value = 1.0
+step = 0.01
+value = 1.0
+fill_mode = 2
+texture_progress = ExtResource("8_3osc8")
+tint_progress = Color(0.43, 0.981, 1, 1)
+
+[connection signal="has_fired" from="Enemy/Root/RHBase/RightHandTarget/GunHolder/Gun" to="Enemy" method="_on_gun_has_fired"]
 [connection signal="timeout" from="Enemy/FollowDelay" to="Enemy" method="_on_follow_delay_timeout"]
+[connection signal="timeout" from="Enemy/BurstDelay" to="Enemy" method="_on_burst_delay_timeout"]
+
+[editable path="Enemy/Root"]
+[editable path="Enemy/Root/robot"]
