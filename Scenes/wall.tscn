@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://div3mfnjrjog2"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_7p81r"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_nh568"]
+
+[node name="wall" type="MeshInstance3D"]
+transform = Transform3D(8.556378, 0, 0, 0, 4.729888, 0, 0, 0, 1, 0, 0, 0)
+mesh = SubResource("BoxMesh_7p81r")
+skeleton = NodePath("../..")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+shape = SubResource("BoxShape3D_nh568")
+
+[node name="NavigationObstacle3D" type="NavigationObstacle3D" parent="."]

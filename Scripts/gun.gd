@@ -3,15 +3,15 @@ extends Node3D
 
 @export_category("gun stats")
 @export var gun_range :float = 100.0
-@export var damage:float = 10.0
-@export var rps:float = 5.0
+@export var damage:float = 20.0
+@export var rps:float = 10.0
 @export var mag_size:int = 200
 @export var reload_time:float = 2.0
-@export var aim_speed:float = 1.0
+@export var aim_speed:float = 0.5
 @export var is_auto:bool = true
 var can_shoot:bool=true
-@export var min_spread:float = 0.1
-@export var max_spread:float = 0.1
+@export var min_spread:float = 0.0
+@export var max_spread:float = 0.3
 var spread:float
 var is_shooting:bool = false
 var is_aiming:bool = false
@@ -23,14 +23,14 @@ signal has_fired
 func _ready():
 	current_mag = mag_size
 	bullet_scene = load("res://Scenes/bullet.tscn")
-	spread = max_spread
+	spread = min_spread
 
 func _process(delta: float) -> void:
-	var aim_delta :float = delta/aim_speed
-	if is_aiming:
-		spread = move_toward(spread, min_spread, aim_delta)
+	var aim_delta :float = delta*aim_speed
+	if is_shooting:
+		spread = move_toward(spread, max_spread, aim_delta)
 	else:
-		spread = move_toward(spread, max_spread, aim_delta*2)
+		spread = move_toward(spread, min_spread, aim_delta*4)
 	#print(spread)
 
 func shoot():
@@ -55,6 +55,8 @@ func shoot():
 		if c.is_class("CharacterBody3D"):
 			c.take_damage(damage)
 			#print("cenemy")
+	else:
+		target_pos = end
 	current_mag -= 1
 	if current_mag == 0:
 		$Reload.start(reload_time)

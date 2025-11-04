@@ -21,6 +21,7 @@ func _unhandled_input(event: InputEvent) -> void:
 func _physics_process(delta):
 	move_dir = Input.get_vector("left", "right", "up", "down")
 	move_mouse()
+	$Flashlight.global_transform = gun.global_transform
 	super._physics_process(delta)
 
 func move_mouse():

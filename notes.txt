@@ -52,7 +52,6 @@ TODO:
 				if clear line of sight to player, shoot, then retrace steps until out of sight of player
 		make middle torso mesh as root and lower and upper torso both rotate freely
 		
-		
 		make decorations in blender
 		model guns and swords and characters
 		model floors and walls
@@ -62,8 +61,10 @@ TODO:
 	week 11/2
 		
 		make demo level and take video and post to youtube
+		allow rotate camera? no
+		bug flashlight shadowcasts own gun
 		make gun system
-			model gun in blender
+			x model gun in blender
 			
 			remember y is forward in blender
 			x gun braced at shoulder with two spots for each hand IK target maybe change magnet pos?
@@ -89,7 +90,7 @@ TODO:
 			cables?
 			longer arms
 		make enemy ai
-			follow player
+			x follow player
 			x limit rotation speed
 				x slowly move target position
 				x bug: robot moves backwards towards player before facing player

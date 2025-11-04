@@ -143,7 +143,7 @@ func look(target:Vector3, delta:float):
 	$RHBase.look_at(target)
 	var right_x_tilt =$RHBase.rotation.x
 	var max_gun_fall:float = PI/4
-	$RHBase.rotation.x = clamp(right_x_tilt, -PI/4,PI)
+	$RHBase.rotation.x = clamp(right_x_tilt, -PI/8,PI)
 	var target_v: Vector3 = (target-global_position)
 	target_v.y = 0
 	var upperspine_t :Transform3D = skel.get_bone_global_pose(skel.find_bone("upperspine"))

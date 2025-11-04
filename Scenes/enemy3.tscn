@@ -1,0 +1,62 @@
+[gd_scene load_steps=4 format=3 uid="uid://cjy5k0ppmnbq8"]
+
+[ext_resource type="Script" uid="uid://bdlpxi8lsg3kh" path="res://Scripts/enemy3d.gd" id="1_t205n"]
+[ext_resource type="PackedScene" uid="uid://cfx0dwkmulm7a" path="res://Scenes/enemy_model.tscn" id="2_g2rsm"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_e688o"]
+radius = 0.33984375
+height = 2.0140147
+
+[node name="Enemy" type="CharacterBody3D"]
+script = ExtResource("1_t205n")
+metadata/_edit_group_ = true
+
+[node name="Root" parent="." instance=ExtResource("2_g2rsm")]
+
+[node name="hand_L" parent="Root/robot/Armature/Skeleton3D" index="0"]
+transform = Transform3D(-0.60237485, -0.79613334, -0.0575798, 0.79680157, -0.59545565, -0.102659985, 0.047444798, -0.10771954, 0.9930485, -3.9109304, -0.21625704, 0.38549882)
+
+[node name="forearm_L" parent="Root/robot/Armature/Skeleton3D" index="1"]
+transform = Transform3D(-0.65370435, -0.75614, -0.030367851, 0.7556175, -0.6500066, -0.08082636, 0.04137671, -0.07578306, 0.9962654, -2.6235578, 0.89041704, 0.51452386)
+
+[node name="upperarm_L" parent="Root/robot/Armature/Skeleton3D" index="2"]
+transform = Transform3D(-0.55209464, -0.8310451, 0.067490175, 0.81888056, -0.5556835, -0.14370051, 0.15692481, -0.02406992, 0.98731714, -1.2997522, 1.7755868, 0.55286574)
+
+[node name="hand_R" parent="Root/robot/Armature/Skeleton3D" index="4"]
+transform = Transform3D(-0.5422562, 0.7878203, 0.2920571, -0.83981836, -0.49754775, -0.21714453, -0.025758535, -0.3630228, 0.931424, 3.871808, -0.11664957, -0.0069589615)
+
+[node name="forearm_R" parent="Root/robot/Armature/Skeleton3D" index="5"]
+transform = Transform3D(-0.59178144, 0.7766844, 0.21576834, -0.8060785, -0.56829214, -0.16517183, -0.0056669265, -0.27167183, 0.96237326, 2.549458, 0.85090035, 0.4555779)
+
+[node name="upperarm_R" parent="Root/robot/Armature/Skeleton3D" index="6"]
+transform = Transform3D(-0.5766812, 0.80444753, 0.1424883, -0.8043068, -0.5896298, 0.07367172, 0.14328034, -0.07211924, 0.9870509, 1.2680218, 1.7901452, 0.57045954)
+
+[node name="MeshInstance3D" parent="Root/FootTracker/Holder/LeftFootTrack/Tip" index="0"]
+visible = false
+
+[node name="MeshInstance3D" parent="Root/FootTracker/Holder/RightFootTrack/Tip" index="0"]
+visible = false
+
+[node name="MeshInstance3D2" parent="Root/TorsoTarget" index="0"]
+visible = false
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.0070074, 0)
+shape = SubResource("CapsuleShape3D_e688o")
+
+[node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
+target_desired_distance = 2.61
+
+[node name="FollowDelay" type="Timer" parent="."]
+wait_time = 0.3
+one_shot = true
+
+[node name="BurstDelay" type="Timer" parent="."]
+one_shot = true
+
+[connection signal="has_fired" from="Root/RHBase/RightHandTarget/GunHolder/Gun" to="." method="_on_gun_has_fired"]
+[connection signal="timeout" from="FollowDelay" to="." method="_on_follow_delay_timeout"]
+[connection signal="timeout" from="BurstDelay" to="." method="_on_burst_delay_timeout"]
+
+[editable path="Root"]
+[editable path="Root/robot"]
