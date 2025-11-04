@@ -2,15 +2,22 @@ extends Character3d
 const RAY_LENGTH = 1000
 
 func _ready():
-	target = $Mouse
 	super._ready()
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("mouse1"):
-		is_shooting = true
+		gun.is_shooting = true
 	elif event.is_action_released("mouse1"):
-		is_shooting = false
-		
+		gun.is_shooting = false
+	elif event.is_action_pressed("aim"):
+		gun.is_aiming = true
+	elif event.is_action_released("aim"):
+		gun.is_aiming = false
+	elif event.is_action_pressed("sprint"):
+		is_sprinting = true
+	elif event.is_action_released("sprint"):
+		is_sprinting = false
+	
 func _physics_process(delta):
 	move_dir = Input.get_vector("left", "right", "up", "down")
 	move_mouse()
@@ -29,4 +36,5 @@ func move_mouse():
 
 	var result = space_state.intersect_ray(query)
 	if result:
-		$Mouse.global_position = result.get("position")
+		target = result.get("position")
+		$Mouse.global_position = target

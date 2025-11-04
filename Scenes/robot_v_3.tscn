@@ -1,0 +1,54 @@
+[gd_scene load_steps=3 format=3 uid="uid://dkvmsnxxhkb3h"]
+
+[ext_resource type="PackedScene" uid="uid://ctb84yfllt3jf" path="res://robot_v3.glb" id="1_x1kb1"]
+[ext_resource type="Material" uid="uid://b63oy8gmgkam2" path="res://vertex_snap.tres" id="2_baknp"]
+
+[node name="robot_v3" instance=ExtResource("1_x1kb1")]
+
+[node name="Cube_011" parent="Armature/Skeleton3D/hand_L" index="0"]
+surface_material_override/0 = ExtResource("2_baknp")
+
+[node name="Cube_004" parent="Armature/Skeleton3D/forearm_L" index="0"]
+surface_material_override/0 = ExtResource("2_baknp")
+
+[node name="Cube_003" parent="Armature/Skeleton3D/upperarm_L" index="0"]
+surface_material_override/0 = ExtResource("2_baknp")
+
+[node name="head" parent="Armature/Skeleton3D/head_2" index="0"]
+surface_material_override/0 = ExtResource("2_baknp")
+
+[node name="Cube_005" parent="Armature/Skeleton3D/hand_R" index="0"]
+surface_material_override/0 = ExtResource("2_baknp")
+
+[node name="Cube_009" parent="Armature/Skeleton3D/forearm_R" index="0"]
+surface_material_override/0 = ExtResource("2_baknp")
+
+[node name="Cube_008" parent="Armature/Skeleton3D/upperarm_R" index="0"]
+surface_material_override/0 = ExtResource("2_baknp")
+
+[node name="body_001" parent="Armature/Skeleton3D/upperspine" index="0"]
+surface_material_override/0 = ExtResource("2_baknp")
+
+[node name="Cube_010" parent="Armature/Skeleton3D/spine" index="0"]
+surface_material_override/0 = ExtResource("2_baknp")
+
+[node name="head_001" parent="Armature/Skeleton3D/foot_L" index="0"]
+surface_material_override/0 = ExtResource("2_baknp")
+
+[node name="Cube_002" parent="Armature/Skeleton3D/lowerleg_L" index="0"]
+surface_material_override/0 = ExtResource("2_baknp")
+
+[node name="Cube_001" parent="Armature/Skeleton3D/thigh_L" index="0"]
+surface_material_override/0 = ExtResource("2_baknp")
+
+[node name="head_002" parent="Armature/Skeleton3D/foot_R" index="0"]
+surface_material_override/0 = ExtResource("2_baknp")
+
+[node name="Cube_007" parent="Armature/Skeleton3D/lowerleg_R" index="0"]
+surface_material_override/0 = ExtResource("2_baknp")
+
+[node name="Cube_006" parent="Armature/Skeleton3D/thigh_R" index="0"]
+surface_material_override/0 = ExtResource("2_baknp")
+
+[node name="body" parent="Armature/Skeleton3D/pelvis" index="0"]
+surface_material_override/0 = ExtResource("2_baknp")

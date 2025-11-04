@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://bwid2mwtukslq"]
+[gd_scene load_steps=18 format=3 uid="uid://bwid2mwtukslq"]
 
 [ext_resource type="Texture2D" uid="uid://bnkshmj5fmynw" path="res://light_path.png" id="1_e688o"]
 [ext_resource type="Script" uid="uid://bdlpxi8lsg3kh" path="res://Scripts/enemy3d.gd" id="1_kjbku"]
@@ -19,9 +19,7 @@ height = 2.0140147
 radius = 0.2
 height = 0.4
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7p81r"]
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_nh568"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_aftg3"]
 albedo_color = Color(1, 0, 0, 1)
 
 [sub_resource type="Environment" id="Environment_nnj57"]
@@ -84,7 +82,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.31225586, 0, 0.23129272)
 axis_lock_angular_x = true
 axis_lock_angular_z = true
 script = ExtResource("1_nnj57")
-max_health = 500.0
 metadata/_edit_group_ = true
 
 [node name="Root" parent="Player" instance=ExtResource("2_aftg3")]
@@ -100,18 +97,18 @@ fov = 64.0
 size = 11.001
 
 [node name="Mouse" type="MeshInstance3D" parent="Player"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.009094, 0, 1.30896)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.6799316, 0, 1.1689453)
 top_level = true
 mesh = SubResource("SphereMesh_nnj57")
 skeleton = NodePath("../..")
-surface_material_override/0 = SubResource("StandardMaterial3D_7p81r")
+surface_material_override/0 = SubResource("StandardMaterial3D_aftg3")
 
 [node name="shot" type="MeshInstance3D" parent="Player"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.6799316, 0, 1.1689453)
 top_level = true
 mesh = SubResource("SphereMesh_nnj57")
 skeleton = NodePath("../..")
-surface_material_override/0 = SubResource("StandardMaterial3D_nh568")
+surface_material_override/0 = SubResource("StandardMaterial3D_aftg3")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_nnj57")

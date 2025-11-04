@@ -4,7 +4,13 @@ extends CharacterBody3D
 var speed_start = 1.0
 var speed = 3.0
 var accel = 0.0
-var target:Node3D
+var accel_stat = 0.5
+var current_energy:float
+var max_energy:float = 100.0
+#per second
+var sprint_energy_rate:float = 30.0
+var energy_replete_rate:float = 10.0
+var target:Vector3
 var move_dir:Vector2
 @export
 var max_health: float = 50.0
@@ -13,23 +19,38 @@ var damage:float
 #keep track of when movement changes direction and emit signal if so
 var last_move_dir: Vector2 = Vector2.ZERO
 var last_look_angle:float
-var is_shooting:bool=false
+var is_sprinting:bool=false
+#true when energy reaches 0 and back to false when energy replenishes to threshold
+var is_exhausted:bool = false
 signal changed_dir
 signal changed_look
 
 var gun:Gun
 func _ready():
 	current_health = max_health
+	current_energy = max_energy
 	connect("changed_dir", $Root._on_changed_dir)
 	connect("changed_look", $Root._on_changed_dir)
 	gun = find_child("Gun")
 
 #self always faces same direction so angles pass from -pi to pi when turning so let model calculate rotation to target
 func _physics_process(delta: float) -> void:
-	if is_shooting:
+	if gun.is_shooting:
 		var p=  gun.shoot()
 		if p:
 			$shot.global_position = p
+	
+	if current_energy > 20.0 and is_exhausted:
+		is_exhausted = false
+	if is_sprinting and current_energy > 0.0 and not gun.is_shooting and not is_exhausted:
+		accel = accel_stat
+		current_energy = move_toward(current_energy, 0.0, sprint_energy_rate*delta)
+	else:
+		is_exhausted = true
+		current_energy = move_toward(current_energy, max_energy, sprint_energy_rate*delta)
+		accel = 0.0
+		speed = speed_start
+	#print(current_energy)
 	#keep track of change to look angle
 	#var a_to_target:float = (-basis.z).signed_angle_to(target.position-position, Vector3.UP)
 	#var diff := a_to_target-last_look_angle
@@ -37,7 +58,7 @@ func _physics_process(delta: float) -> void:
 		#print("rot {0} last_rot {1} diff {2}".format([a_to_target, last_look_angle, diff]))
 	#$Root.add_rot(a_to_target-last_look_angle)
 	#last_look_angle = a_to_target
-	$Root.look(target)
+	$Root.look(target, delta)
 	#print(abs(last_move_dir.angle_to(move_dir)))
 	if abs(last_move_dir.angle_to(move_dir)) >=PI or (last_move_dir==Vector2.ZERO and move_dir != Vector2.ZERO) :
 		changed_dir.emit()
@@ -49,7 +70,9 @@ func _physics_process(delta: float) -> void:
 	
 	var direction := (transform.basis * Vector3(move_dir.x, 0, move_dir.y)).normalized()
 	if direction:
-		speed = clamp(speed+ accel * delta, speed_start, speed_start*2)
+		speed = move_toward(speed, speed_start*2, accel*delta)
+		if gun.is_shooting or gun.is_aiming:
+			speed *= 0.5
 		velocity.x = direction.x * speed
 		velocity.z = direction.z * speed
 	else:
@@ -64,7 +87,7 @@ func _physics_process(delta: float) -> void:
 
 func take_damage(d:float):
 	current_health = clamp(current_health-d, 0.0, max_health)
-	print(current_health)
+	#print(current_health)
 	if current_health ==0.0:
 		die()
 

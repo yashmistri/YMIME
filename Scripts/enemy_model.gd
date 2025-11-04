@@ -7,7 +7,6 @@ var max_rotation: float = PI/2
 #divides by speed and controls stride time; more =slower stride same for step time
 var stride_time_factor:float = 0.4
 var step_time_factor = 0.6
-
 var reset_time:float = 0.01
 var velocity:Vector3
 @export
@@ -139,15 +138,19 @@ var angle_acc:float
 var max_turn_before_pivot:float = PI
 #calcs angle from current dir to target and sends it to add_rot()
 #also calculates accumulated rotation of lower body and resets feet if body rotates too much
-func look(target:Node3D):
-	$TorsoTarget.look_at(target.global_position)
-	$RightHandTarget.look_at(target.global_position)
-	var target_v: Vector3 = (target.global_position-global_position)
+func look(target:Vector3, delta:float):
+	$TorsoTarget.look_at(target)
+	$RHBase.look_at(target)
+	var right_x_tilt =$RHBase.rotation.x
+	var max_gun_fall:float = PI/4
+	$RHBase.rotation.x = clamp(right_x_tilt, -PI/4,PI)
+	var target_v: Vector3 = (target-global_position)
 	target_v.y = 0
 	var upperspine_t :Transform3D = skel.get_bone_global_pose(skel.find_bone("upperspine"))
 	#var upperspine_a := (-upperspine_t.basis.z).signed_angle_to(Vector3.FORWARD, Vector3.UP)
 	
 	var a_to_target:float = (-basis.z).signed_angle_to(target_v, Vector3.UP)
+	#$RightHandTarget.global_rotation.y = a_to_target
 	var rot_y = rotation.y
 	angle_acc += rot_y-last_look_a
 	if abs(angle_acc) > max_turn_before_pivot:
@@ -156,6 +159,7 @@ func look(target:Node3D):
 	#print(angle_acc)
 	#if abs(diff) > 0:
 		#print("rot {0} last_rot {1} diff {2}".format([a_to_target, last_look_angle, diff]))
+	#var rot_speed :float = clamp(a_to_target, -max_rot_speed, max_rot_speed)
 	add_rot(a_to_target)
 	last_look_a = rot_y
 

@@ -41,6 +41,8 @@ TODO:
 			let mouse ray hit characters?
 			gun points in horizontal direction of look
 			shot is raycast and has a flash of light
+				line that travels from gun to target
+				puff of smoke?
 		make enemy ai
 			follow player
 			strafe player
@@ -49,11 +51,7 @@ TODO:
 			keeps track of path traversed
 				if clear line of sight to player, shoot, then retrace steps until out of sight of player
 		make middle torso mesh as root and lower and upper torso both rotate freely
-		proc anim for hands
-			walking
-			swinging sword
-			shooting
-			reload gun? 
+		
 		
 		make decorations in blender
 		model guns and swords and characters
@@ -62,18 +60,107 @@ TODO:
 		
 		make demo level and take video and post to youtube
 	week 11/2
+		
+		make gun system
+			model gun in blender
+			gun braced at shoulder with two spots for each hand IK target maybe change magnet pos?
+			limit up and down tilt of gun
+			puff of smoke?
+			fire from tip
+			only some guns use aim down accuracy
+				pistols get laser
+				charge weapons have hold charge until fire
+				semi auto rifles hold down aim to improve accuracy
+			aim down is on or off and slows down movement but raises accuracy
+			make node at center of torso and child rh target in front 
+				rotate node to face target
+		model environment
+			ground
+			walls
+			lights
+			make sure all walls are behind walkable locations?
+			make collision bigger than walls?
+		model robot
+			hydraulic limbs and torso etc
+			cables?
+		make enemy ai
+			follow player
+			limit rotation speed
+				slowly move target position
+				x bug: robot moves backwards towards player before facing player
+			strafe player
+			wander around
+				detect player with view cone or when hit
+			shoot
+		make demo level and take video and post to youtube
+		
+	week 11/9:
+		enemy death effect:
+			fade out?
+			model dissappears from top to bottom while burning?
+			tf2 energy weapon death effect?
+			explode body parts?
+			ragdoll?
+			each in certain situations?
+		multiple sizes of gun with different weights and movement slow down on shooting
+	week ?
+		bonfire system for respawning and progress?
+			small enemies always respawn
+			big enemies dont respawn after kill
+		loot system:
+			walk over items to pick them up?
+			press interact at enemy death location to pick up loot?
+			enemies drop ammo and health
+		make energy system:
+			if energy goes below threshold of exhaustion abilities have to wait for energy to replenish to threshold to use again
+				rate of use abilities: sprint, flashlight, etc
+		make enemy ai
+			follow player
+			strafe player
+			wander around
+			shoot
+				sprint after shooting
+			keeps track of path traversed
+				if clear line of sight to player, shoot, then retrace steps until out of sight of player
+		make gun system
+			gun braced at shoulder with two spots for each hand IK target maybe change magnet pos?
+			let mouse ray hit characters?
+			gun points in horizontal direction of look
+			shot is raycast and has a flash of light
+				line that travels from gun to target
+				puff of smoke?
+		characters have a stat that determines how much they lean forward or backward?
+		make path for feet to follow when moving that mimics natural foot movement
+			or robotic foot movement
+			or self-balancing robot movement
+		2 jointed legs with no feet or claw feet
+		proc anim for accessories
+			springy antennae?
+			floating light orb that orbits?
 		how to calculate proper stride factors?
 			set factors at 3 different speeds to be as natural as possible
 			then try to fit a curve to each variable
 		ragdolls
 			no momentum on death? or take momentum from killing shot?
 			limbs can be separated and be knocked away
-		characters have a stat that determines how much they lean forward or backward?
-		make path for feet to follow when moving that mimics natural foot movement
-		proc anim for accessories
-			springy antennae?
-			floating light orb that orbits?
-	week ?
+		show char shifting weight over each foot to reduce linear motion in animation
+			
+			body leans in direction of movement
+				make node at floor with child at pelvis height
+				node tilts in direction of velocity
+				root position and rotation is matched with child
+			make lead tracker tip longer than other tip when strafing
+			make heels lift up at very end of drag?
+				animate?
+		should stride time and step tempo increase linearly with speed or some curve?
+				balance stride time, step tempo, and stride length so that 
+				feet dont drag
+				steps look natural
+		proc anim for hands
+				walking
+				swinging sword
+				shooting
+				reload gun? 
 		make sure rotation of feet only happens around y
 		rotate pelvis to align with feet?
 		
@@ -86,21 +173,18 @@ TODO:
 				zombie
 				stiff robotic
 				all 4s?
-				
-		2d:
-			make shadows out of sprites using copy of sprite make black and set z level and skew
-			put all static objects renders and normals in the same png spritesheet
-			add more 2d lights to scene with corresponding 3d lights?
-			add 3d blocks to 3d world where 2d walls are in order to block light correctly
-			circle light makes all enemy types look like the same blob
-			cone light faces cursor and fully illuminates enemies
-			cast shadows on enemies and objects?
-			light coming from above
-			make chars occlude 2d lights
-			use 3d proj sprite for making a shadow for each light. start with only players flashlight
-			put normal maps on blocks; simplify occluder system to just one block type
-			sparks fly in 2d when 3d weapons hit
+			default is robot walk; self balancing robot
+				arms lean to center of gravity or in direction of acceleration
+		
 		3d:
+			make decorations in blender
+				model guns and swords and characters
+				model floors and walls
+				marble pillars
+				one mesh for char?
+			make light that projects stripes texture to simulate multiple rectangle lights
+			ghosts walk around and can be killed with energy weapon type
+			stylized graphics: monochrome?
 			heartbeat sensor
 				uses energy at some rate
 			use negative light with shadows to simulate aftermath of explosion?
@@ -159,7 +243,7 @@ TODO:
 		turret with sweeping narrow red light cone
 		floating heads with two independent moving eyes with lights attached
 		enemies talk with speech synthesis, one level of comms is in game another is on radio which can only be listened to if picking a radio up or hacking comms
-		
+		enemy that gets woken if you stare at it so player has to walk backwards
 	player:
 		fire projectile
 			damage each tile in a line from player to max range
@@ -175,13 +259,18 @@ TODO:
 	sounds:
 		higher level enemies have better quality speech synthesis
 	game:
+<<<<<<< Updated upstream
 		gunplay:
 			accuracy system: shots have random spread
 				perlin noise random with seed that resets every level similar to counterstrike?
 				each gun has unique spread every run/level
 				accuracy goes down while moving or while shooting
+				aim button readies and focuses weapon over time, fire button shoots
 			
-			
+=======
+		make everything but area around cursor blurry or hidden and show fake hallucinated enemies and real enemies appear as furniture etc
+			A trap triggers this silently
+>>>>>>> Stashed changes
 		energy system
 			recharges slowly but depletes quickly for abilities/attachments:
 				flashlight, heartbeat sensor, running?, hacking and listening enemy comms
@@ -191,11 +280,13 @@ TODO:
 				more health
 				larger non-blurry radius
 				resistance to debuffs
+				wider/stronger flashlight
 			depletes in chunks to deploy devices etc:
 				mines, 
 				dash
+		grid based ability/attachment slots?
 		player moves using navigation system? maybe makes multiple elevations in levels possible
-	
+		have to balance character while moving or shooting or it falls over and takes time to get back up
 		have places that player has to go to in a time limit
 			show trail to place
 				animate pulse going from player to goal
@@ -212,7 +303,14 @@ TODO:
 				rewards fast and efficient attacks and combos
 			
 	visuals:
-		
+		every fifth bullet is visible as a tracer for auto weapons every bullet for slow weapons
+		vertex snapping?
+		getting grabbed and executed by enemy switches cam to first person?
+		first person scope in for long range weapons
+		gun models based on real world experimental guns and weapons
+		hud has camera feed of player face in world
+		higher difficulty reduces number of modules and replaces slots with coffee machine, tiktok, microwave with spinning doll, etc
+			position of junk in inventory is randomized and locked before each level
 		hide walls in front of player
 			have each wall keep track of player position and go transparent as player approaches a certain point
 			put something beneath walls when they dissapear?
@@ -275,6 +373,27 @@ TODO:
 			eyes face direction
 			show back when facing up
 			special symbols for xp levels
+<<<<<<< Updated upstream
+=======
+	2d:
+			make shadows out of sprites using copy of sprite make black and set z level and skew
+			put all static objects renders and normals in the same png spritesheet
+			add more 2d lights to scene with corresponding 3d lights?
+			add 3d blocks to 3d world where 2d walls are in order to block light correctly
+			circle light makes all enemy types look like the same blob
+			cone light faces cursor and fully illuminates enemies
+			cast shadows on enemies and objects?
+			light coming from above
+			make chars occlude 2d lights
+			use 3d proj sprite for making a shadow for each light. start with only players flashlight
+			put normal maps on blocks; simplify occluder system to just one block type
+			sparks fly in 2d when 3d weapons hit
+	sounds:
+>>>>>>> Stashed changes
+	
+	name ideas:
+		obsolete obots
+		tac-pickle
 		
 	make/download isometric 2d sprites:
 		angle/dimensions? try 45 degrees
@@ -308,5 +427,4 @@ Bugs:
 Notes:
 Ideas:
 	level is 2d sprites but characters are 3d models. need separate lights for 2d and 3d and some way to set both positions correctly
-	make everything but area around cursor blurry or hidden
-		always or as debuff?
+	
