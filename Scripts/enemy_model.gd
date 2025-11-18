@@ -38,7 +38,9 @@ var is_left_current:bool = true
 #use states? standing and walking
 # if on slope set foot position to slope and rotation to slope normal
 func _ready() -> void:
-	
+	$TorsoTarget/debug.visible = Global.debug_on
+	$FootTracker/Holder/LeftFootTrack/Tip/MeshInstance3D.visible = Global.debug_on
+	$FootTracker/Holder/RightFootTrack/Tip/MeshInstance3D.visible = Global.debug_on
 	for c in find_children("", "SkeletonIK3D"):
 		c.start()
 	skel = find_child("Skeleton3D")

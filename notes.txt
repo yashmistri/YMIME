@@ -111,6 +111,7 @@ TODO:
 			each in certain situations?
 		multiple sizes of gun with different weights and movement slow down on shooting
 	week ?
+		lower torso and upper torso return to neutral relative to each other when walking?
 		bonfire system for respawning and progress?
 			small enemies always respawn
 			big enemies dont respawn after kill
@@ -181,11 +182,11 @@ TODO:
 				zombie
 				stiff robotic
 				all 4s?
-<<<<<<< Updated upstream
 			default is robot walk; self balancing robot
 				arms lean to center of gravity or in direction of acceleration
 		
 		3d:
+			pass weight painting of body parts in blender to godot and use shader to inflate in normal direction to inflate body parts
 			make decorations in blender
 				model guns and swords and characters
 				model floors and walls
@@ -193,11 +194,8 @@ TODO:
 				one mesh for char?
 			make light that projects stripes texture to simulate multiple rectangle lights
 			ghosts walk around and can be killed with energy weapon type
-=======
-				
-		
 		3d:
->>>>>>> Stashed changes
+			enemy variety: different sizes for body parts: head, legs, torso, arms
 			stylized graphics: monochrome?
 			heartbeat sensor
 				uses energy at some rate
@@ -273,8 +271,6 @@ TODO:
 	sounds:
 		higher level enemies have better quality speech synthesis
 	game:
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
 		gunplay:
 			accuracy system: shots have random spread
 				perlin noise random with seed that resets every level similar to counterstrike?
@@ -282,14 +278,8 @@ TODO:
 				accuracy goes down while moving or while shooting
 				aim button readies and focuses weapon over time, fire button shoots
 			
-=======
 		make everything but area around cursor blurry or hidden and show fake hallucinated enemies and real enemies appear as furniture etc
 			A trap triggers this silently
->>>>>>> Stashed changes
-=======
-		make everything but area around cursor blurry or hidden and show fake hallucinated enemies and real enemies appear as furniture etc
-			A trap triggers this silently
->>>>>>> Stashed changes
 		energy system
 			recharges slowly but depletes quickly for abilities/attachments:
 				flashlight, heartbeat sensor, running?, hacking and listening enemy comms
@@ -392,11 +382,6 @@ TODO:
 			eyes face direction
 			show back when facing up
 			special symbols for xp levels
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-=======
-=======
->>>>>>> Stashed changes
 	2d:
 			make shadows out of sprites using copy of sprite make black and set z level and skew
 			put all static objects renders and normals in the same png spritesheet
@@ -411,12 +396,11 @@ TODO:
 			put normal maps on blocks; simplify occluder system to just one block type
 			sparks fly in 2d when 3d weapons hit
 	sounds:
->>>>>>> Stashed changes
 	
 	name ideas:
 		obsolete obots
 		tac-pickle
-		
+		tactical simulation of robot and alien combat
 	make/download isometric 2d sprites:
 		angle/dimensions? try 45 degrees
 		tiled? yes

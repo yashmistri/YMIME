@@ -28,7 +28,7 @@ one_shot = true
 one_shot = true
 
 [node name="Tip" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.55529785)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.91622925)
 
 [connection signal="timeout" from="FireDelay" to="." method="_on_fire_delay_timeout"]
 [connection signal="timeout" from="Reload" to="." method="_on_reload_timeout"]

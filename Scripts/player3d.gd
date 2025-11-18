@@ -2,6 +2,8 @@ extends Character3d
 const RAY_LENGTH = 1000
 
 func _ready():
+	$Mouse.visible = Global.debug_on
+	$Shot.visible = Global.debug_on
 	super._ready()
 
 func _unhandled_input(event: InputEvent) -> void:
@@ -21,7 +23,6 @@ func _unhandled_input(event: InputEvent) -> void:
 func _physics_process(delta):
 	move_dir = Input.get_vector("left", "right", "up", "down")
 	move_mouse()
-	$Flashlight.global_transform = gun.global_transform
 	super._physics_process(delta)
 
 func move_mouse():
@@ -33,7 +34,7 @@ func move_mouse():
 	var end = origin + cam.project_ray_normal(mousepos) * RAY_LENGTH
 	var query = PhysicsRayQueryParameters3D.create(origin, end)
 	query.collide_with_areas = true
-	query.collision_mask = 0b11
+	query.collision_mask = 0b01
 
 	var result = space_state.intersect_ray(query)
 	if result:

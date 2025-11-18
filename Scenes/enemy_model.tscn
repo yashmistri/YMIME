@@ -21,24 +21,8 @@ script = ExtResource("1_cwoyp")
 [node name="robot" parent="." instance=ExtResource("2_kbb0h")]
 transform = Transform3D(0.335, 0, 0, 0, 0.335, 0, 0, 0, 0.335, 0, 0, 0)
 
-[node name="hand_L" parent="robot/Armature/Skeleton3D" index="0"]
-transform = Transform3D(-0.006030023, 0.80768746, -0.58957934, 0.99258196, -0.06675804, -0.10160598, -0.12142515, -0.58581877, -0.80129373, 0.24375314, 1.6130191, -2.3532777)
-
-[node name="forearm_L" parent="robot/Armature/Skeleton3D" index="1"]
-transform = Transform3D(-0.7981546, 0.48806015, -0.35319394, 0.37817612, -0.050473727, -0.9243564, -0.4689687, -0.8713491, -0.1442869, -0.58719766, 1.6989535, -0.8697552)
-
-[node name="upperarm_L" parent="robot/Armature/Skeleton3D" index="2"]
-transform = Transform3D(-0.7940215, 0.44732094, -0.41162294, 0.4382083, -0.048108358, -0.897585, -0.42131114, -0.89307857, -0.1578207, -1.2997525, 1.7755868, 0.5528658)
-
 [node name="hand_R" parent="robot/Armature/Skeleton3D" index="4"]
-transform = Transform3D(1.0000001, -1.4062971e-07, 1.1920929e-07, 1.5832484e-08, 1.0000001, -5.9604645e-08, 2.3283064e-08, 5.9604645e-08, 0.99999994, 0.65569174, 1.360425, -1.2183692)
 visible = false
-
-[node name="forearm_R" parent="robot/Armature/Skeleton3D" index="5"]
-transform = Transform3D(-0.4858033, -0.8739325, 0.0154207535, -0.43114078, 0.22424202, -0.87397563, 0.76033735, -0.43122864, -0.4857252, 2.143612, 0.9786402, -0.4841776)
-
-[node name="upperarm_R" parent="robot/Armature/Skeleton3D" index="6"]
-transform = Transform3D(-0.57509255, 0.54966944, 0.6059146, -0.8055967, -0.5094385, -0.3024681, 0.14241868, -0.6620698, 0.7357857, 1.2680218, 1.7901452, 0.5704596)
 
 [node name="LeftIK" type="SkeletonIK3D" parent="robot/Armature/Skeleton3D" index="16"]
 transform = Transform3D(0.12375002, 0, -2.3447911e-15, 0, 0.12375002, 0, 2.3447911e-15, 0, 0.12375002, 0, 1.446134, -0.16180757)
@@ -89,7 +73,7 @@ top_level = true
 top_level = true
 
 [node name="FootTracker" type="Node3D" parent="."]
-transform = Transform3D(0.4, 0, 0, 0, 1, 0, 0, 0, 0.4, 0, 0, 0)
+transform = Transform3D(0.4, 0, 0, 0, 1, 0, 0, 0, 0.4, 0, 0.13826895, 0)
 
 [node name="Holder" type="Node3D" parent="FootTracker"]
 
@@ -133,7 +117,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.655)
 [node name="TorsoTarget" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.21185303, 1.6420898, -0.5572586)
 
-[node name="MeshInstance3D2" type="MeshInstance3D" parent="TorsoTarget"]
+[node name="debug" type="MeshInstance3D" parent="TorsoTarget"]
 transform = Transform3D(0.313, 0, 0, 0, 0.313, 0, 0, 0, 0.313, 0, 0, 0)
 mesh = SubResource("SphereMesh_cwoyp")
 skeleton = NodePath("../../Tip")

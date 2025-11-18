@@ -1,5 +1,8 @@
 extends Node3D
 
+func _ready() -> void:
+	pass
+
 func _process(delta: float) -> void:
 	var hpbar:TextureProgressBar = find_child("HP")
 	var enbar:TextureProgressBar = find_child("Energy")

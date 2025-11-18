@@ -42,6 +42,7 @@ func _physics_process(delta: float) -> void:
 			$shot.global_position = p
 	
 	
+	$Flashlight.global_transform = gun.get_node("Tip").global_transform
 		#accel = 0.0
 		#speed = speed_start
 	#print(current_energy)
