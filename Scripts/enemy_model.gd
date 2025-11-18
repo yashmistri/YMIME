@@ -41,13 +41,19 @@ func _ready() -> void:
 	$TorsoTarget/debug.visible = Global.debug_on
 	$FootTracker/Holder/LeftFootTrack/Tip/MeshInstance3D.visible = Global.debug_on
 	$FootTracker/Holder/RightFootTrack/Tip/MeshInstance3D.visible = Global.debug_on
-	for c in find_children("", "SkeletonIK3D"):
-		c.start()
+	start_IK()
 	skel = find_child("Skeleton3D")
 	make_step()
 	make_step()
 	#path.curve.add_point()
 
+func start_IK():
+	for c in find_children("", "SkeletonIK3D"):
+		c.start()
+
+func stop_IK():
+	for c in find_children("", "SkeletonIK3D"):
+		c.stop()
 #foot algo
 #if rotation or distance is too much since last move, reset to foot_track
 # bug: both feet can move at the same time 

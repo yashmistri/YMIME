@@ -22,6 +22,7 @@ var last_look_angle:float
 var is_sprinting:bool=false
 #true when energy reaches 0 and back to false when energy replenishes to threshold
 var is_exhausted:bool = false
+var is_ragdoll:bool = false
 signal changed_dir
 signal changed_look
 
@@ -33,9 +34,21 @@ func _ready():
 	connect("changed_dir", $Root._on_changed_dir)
 	connect("changed_look", $Root._on_changed_dir)
 	gun = find_child("Gun")
+	start_ragdoll()
 
+
+func start_ragdoll():
+	$Collision.disabled = true
+	is_ragdoll = true
+	$Root.stop_IK()
+	var bs : PhysicalBoneSimulator3D = $Root.find_child("BoneSim")
+	bs.active = true
+	bs.physical_bones_start_simulation()
+	
 #self always faces same direction so angles pass from -pi to pi when turning so let model calculate rotation to target
 func _physics_process(delta: float) -> void:
+	if is_ragdoll:
+		return
 	if gun.is_shooting:
 		var p=  gun.shoot()
 		if p and has_node("shot"):

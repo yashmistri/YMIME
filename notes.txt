@@ -176,7 +176,13 @@ TODO:
 		x mouse rotates upper torso some angle before rotating rest of body
 			x is buggy
 	misc:
+		fix gun staying while ragdoll
+		make moving use momentum 
+			too much momentum = fall over and ragdoll?
+		how to have enemies navigate with inertia movement:
+			movement direction is velocity reflected over next path direction?
 		animations:
+			how to move foot more robotically
 			more stylized walking:
 				default human like
 				zombie

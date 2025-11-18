@@ -111,24 +111,21 @@ omni_shadow_mode = 0
 script = ExtResource("2_7p81r")
 
 [node name="Player" type="CharacterBody3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.31225586, 0, 0.23129272)
-axis_lock_angular_x = true
-axis_lock_angular_z = true
 script = ExtResource("1_nnj57")
 max_health = 500.0
 metadata/_edit_group_ = true
 
 [node name="Root" parent="Player" instance=ExtResource("2_aftg3")]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Player"]
+[node name="Collision" type="CollisionShape3D" parent="Player"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.99107456, 0)
 shape = SubResource("CapsuleShape3D_kjbku")
 
 [node name="Camera3D" type="Camera3D" parent="Player"]
-transform = Transform3D(1, 0, 0, 0, 0.49999997, 0.86602545, 0, -0.86602545, 0.49999997, 0, 17.45824, 9.521374)
+transform = Transform3D(1, 0, 0, 0, 0.9178239, 0.39698777, 0, -0.39698777, 0.9178239, 0, 5.8251266, 9.766434)
 projection = 1
 fov = 64.0
-size = 11.001
+size = 6.162
 
 [node name="Mouse" type="MeshInstance3D" parent="Player"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.009094, 0, 1.30896)
