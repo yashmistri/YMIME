@@ -174,9 +174,10 @@ func look(target:Vector3, delta:float):
 #add rot to upper spine rot unless too much then apply to body rot
 #change to set rot and pass rot or target or something
 #upperspine rotation is fine but rotating past the limit of upperspine rotation is too slow
+#how to reset lower body to match with upperbody
 func add_rot(a: float):
 	#if ang < 0 : print(ang)
-	var max_upperspine_a := PI/4
+	var max_upperspine_a := 0
 	var upperspine_t :Transform3D = skel.get_bone_global_pose(skel.find_bone("upperspine"))
 	var upperspine_a := (-upperspine_t.basis.z).signed_angle_to(Vector3.FORWARD, Vector3.UP)
 	

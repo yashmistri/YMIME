@@ -66,3 +66,7 @@ func _on_burst_delay_timeout() -> void:
 
 func _on_gun_has_fired() -> void:
 	shots_fired +=1
+
+func die():
+	start_ragdoll()
+	is_dead = true

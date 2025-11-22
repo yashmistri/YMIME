@@ -177,10 +177,14 @@ TODO:
 			x is buggy
 	misc:
 		fix gun staying while ragdoll
+		how to make ragdoll start with current pose
+			spawn copy of model scene and apply all bones poses?
 		make moving use momentum 
 			too much momentum = fall over and ragdoll?
+			convert movement to use rigidbody?
 		how to have enemies navigate with inertia movement:
 			movement direction is velocity reflected over next path direction?
+			limit to 90 degrees if going in wrong direction?
 		animations:
 			how to move foot more robotically
 			more stylized walking:
