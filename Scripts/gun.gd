@@ -3,7 +3,7 @@ extends Node3D
 
 @export_category("gun stats")
 @export var gun_range :float = 100.0
-@export var damage:float = 20.0
+@export var damage:float = 40.0
 @export var rps:float = 10.0
 @export var mag_size:int = 200
 @export var reload_time:float = 2.0
@@ -11,7 +11,7 @@ extends Node3D
 @export var is_auto:bool = true
 var can_shoot:bool=true
 @export var min_spread:float = 0.0
-@export var max_spread:float = 0.3
+@export var max_spread:float = 0.1
 var spread:float
 var is_shooting:bool = false
 var is_aiming:bool = false

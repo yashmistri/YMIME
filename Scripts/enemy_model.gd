@@ -50,10 +50,14 @@ func _ready() -> void:
 func start_IK():
 	for c in find_children("", "SkeletonIK3D"):
 		c.start()
-
+		
+#tweens influence to 0
 func stop_IK():
-	for c in find_children("", "SkeletonIK3D"):
+	for c: SkeletonIK3D in find_children("", "SkeletonIK3D"):
 		c.stop()
+		#var t:Tween = get_tree().create_tween()
+		#t.tween_property(c,"influence", 0.0,1.0)
+
 #foot algo
 #if rotation or distance is too much since last move, reset to foot_track
 # bug: both feet can move at the same time 
@@ -196,6 +200,8 @@ func add_rot(a: float):
 #	increase scale.z of foot trackers
 #trackers are flipped when moving backwards how to fix
 func _process(delta: float) -> void:
+	#var idx = 11
+	#print("name {1} pose {0} ".format([skel.get_bone_name(idx),skel.global_transform * skel.get_bone_global_pose(idx)]))
 	velocity = $"..".velocity
 	#print(stride_length_factor*velocity.length())
 	#sets position of feet end position after move

@@ -37,25 +37,69 @@ func _ready():
 	gun = find_child("Gun")
 	stop_ragdoll()
 
-
+# tween bonesim influence 0 to 1 and ik influence 1 to 0?
 func start_ragdoll():
 	$Collision.disabled = true
 	is_ragdoll = true
-	$Root.stop_IK()
-	var bs : PhysicalBoneSimulator3D = $Root.find_child("BoneSim")
-	bs.active = true
-	bs.physical_bones_start_simulation()
+	#$Root.visible = false
+	#$Ragdoll.visible = true
+	
+	
+	set_ragdoll_pose()
+	#get_tree().paused = true
+	#bs.influence = 0.0
+	#var bt :Tween = get_tree().create_tween()
+	#bt.tween_property(bs,"influence",1.0,2.0)
 
+#figure out how to get correct bone poses in real time 
 func stop_ragdoll():
 	$Collision.disabled = false
 	is_ragdoll = false
 	$Root.start_IK()
+	$Root.visible = true
+	#$Ragdoll.visible = false
 	var bs : PhysicalBoneSimulator3D = $Root.find_child("BoneSim")
 	bs.active = false
 	bs.physical_bones_stop_simulation()
 
+#start with setting ragdoll right leg pos to real model right leg
+#keep IKs active during ragdoll?
+#apply poses to physicalbones not reg bones?
+func set_ragdoll_pose():
+	# how to find all bone poses and 
+	#store bone poses by index
+	var skel:Skeleton3D = $Root.find_child("Skeleton3D")
+	#var ragdoll_skel:Skeleton3D = $Ragdoll.find_child("Skeleton3D")
+	var bone_poses: Array[Transform3D]
+	
+	for bone_idx in range(skel.get_bone_count()):
+		var t :Transform3D = Transform3D(skel.global_transform*skel.get_bone_global_pose(bone_idx))
+		bone_poses.append(t)
+		
+		print("bone {0} idx {1} pose {2}".format(["bone_name",bone_idx,bone_poses[bone_idx]]))
+	#$Root.stop_IK()
+	var bs : PhysicalBoneSimulator3D = $Root.find_child("BoneSim")
+	bs.physical_bones_start_simulation()
+	bs.active = true
+	for bone_idx in range(skel.get_bone_count()):
+		skel.set_bone_global_pose_override(bone_idx,bone_poses[bone_idx],1.0)
+	return
+	#await get_tree().process_frame
+	#await get_tree().create_timer(0.1).timeout
+	for bone:PhysicalBone3D in bs.get_children():
+		#var bone_name = "lowerleg.R"
+		#var bone_idx = skel.find_bone(bone_name)
+		#print(bone.bone_name)
+		var bone_idx = skel.find_bone(bone.bone_name)
+		print(bone_idx)
+		bone.joint_offset = bone_poses[bone_idx]
+		#var bone_global_t:Transform3D = global_transform*skel.get_bone_global_pose(bone_idx)
+		#skel.set_bone_global_pose(bone_idx,bone_poses[bone_idx])
+		#print("bone {0} idx {1} pose {2}".format([bone_name,bone_idx,skel.get_bone_global_pose(bone_idx)]))
+
 #self always faces same direction so angles pass from -pi to pi when turning so let model calculate rotation to target
 func _physics_process(delta: float) -> void:
+	#set_ragdoll_pose()
 	if is_ragdoll or is_dead:
 		return
 	if gun.is_shooting:

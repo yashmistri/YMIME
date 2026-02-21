@@ -4,6 +4,7 @@
 [ext_resource type="Shader" uid="uid://be8bua0mm64pt" path="res://vertex_snap.gdshader" id="1_dqb1s"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_nkhj3"]
+shading_mode = 0
 albedo_texture = ExtResource("1_dbody")
 
 [resource]

@@ -105,11 +105,17 @@ TODO:
 		enemy death effect:
 			fade out?
 			model dissappears from top to bottom while burning?
-			tf2 energy weapon death effect?
+			ragdoll + tf2 energy weapon death effect?
 			explode body parts?
 			ragdoll?
 			each in certain situations?
 		multiple sizes of gun with different weights and movement slow down on shooting
+	week 1/13:
+		remake 2d system
+			every char gets its own camera
+			send normal map data to texture in sprite2d
+			make sure 2dlights are y sorted
+		clean up files
 	week ?
 		lower torso and upper torso return to neutral relative to each other when walking?
 		bonfire system for respawning and progress?
@@ -152,6 +158,7 @@ TODO:
 		ragdolls
 			no momentum on death? or take momentum from killing shot?
 			limbs can be separated and be knocked away
+			
 		show char shifting weight over each foot to reduce linear motion in animation
 			
 			body leans in direction of movement
@@ -176,12 +183,27 @@ TODO:
 		x mouse rotates upper torso some angle before rotating rest of body
 			x is buggy
 	misc:
+		enemies are ragdolls and get dragged around by physics and squirm around
+		how to draw vfx on terrain mesh
+		how to make fancy hud that puts box around enemies
+		how to make text unique:
+			find fancy font?
+			put gradient on text?
+			use shader to curve text?
+			big text behind text?
+		some surfaces are slippery or trip chars
+		ability that recovers playeer from ragdoll
+		how to make this ability tactical
+			some abilities can be casted while ragdoll
 		fix gun staying while ragdoll
 		how to make ragdoll start with current pose
 			spawn copy of model scene and apply all bones poses?
+			just animate death?
 		make moving use momentum 
+			lean model in direction of velocity or acceleration
 			too much momentum = fall over and ragdoll?
 			convert movement to use rigidbody?
+			hit wall = ragdoll
 		how to have enemies navigate with inertia movement:
 			movement direction is velocity reflected over next path direction?
 			limit to 90 degrees if going in wrong direction?
@@ -266,6 +288,13 @@ TODO:
 		floating heads with two independent moving eyes with lights attached
 		enemies talk with speech synthesis, one level of comms is in game another is on radio which can only be listened to if picking a radio up or hacking comms
 		enemy that gets woken if you stare at it so player has to walk backwards
+		boss enemy: alien:
+			two knees legs with one knee backwards
+			tail
+			wings
+			black and gold
+			claws
+			doesnt walk with momentum
 	player:
 		fire projectile
 			damage each tile in a line from player to max range
