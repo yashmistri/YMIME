@@ -1,0 +1,57 @@
+spring 26 mission: extended procedural animation system
+animated character with code with minimum use of animation curves
+features:
+	walk, strafe, run: all same function
+	new function: move hand- animates whole body with focus around right hand
+		given target position of right hand move body in natural way to match pose
+		rules:
+			feet try to remain balanced under center of mass
+			the heavier the object in RH the more anticipation and follow through
+			torso tries to find a natural transform between arms and feet
+			for changes in rot hand tries to execute arc motion
+		recursive function: executes different movements depending on position and rotation of RH
+			executes one movement at a time until RH reaches target transform
+			uses queue for multi part movements
+		priority list for shift in position:
+			if close and forward then just move RH to target
+			if farther then lunge towards target
+			if farther then dash towards target
+		prio for change in rotation:
+			if 180 deg in weapon up axis: do a flip or twist belly up
+		anticipation/follow through: torso moves and spins first and then arms move later
+			more for heavier weapons and faster movement
+		
+		only input is target pos and rot of RH
+		important variables: 
+			input: transform of target of RH
+			current transform of RH and
+			weight of weapon in RH and 
+			speed of movement
+			current character velocity and look direction
+how to limit scope if necessary:
+	less inputs
+	dont interpolate poses and do a smear VFX between limb positions
+	zoom out or pixelate or blur etc
+	refine one speed at a time
+	less joints no knees no feet etc
+	movement can be very robotic or puppet like doesnt have to be natural human like
+	hardcode some whole body or limb animations
+		like dash, leap, idle, roll, spin, flip, dance, grapple
+	
+typical situations:
+	reset: return to neutral pose
+	sword swing:
+		movement 1: move sword slowly to point back and to back left when facing target
+		movenent 2: move sword fast to point right and forward right pos
+ideas for anims possible:
+	sword swing
+		top down
+		bottom left to top right
+		top right to bottom left
+	parry
+	block
+	sword lunge
+	3x sword spin attack
+	astorias double flip overhead swing
+	dash forward and attack 3x
+	strafe dash
