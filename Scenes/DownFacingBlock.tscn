@@ -1,9 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://dg6poucs0w1oo"]
-
-[ext_resource type="PackedScene" uid="uid://ch7uhr8j2xa3v" path="res://Scenes/block_1.tscn" id="1_2ot2n"]
-
-[node name="Block1" instance=ExtResource("1_2ot2n")]
-face_dir = 0
-
-[node name="Dir" parent="." index="1"]
-text = "D"

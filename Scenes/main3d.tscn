@@ -1,31 +1,10 @@
-[gd_scene load_steps=25 format=3 uid="uid://bwid2mwtukslq"]
+[gd_scene format=3 uid="uid://bwid2mwtukslq"]
 
-[ext_resource type="Texture2D" uid="uid://bnkshmj5fmynw" path="res://light_path.png" id="1_e688o"]
-[ext_resource type="Script" uid="uid://is7yvnfi002n" path="res://Scenes/main_3d.gd" id="1_idrat"]
+[ext_resource type="Script" uid="uid://is7yvnfi002n" path="res://Scripts/main_3d.gd" id="1_idrat"]
 [ext_resource type="Script" uid="uid://c7t6ujtiquk82" path="res://Scripts/player3d.gd" id="1_nnj57"]
-[ext_resource type="Script" uid="uid://bomtf6r3iodrs" path="res://l.gd" id="2_7p81r"]
 [ext_resource type="PackedScene" uid="uid://cfx0dwkmulm7a" path="res://Scenes/enemy_model.tscn" id="2_aftg3"]
-[ext_resource type="PackedScene" uid="uid://bipyyhcoe54gh" path="res://Scenes/FancyText.tscn" id="2_jfj2w"]
-[ext_resource type="Shader" uid="uid://bbtapy3hdvot0" path="res://FancyText.gdshader" id="3_dpifw"]
-[ext_resource type="PackedScene" uid="uid://bbtm824jhovdv" path="res://Scenes/ragdoll.tscn" id="6_urbwf"]
-[ext_resource type="Texture2D" uid="uid://dw23006j0q24a" path="res://bar.tres" id="8_3osc8"]
-[ext_resource type="Shader" uid="uid://bxgp2tldefy6a" path="res://ground.gdshader" id="8_idrat"]
 [ext_resource type="PackedScene" uid="uid://div3mfnjrjog2" path="res://Scenes/wall.tscn" id="8_urbwf"]
 [ext_resource type="PackedScene" uid="uid://cjy5k0ppmnbq8" path="res://Scenes/enemy3.tscn" id="9_idrat"]
-
-[sub_resource type="Curve" id="Curve_64e68"]
-_limits = [0.0, 10.0, 0.0, 1.0]
-_data = [Vector2(0, 10), 0.0, -37.06522, 0, 0, Vector2(0.43478265, 0), 0.0, 0.0, 0, 0, Vector2(0.513834, 0), 0.0, 0.0, 0, 0, Vector2(0.5928854, 0), 0.0, 0.0, 0, 0, Vector2(1, 10), 42.50001, 0.0, 0, 0]
-point_count = 5
-
-[sub_resource type="CurveTexture" id="CurveTexture_x7267"]
-curve = SubResource("Curve_64e68")
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_6m416"]
-resource_local_to_scene = true
-shader = ExtResource("3_dpifw")
-shader_parameter/curve = SubResource("CurveTexture_x7267")
-shader_parameter/scale = 0.0
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_kjbku"]
 radius = 0.33984375
@@ -50,36 +29,28 @@ vertices = PackedVector3Array(-33.818718, 0.35258543, -23.568718, -31.818718, 0.
 polygons = [PackedInt32Array(1, 0, 2), PackedInt32Array(2, 0, 3), PackedInt32Array(5, 4, 6), PackedInt32Array(6, 4, 7), PackedInt32Array(9, 8, 7), PackedInt32Array(4, 2, 7), PackedInt32Array(7, 2, 3), PackedInt32Array(7, 3, 9), PackedInt32Array(11, 10, 12), PackedInt32Array(12, 10, 13), PackedInt32Array(16, 15, 14), PackedInt32Array(18, 17, 19), PackedInt32Array(19, 17, 16), PackedInt32Array(21, 13, 20), PackedInt32Array(23, 22, 24), PackedInt32Array(24, 22, 21), PackedInt32Array(12, 13, 22), PackedInt32Array(22, 13, 21), PackedInt32Array(8, 9, 15), PackedInt32Array(15, 9, 14), PackedInt32Array(19, 16, 20), PackedInt32Array(20, 16, 14), PackedInt32Array(21, 20, 25), PackedInt32Array(25, 20, 14), PackedInt32Array(6, 26, 5), PackedInt32Array(5, 26, 27), PackedInt32Array(30, 29, 31), PackedInt32Array(31, 29, 26), PackedInt32Array(31, 26, 28), PackedInt32Array(28, 26, 17), PackedInt32Array(29, 27, 26), PackedInt32Array(11, 31, 10), PackedInt32Array(10, 31, 28), PackedInt32Array(17, 18, 28), PackedInt32Array(35, 34, 32), PackedInt32Array(32, 34, 33), PackedInt32Array(0, 1, 36), PackedInt32Array(30, 37, 29), PackedInt32Array(29, 37, 36), PackedInt32Array(23, 24, 37), PackedInt32Array(37, 24, 36), PackedInt32Array(36, 24, 0), PackedInt32Array(41, 40, 38), PackedInt32Array(38, 40, 39), PackedInt32Array(45, 44, 42), PackedInt32Array(42, 44, 43), PackedInt32Array(49, 48, 46), PackedInt32Array(46, 48, 47)]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_urbwf"]
-render_priority = 0
-shader = ExtResource("8_idrat")
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_e688o"]
 material = SubResource("ShaderMaterial_urbwf")
 
 [sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_nnj57"]
 
-[node name="Main3d" type="Node3D"]
+[node name="Main3d" type="Node3D" unique_id=1536319688]
 script = ExtResource("1_idrat")
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1751539751]
 visible = false
 
-[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer" unique_id=94050786]
 anchors_preset = 10
 anchor_right = 1.0
 grow_horizontal = 2
 
-[node name="FancyText" parent="CanvasLayer" instance=ExtResource("2_jfj2w")]
-material = SubResource("ShaderMaterial_6m416")
-
-[node name="SubViewport" parent="CanvasLayer/FancyText" index="1"]
-render_target_update_mode = 0
-
-[node name="Control" type="Control" parent="CanvasLayer"]
+[node name="Control" type="Control" parent="CanvasLayer" unique_id=186321446]
 layout_mode = 3
 anchors_preset = 0
 
-[node name="HP" type="TextureProgressBar" parent="CanvasLayer/Control"]
+[node name="HP" type="TextureProgressBar" parent="CanvasLayer/Control" unique_id=224873172]
 layout_mode = 0
 offset_left = -176.0
 offset_top = 177.0
@@ -90,10 +61,9 @@ max_value = 1.0
 step = 0.01
 value = 1.0
 fill_mode = 2
-texture_progress = ExtResource("8_3osc8")
 tint_progress = Color(0.48000002, 1, 0.5926667, 1)
 
-[node name="Control2" type="Control" parent="CanvasLayer"]
+[node name="Control2" type="Control" parent="CanvasLayer" unique_id=2062040649]
 layout_mode = 3
 anchors_preset = 0
 offset_left = 1201.0
@@ -101,7 +71,7 @@ offset_top = -1.0
 offset_right = 1201.0
 offset_bottom = -1.0
 
-[node name="Energy" type="TextureProgressBar" parent="CanvasLayer/Control2"]
+[node name="Energy" type="TextureProgressBar" parent="CanvasLayer/Control2" unique_id=581172511]
 layout_mode = 0
 offset_left = -160.0
 offset_top = -158.0
@@ -112,52 +82,44 @@ max_value = 1.0
 step = 0.01
 value = 1.0
 fill_mode = 2
-texture_progress = ExtResource("8_3osc8")
 tint_progress = Color(0.43, 0.981, 1, 1)
 
-[node name="SpotLight3D" type="SpotLight3D" parent="."]
+[node name="SpotLight3D" type="SpotLight3D" parent="." unique_id=1556350280]
 transform = Transform3D(1, 0, 0, 0, 0.8660254, 0.5, 0, -0.5, 0.8660254, 1.3931885, 3.822815, 4.747925)
 visible = false
 light_color = Color(1, 0, 0, 1)
-light_projector = ExtResource("1_e688o")
 shadow_enabled = true
 spot_range = 10.457
 
-[node name="alarmlight" type="OmniLight3D" parent="."]
+[node name="alarmlight" type="OmniLight3D" parent="." unique_id=1275526394]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 1.3178711)
 visible = false
 light_color = Color(1, 0, 0, 1)
-light_projector = ExtResource("1_e688o")
 shadow_enabled = true
 omni_range = 14.345348
 omni_shadow_mode = 0
-script = ExtResource("2_7p81r")
 
-[node name="Enemy" parent="." instance=ExtResource("9_idrat")]
+[node name="Enemy" parent="." unique_id=1670004288 instance=ExtResource("9_idrat")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.2908745, 4.7683716e-07, -4.0135317)
 
-[node name="Player" type="CharacterBody3D" parent="."]
+[node name="Player" type="CharacterBody3D" parent="." unique_id=495396812]
 script = ExtResource("1_nnj57")
 max_health = 500.0
 metadata/_edit_group_ = true
 
-[node name="Ragdoll" parent="Player" instance=ExtResource("6_urbwf")]
-transform = Transform3D(0.335, 0, 0, 0, 0.335, 0, 0, 0, 0.335, -3.704657, 0, 0)
-visible = false
+[node name="Root" parent="Player" unique_id=1835215658 instance=ExtResource("2_aftg3")]
 
-[node name="Root" parent="Player" instance=ExtResource("2_aftg3")]
-
-[node name="Collision" type="CollisionShape3D" parent="Player"]
+[node name="Collision" type="CollisionShape3D" parent="Player" unique_id=335371986]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.99107456, 0)
 shape = SubResource("CapsuleShape3D_kjbku")
 
-[node name="Camera3D" type="Camera3D" parent="Player"]
+[node name="Camera3D" type="Camera3D" parent="Player" unique_id=1453340043]
 transform = Transform3D(1, 0, 0, 0, 0.68534815, 0.7282156, 0, -0.7282156, 0.68534815, 1.9073486e-06, 31.532913, 27.743427)
 projection = 1
 fov = 64.0
 size = 20.065
 
-[node name="Mouse" type="MeshInstance3D" parent="Player"]
+[node name="Mouse" type="MeshInstance3D" parent="Player" unique_id=738534231]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.009094, 0, 1.30896)
 top_level = true
 visible = false
@@ -165,7 +127,7 @@ mesh = SubResource("SphereMesh_nnj57")
 skeleton = NodePath("../..")
 surface_material_override/0 = SubResource("StandardMaterial3D_7p81r")
 
-[node name="Shot" type="MeshInstance3D" parent="Player"]
+[node name="Shot" type="MeshInstance3D" parent="Player" unique_id=1156292547]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.6799316, 0, 1.1689453)
 top_level = true
 visible = false
@@ -173,7 +135,7 @@ mesh = SubResource("SphereMesh_nnj57")
 skeleton = NodePath("../..")
 surface_material_override/0 = SubResource("StandardMaterial3D_nh568")
 
-[node name="Flashlight" type="SpotLight3D" parent="Player"]
+[node name="Flashlight" type="SpotLight3D" parent="Player" unique_id=1968978846]
 transform = Transform3D(1, 0, 0, 0, 0.88726056, 0.46126863, 0, -0.46126863, 0.88726056, 0, 3.367784, 0)
 light_energy = 2.149
 shadow_enabled = true
@@ -182,10 +144,10 @@ spot_range = 18.289
 spot_angle = 31.45
 spot_angle_attenuation = 2.070532
 
-[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1359153835]
 environment = SubResource("Environment_nnj57")
 
-[node name="OmniLight3D" type="OmniLight3D" parent="."]
+[node name="OmniLight3D" type="OmniLight3D" parent="." unique_id=2074462201]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.8918457, 0)
 light_color = Color(0.9999997, 0.9633147, 0.7531841, 1)
 light_energy = 4.893
@@ -196,30 +158,28 @@ omni_range = 20.706
 omni_attenuation = 1.337
 omni_shadow_mode = 0
 
-[node name="NavigationRegion3D" type="NavigationRegion3D" parent="."]
+[node name="NavigationRegion3D" type="NavigationRegion3D" parent="." unique_id=1873785972]
 navigation_mesh = SubResource("NavigationMesh_e688o")
 
-[node name="ground" type="MeshInstance3D" parent="NavigationRegion3D"]
+[node name="ground" type="MeshInstance3D" parent="NavigationRegion3D" unique_id=631024923]
 transform = Transform3D(34.318718, 0, 0, 0, 34.318718, 0, 0, 0, 34.318718, 0, 0, 0)
 mesh = SubResource("PlaneMesh_e688o")
 skeleton = NodePath("../..")
 
-[node name="StaticBody3D" type="StaticBody3D" parent="NavigationRegion3D/ground"]
+[node name="StaticBody3D" type="StaticBody3D" parent="NavigationRegion3D/ground" unique_id=697806152]
 collision_layer = 3
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/ground/StaticBody3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/ground/StaticBody3D" unique_id=180125150]
 shape = SubResource("WorldBoundaryShape3D_nnj57")
 
-[node name="wall" parent="NavigationRegion3D" instance=ExtResource("8_urbwf")]
+[node name="wall" parent="NavigationRegion3D" unique_id=924841181 instance=ExtResource("8_urbwf")]
 transform = Transform3D(6.143419, 0, 0, 0, 4.729888, 0, 0, 0, 1, -20.838303, 1.2175294, -24.611246)
 
-[node name="wall2" parent="NavigationRegion3D" instance=ExtResource("8_urbwf")]
+[node name="wall2" parent="NavigationRegion3D" unique_id=705477716 instance=ExtResource("8_urbwf")]
 transform = Transform3D(2.6990047, 0, 0, 0, 6.446513, 0, 0, 0, 1.8338295, -25.85752, 2.364944, -15.4212)
 
-[node name="wall3" parent="NavigationRegion3D" instance=ExtResource("8_urbwf")]
+[node name="wall3" parent="NavigationRegion3D" unique_id=456265658 instance=ExtResource("8_urbwf")]
 transform = Transform3D(1.6293967, 0, 0, 0, 4.729888, 0, 0, 0, 6.451636, -18.682545, 2.364944, -15.831501)
 
-[node name="wall4" parent="NavigationRegion3D" instance=ExtResource("8_urbwf")]
+[node name="wall4" parent="NavigationRegion3D" unique_id=1763291880 instance=ExtResource("8_urbwf")]
 transform = Transform3D(3.636086, 0, 0, 0, 2.1466599, 0, 0, 0, 1.4965155, -29.484789, 1.1350794, -23.539482)
-
-[editable path="CanvasLayer/FancyText"]
