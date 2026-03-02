@@ -1,12 +1,29 @@
-[gd_scene format=3 uid="uid://cfx0dwkmulm7a"]
+[gd_scene format=3 uid="uid://b4l6tkceuqx73"]
 
-[ext_resource type="Script" uid="uid://dbaj3ji123evv" path="res://Scripts/enemy_model.gd" id="1_cwoyp"]
-[ext_resource type="PackedScene" uid="uid://dkvmsnxxhkb3h" path="res://Scenes/robot_v_3.tscn" id="2_kbb0h"]
+[ext_resource type="Script" uid="uid://cvah6hrjahtbf" path="res://Scripts/char_model.gd" id="1_uebvp"]
+[ext_resource type="PackedScene" uid="uid://dkvmsnxxhkb3h" path="res://Scenes/robot_v_3.tscn" id="2_j3e7b"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_uebvp"]
+size = Vector3(1.51, 0.455, 0.265)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_j3e7b"]
+albedo_color = Color(0.59813, 0.99721104, 0.9238513, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_m6jr0"]
+material = SubResource("StandardMaterial3D_j3e7b")
+size = Vector3(0.135, 0.165, 0.735)
 
 [sub_resource type="SphereMesh" id="SphereMesh_cwoyp"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_cwoyp"]
 albedo_color = Color(0.47000003, 1, 0.6908334, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_c0nqx"]
+albedo_color = Color(0.59813, 0.99721104, 0.9238513, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_1r01a"]
+material = SubResource("StandardMaterial3D_c0nqx")
+size = Vector3(0.135, 0.165, 0.735)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gy5hj"]
 albedo_color = Color(0.47000003, 0.6908334, 1, 1)
@@ -21,9 +38,9 @@ shading_mode = 0
 height = 4.098
 
 [node name="Root" type="Node3D" unique_id=575523289]
-script = ExtResource("1_cwoyp")
+script = ExtResource("1_uebvp")
 
-[node name="robot" parent="." unique_id=1388112675 instance=ExtResource("2_kbb0h")]
+[node name="robot" parent="." unique_id=1388112675 instance=ExtResource("2_j3e7b")]
 visible = false
 
 [node name="Skeleton3D" parent="robot/Armature" index="0"]
@@ -154,9 +171,9 @@ joint_offset = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.109476e-07, 2.2230437e-0
 body_offset = Transform3D(-0.05697181, 0.6872861, 0.7241496, -3.1199306e-08, 0.72532743, -0.68840414, -0.9983759, -0.039219655, -0.04132318, -0.61985856, 0.58923054, 0.03537249)
 
 [node name="Physical Bone upperarm_L" parent="robot/Armature/Skeleton3D/BoneSim" index="3"]
-transform = Transform3D(-0.5520887, 0.067082144, 0.8310825, 0.81888497, -0.14397417, 0.5556069, 0.15692572, 0.98730516, 0.024553943, -1.9616526, 1.3329978, 0.53369224)
-joint_offset = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.0692979e-05, -0.0003896057, 0.79647017)
-body_offset = Transform3D(1.0000006, -7.1525574e-07, -7.438939e-06, -7.491326e-06, 0.00049144775, -1.0000002, 6.7055225e-07, 0.99999994, 0.0004914105, -4.7683716e-06, 0.7964705, -1.7881393e-06)
+transform = Transform3D(-0.5520887, 0.06663262, 0.8311187, 0.81888497, -0.14427465, 0.5555289, 0.15692572, 0.9872917, 0.025087947, -1.9616526, 1.3329978, 0.53369224)
+joint_offset = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.0743864e-05, -0.00082040386, 0.79646987)
+body_offset = Transform3D(1.0000006, -7.003546e-07, -7.5032003e-06, -7.491326e-06, 0.001032332, -0.99999976, 6.7055225e-07, 0.9999995, 0.0010322947, -4.7683716e-06, 0.7964705, -1.7881393e-06)
 
 [node name="Physical Bone forearm_L" parent="robot/Armature/Skeleton3D/BoneSim" index="4"]
 transform = Transform3D(-0.6537048, -0.030368226, 0.7561402, 0.75561774, -0.08082643, 0.65000695, 0.041376553, 0.99626553, 0.075783394, -3.2672455, 0.33707857, 0.45001158)
@@ -165,9 +182,9 @@ joint_rotation = Vector3(0, 0, 0)
 body_offset = Transform3D(1.0000005, 1.899898e-07, 2.591405e-07, 2.1746382e-07, 3.2782555e-07, -1.0000006, -1.6018748e-07, 1.0000001, 2.9802322e-07, 0, 0.8512812, 4.172325e-07)
 
 [node name="Physical Bone upperarm_R" parent="robot/Armature/Skeleton3D/BoneSim" index="5"]
-transform = Transform3D(-0.576681, 0.1424882, -0.80444777, -0.80430686, 0.07367269, 0.5896294, 0.14328104, 0.98705095, 0.072118595, 1.9087632, 1.3205032, 0.5130191)
-joint_offset = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.622303e-06, -1.6653403e-06, 0.7965001)
-body_offset = Transform3D(1.0000005, -7.4505806e-07, 2.9895455e-07, 9.9651515e-08, -6.482005e-07, -1.0000001, 6.854534e-07, 1.0000002, -6.7800283e-07, 2.3841858e-06, 0.7965002, 2.2053719e-06)
+transform = Transform3D(-0.576681, 0.1424882, -0.8044477, -0.80430686, 0.07367269, 0.58962935, 0.14328104, 0.98705095, 0.0721186, 1.9087632, 1.3205032, 0.5130191)
+joint_offset = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.5740862e-06, -1.6712747e-06, 0.7965001)
+body_offset = Transform3D(1.0000005, -7.4505806e-07, 2.3841858e-07, 9.9651515e-08, -6.482005e-07, -1.0000001, 6.854534e-07, 1.0000002, -6.7055225e-07, 2.3841858e-06, 0.7965002, 2.2053719e-06)
 
 [node name="Physical Bone forearm_R" parent="robot/Armature/Skeleton3D/BoneSim" index="6"]
 transform = Transform3D(-0.5917812, 0.21577139, -0.7766838, -0.8060787, -0.16516945, 0.5682923, -0.0056632073, 0.96237296, 0.27167293, 3.2106342, 0.367126, 0.22430938)
@@ -206,12 +223,19 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.07659912, -0.03552246, 0.12
 top_level = true
 
 [node name="FootTracker" type="Node3D" parent="." unique_id=656936007]
-transform = Transform3D(0.4, 0, 0, 0, 1, 0, 0, 0, 0.4, 0, 0.13826895, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.13826895, 0)
 
 [node name="Holder" type="Node3D" parent="FootTracker" unique_id=861974782]
 
+[node name="debug" type="MeshInstance3D" parent="FootTracker/Holder" unique_id=1084559009]
+mesh = SubResource("BoxMesh_uebvp")
+
 [node name="LeftFootTrack" type="Node3D" parent="FootTracker/Holder" unique_id=74260201]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.67609996, 0, 0)
+
+[node name="debug" type="MeshInstance3D" parent="FootTracker/Holder/LeftFootTrack" unique_id=502531322]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.5067749)
+mesh = SubResource("BoxMesh_m6jr0")
 
 [node name="Tip" type="Node3D" parent="FootTracker/Holder/LeftFootTrack" unique_id=583808676]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1)
@@ -223,6 +247,10 @@ surface_material_override/0 = SubResource("StandardMaterial3D_cwoyp")
 
 [node name="RightFootTrack" type="Node3D" parent="FootTracker/Holder" unique_id=1894514497]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.68333846, 0, 0)
+
+[node name="debug" type="MeshInstance3D" parent="FootTracker/Holder/RightFootTrack" unique_id=1408829163]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.5067749)
+mesh = SubResource("BoxMesh_1r01a")
 
 [node name="Tip" type="Node3D" parent="FootTracker/Holder/RightFootTrack" unique_id=1745299917]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1)
@@ -264,6 +292,7 @@ one_shot = true
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=713233208]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.9635925, 0)
+visible = false
 material_override = SubResource("StandardMaterial3D_4uij5")
 mesh = SubResource("CapsuleMesh_kbb0h")
 
