@@ -21,7 +21,7 @@ config/icon="res://Sprites/icon.svg"
 
 [autoload]
 
-Global="*res://Scripts/global.gd"
+Global="*uid://c00gxdtntnnod"
 
 [display]
 

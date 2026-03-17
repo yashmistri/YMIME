@@ -137,7 +137,7 @@ skeleton = NodePath("../..")
 surface_material_override/0 = SubResource("StandardMaterial3D_nh568")
 
 [node name="Flashlight" type="SpotLight3D" parent="Player" unique_id=1968978846]
-transform = Transform3D(1, 0, 0, 0, 0.88726056, 0.46126863, 0, -0.46126863, 0.88726056, 0, 7.8792796, -0.20445204)
+transform = Transform3D(1, 0, 0, 0, 0.88726056, 0.46126863, 0, -0.46126863, 0.88726056, 0, 3.367784, 0)
 light_energy = 2.149
 shadow_enabled = true
 shadow_caster_mask = 4294967265

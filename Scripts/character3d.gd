@@ -27,14 +27,13 @@ var is_dead :bool = false
 signal changed_dir
 signal changed_look
 
-var gun:Gun
 func _ready():
 	current_health = max_health
 	current_energy = max_energy
 	accel = accel_stat
 	connect("changed_dir", $Root._on_changed_dir)
 	connect("changed_look", $Root._on_changed_dir)
-	gun = find_child("Gun")
+	
 	stop_ragdoll()
 
 # tween bonesim influence 0 to 1 and ik influence 1 to 0?
@@ -55,12 +54,8 @@ func start_ragdoll():
 func stop_ragdoll():
 	$Collision.disabled = false
 	is_ragdoll = false
-	$Root.start_IK()
 	$Root.visible = true
 	#$Ragdoll.visible = false
-	var bs : PhysicalBoneSimulator3D = $Root.find_child("BoneSim")
-	bs.active = false
-	bs.physical_bones_stop_simulation()
 
 #start with setting ragdoll right leg pos to real model right leg
 #keep IKs active during ragdoll?
@@ -102,13 +97,8 @@ func _physics_process(delta: float) -> void:
 	#set_ragdoll_pose()
 	if is_ragdoll or is_dead:
 		return
-	if gun.is_shooting:
-		var p=  gun.shoot()
-		if p and has_node("shot"):
-			$shot.global_position = p
 	
 	
-	$Flashlight.global_transform = gun.get_node("Tip").global_transform
 		#accel = 0.0
 		#speed = speed_start
 	#print(current_energy)
@@ -135,15 +125,13 @@ func _physics_process(delta: float) -> void:
 	
 	var direction := (transform.basis * Vector3(move_dir.x, 0, move_dir.y)).normalized()
 	if direction:
-		if is_sprinting and current_energy > 0.0 and not gun.is_shooting and not is_exhausted:
+		if is_sprinting and current_energy > 0.0 and not is_exhausted:
 			current_energy = move_toward(current_energy, 0.0, sprint_energy_rate*delta)
 			
 			speed = move_toward(speed, speed_start*2, accel*delta)
 		else:
 			speed = move_toward(speed, speed_start, accel*delta*1.5)
-			
-		if gun.is_shooting or gun.is_aiming:
-			speed *= 1.0
+		
 		velocity.x = direction.x * speed
 		velocity.z = direction.z * speed
 	else:

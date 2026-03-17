@@ -8,13 +8,7 @@ func _ready():
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("mouse1"):
-		gun.is_shooting = true
-	elif event.is_action_released("mouse1"):
-		gun.is_shooting = false
-	elif event.is_action_pressed("aim"):
-		gun.is_aiming = true
-	elif event.is_action_released("aim"):
-		gun.is_aiming = false
+		true
 	elif event.is_action_pressed("sprint"):
 		is_sprinting = true
 	elif event.is_action_released("sprint"):

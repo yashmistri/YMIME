@@ -36,14 +36,10 @@ func _physics_process(delta: float) -> void:
 		#target.z = move_toward(target.z, player.position.z, max_target_find_speed*delta)
 		var target_error:float = target.distance_to(player.position)
 		#print(d_to_target)
-		if player_visible and target_error < 1.0 and nav_agent.distance_to_target() < 4.0 and can_shoot:
-			gun.is_shooting = true
-		elif nav_agent.distance_to_target()>6.0:
-			gun.is_shooting = false
 		nav_agent.target_position = target
 	if not nav_agent.is_navigation_finished():
 		#print(nav_agent.distance_to_target())
-		if can_follow and not gun.is_shooting:
+		if can_follow:
 			move_dir = Vector2(direction.x, direction.z).normalized()
 		else:
 			move_dir = Vector2.ZERO
