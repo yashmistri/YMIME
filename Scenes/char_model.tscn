@@ -1,7 +1,6 @@
 [gd_scene format=3 uid="uid://b4l6tkceuqx73"]
 
 [ext_resource type="Script" uid="uid://cvah6hrjahtbf" path="res://Scripts/char_model.gd" id="1_uebvp"]
-[ext_resource type="PackedScene" uid="uid://dkvmsnxxhkb3h" path="res://Scenes/robot_v_3.tscn" id="2_j3e7b"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_uebvp"]
 size = Vector3(1.51, 0.455, 0.265)
@@ -40,6 +39,7 @@ height = 4.098
 [node name="Root" type="Node3D" unique_id=575523289]
 script = ExtResource("1_uebvp")
 
+<<<<<<< Updated upstream
 [node name="robot" parent="." unique_id=1388112675 instance=ExtResource("2_j3e7b")]
 
 [node name="Skeleton3D" parent="robot/Armature" index="0"]
@@ -106,6 +106,8 @@ tip_bone = &"head_2"
 magnet = Vector3(0, 1.5, 1.39)
 target_node = NodePath("../../../../TorsoTarget")
 
+=======
+>>>>>>> Stashed changes
 [node name="LeftFoot" type="Node3D" parent="." unique_id=1345590147]
 transform = Transform3D(0.9999999, 0, 0, 0, 0.9999999, 0, 0, 0, 0.9999999, -0.20002031, 0, 0)
 top_level = true
@@ -190,5 +192,3 @@ mesh = SubResource("CapsuleMesh_kbb0h")
 
 [connection signal="timeout" from="Reset" to="." method="make_step"]
 [connection signal="timeout" from="Step" to="." method="make_step"]
-
-[editable path="robot"]
