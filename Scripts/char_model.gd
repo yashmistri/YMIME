@@ -1,3 +1,4 @@
+@tool
 extends Node3D
 
 var stride_height:float = 1.0
@@ -95,7 +96,20 @@ func add_rot(a: float):
 #	multiply scale with velocity dir?
 #	increase scale.z of foot trackers
 #trackers are flipped when moving backwards how to fix
+@onready
+var swing_target:=$SwingTarget
+@onready
+var swing_start:=$SwingStart
+@onready
+var swing_end:=$SwingEnd
+@onready
+var swing_arc_center:=$SwingArcCenter
 func _process(delta: float) -> void:
+	#how to find up vector of swing? cross of center to target and +x
+	var swing_forward:Vector3 = swing_target.global_position-swing_arc_center.global_position
+	
+	var swing_up:Vector3 = Vector3.RIGHT.cross(swing_forward)
+	#swing start = swing_forward rotated around swing_center about swing_up vector
 	velocity = $"..".velocity
 	if velocity.length() > 0.01:
 		$Reset.start()

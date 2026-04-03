@@ -55,3 +55,19 @@ ideas for anims possible:
 	astorias double flip overhead swing
 	dash forward and attack 3x
 	strafe dash
+
+how to swing hand:
+	use tweens to lerp hand beginning and target pos
+	rotate torso first delay then move hand
+	rotate torso slower than hand
+	
+	calculate start and end pos from strike target
+		make circle with center = head and end = target
+		start and end is 90 degrees before and after target
+	set start and end pos in animation
+	make circle/ellipse between start and end pos
+	animate progress between start and end
+
+figure out cloth sim
+	robe
+	cape
