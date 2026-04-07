@@ -67,7 +67,14 @@ how to swing hand:
 	set start and end pos in animation
 	make circle/ellipse between start and end pos
 	animate progress between start and end
+	
+	make sword face in direction from swing center to swing target
 
+how to test walking in editor
+	decouple movement of char and feet?
+	feet get equal and opposite motion to char vel
+use path3d for walking
+	make arc using in and out param
 figure out cloth sim
 	robe
 	cape

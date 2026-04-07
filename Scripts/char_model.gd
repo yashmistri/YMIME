@@ -11,7 +11,11 @@ enum State {STANDING, WALKING}
 var current_state :State = State.STANDING
 var skel :Skeleton3D
 var is_left_current:bool = true
-
+@export var test_swing: bool = false:
+	set(value):
+		if value:
+			swing()
+		test_swing = false 
 func _ready() -> void:
 	$TorsoTarget/debug.visible = Global.debug_on
 	$FootTracker/Holder/LeftFootTrack/Tip/MeshInstance3D.visible = Global.debug_on
@@ -41,6 +45,14 @@ func move(foot : Node3D, foot_track : Node3D) -> void:
 	#rot.tween_property(foot, "global_rotation", global_rotation, stride_time)
 	foot.global_rotation = global_rotation
 	foot.rotation.x = -90
+
+@export var swing_time:=0.3
+func swing():
+	var t = get_tree().create_tween().set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_IN)
+	var pf:PathFollow3D =$SwingPath/SwingPathFollow
+	pf.progress_ratio=0.1
+	
+	t.tween_property(pf,"progress_ratio",1.0,swing_time)
 
 var last_look_a:float
 var angle_acc:float
@@ -104,13 +116,18 @@ var swing_start:=$SwingStart
 var swing_end:=$SwingEnd
 @onready
 var swing_arc_center:=$SwingArcCenter
+@onready
+var swing_path:Path3D=$SwingPath
 func _process(delta: float) -> void:
 	#how to find up vector of swing? cross of center to target and +x
-	var swing_forward:Vector3 = swing_target.global_position-swing_arc_center.global_position
-	
-	var swing_up:Vector3 = Vector3.RIGHT.cross(swing_forward)
+	#var swing_forward:Vector3 = swing_target.global_position-swing_arc_center.global_position
+	#
+	#var swing_up:Vector3 = Vector3.RIGHT.cross(swing_forward)
 	#swing start = swing_forward rotated around swing_center about swing_up vector
-	velocity = $"..".velocity
+	swing_path.curve.set_point_position(0,swing_start.position)
+	swing_path.curve.set_point_position(1,swing_end.position)
+	
+	#velocity = $"..".velocity
 	if velocity.length() > 0.01:
 		$Reset.start()
 		#rotate tracker vec holder to movement direction independent of look direction
@@ -139,6 +156,7 @@ func make_step() -> void:
 	is_left_current = not is_left_current
 	$Step.wait_time = step_time
 	$Step.start()
+
 
 func _on_changed_dir():
 	make_step()
