@@ -11,7 +11,8 @@ enum State {STANDING, WALKING}
 var current_state :State = State.STANDING
 var skel :Skeleton3D
 var is_left_current:bool = true
-var stride_time:float = 0.01
+@export var stride_time:float = 0.01
+@export var stride_length:float=1.0
 @export var speed:float = 5.0
 @export var direction:float = 0.0
 @export var step_time:float = 0.01
@@ -29,6 +30,8 @@ func _ready() -> void:
 	skel = find_child("Skeleton3D")
 	make_step()
 	make_step()
+	if not Engine.is_editor_hint():
+		test_walk = false
 	#path.curve.add_point()
 
 func move(foot : Node3D, foot_track : Node3D) -> void:
@@ -52,11 +55,9 @@ func move(foot : Node3D, foot_track : Node3D) -> void:
 
 @export var swing_time:=0.3
 func swing():
-	swing_path.curve.set_point_position(0,swing_start.position)
-	swing_path.curve.set_point_position(1,swing_end.position)
 	
 	var t = get_tree().create_tween().set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_IN)
-	var pf:PathFollow3D =$SwingPath/SwingPathFollow
+	var pf:PathFollow3D =find_child("SwingPathFollow")
 	pf.progress_ratio=0.1
 	
 	t.tween_property(pf,"progress_ratio",1.0,swing_time)
@@ -68,6 +69,8 @@ var max_turn_before_pivot:float = PI
 #also calculates accumulated rotation of lower body and resets feet if body rotates too much
 func look(target:Vector3, delta:float):
 	$TorsoTarget.look_at(target)
+	$Model.look_at(target)
+	$FootTracker/Holder.look_at(target)
 	$RHBase.look_at(target)
 	var right_x_tilt =$RHBase.rotation.x
 	var max_gun_fall:float = PI/4
@@ -88,7 +91,6 @@ func look(target:Vector3, delta:float):
 	#if abs(diff) > 0:
 		#print("rot {0} last_rot {1} diff {2}".format([a_to_target, last_look_angle, diff]))
 	#var rot_speed :float = clamp(a_to_target, -max_rot_speed, max_rot_speed)
-	add_rot(a_to_target)
 	last_look_a = rot_y
 
 #add rot to upper spine rot unless too much then apply to body rot
@@ -116,20 +118,27 @@ func add_rot(a: float):
 #	increase scale.z of foot trackers
 #trackers are flipped when moving backwards how to fix
 @onready
-var swing_target:=$SwingTarget
+var swing_target:=$Model/SwingTarget
 @onready
-var swing_start:=$SwingStart
+var swing_start:=$Model/SwingStart
 @onready
-var swing_end:=$SwingEnd
+var swing_end:=$Model/SwingEnd
 @onready
-var swing_arc_center:=$SwingArcCenter
-@onready
-var swing_path:Path3D=$SwingPath
+var swing_path:Path3D=$Model/SwingPath
 func _process(delta: float) -> void:
 	if test_walk:
 		velocity = speed *0.01 * Vector3.FORWARD.rotated(Vector3.UP,direction)
+
 	$LeftFoot.position -= velocity
 	$RightFoot.position -= velocity
+	$FootTracker/Holder/LeftFootTrack.scale.z = stride_length
+	$FootTracker/Holder/RightFootTrack.scale.z = stride_length
+	#set swing start,end, and target points in swing_path node
+	swing_path.curve.set_point_position(0,swing_start.position)
+	swing_path.curve.set_point_position(1,swing_target.position)
+	
+	swing_path.curve.set_point_position(2,swing_end.position)
+	
 	#$FootTracker.position = position
 	#how to find up vector of swing? cross of center to target and +x
 	#var swing_forward:Vector3 = swing_target.global_position-swing_arc_center.global_position
@@ -139,17 +148,21 @@ func _process(delta: float) -> void:
 	
 	#velocity = $"..".velocity
 	if velocity.length() > 0.01:
+		if $Step.is_stopped():
+			$Step.start()
 		#$Reset.start()
 		#rotate tracker vec holder to movement direction independent of look direction
 		#flip if rotation relative to movement is less than -pi/2 or greater than pi/2
 		var a:= Vector3.FORWARD.signed_angle_to(velocity,Vector3.UP)
-		var a_rel := a - rotation.y
+		#var a_rel := a - rotation.y
+		var a_rel :=a
 		#print(a_rel)
-		$FootTracker/Holder.rotation.y = a_rel
-		if (a_rel < -PI/2 and a_rel >-3*PI/2) or (a_rel > PI/2 and a_rel < 3*PI/2):
-			$FootTracker/Holder.scale.x = -1
-		else:
-			$FootTracker/Holder.scale.x = 1
+		$FootTracker/Holder/LeftFootTrack.global_rotation.y = a_rel
+		$FootTracker/Holder/RightFootTrack.global_rotation.y = a_rel
+		#if (a_rel < -PI/2 and a_rel >-3*PI/2) or (a_rel > PI/2 and a_rel < 3*PI/2):
+			#$FootTracker/Holder.scale.x = -1
+		#else:
+			#$FootTracker/Holder.scale.x = 1
 	else:
 		#$Step.stop()
 		0
@@ -159,7 +172,7 @@ func _process(delta: float) -> void:
 #on stopping steps go too far forward
 #	recalculate tracker size before making step
 func make_step() -> void:
-	if not Engine.is_editor_hint() or not test_walk:
+	if Engine.is_editor_hint() and not test_walk:
 		return
 	print("step")
 	if is_left_current:

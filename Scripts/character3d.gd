@@ -1,6 +1,6 @@
 class_name Character3d
 extends CharacterBody3D
-
+@export
 var speed_start = 1.0
 var speed = 1.0
 var accel = 0.0
@@ -110,6 +110,7 @@ func _physics_process(delta: float) -> void:
 	#$Root.add_rot(a_to_target-last_look_angle)
 	#last_look_angle = a_to_target
 	$Root.look(target, delta)
+	$Root.velocity = velocity
 	#print(abs(last_move_dir.angle_to(move_dir)))
 	if abs(last_move_dir.angle_to(move_dir)) >=PI or (last_move_dir==Vector2.ZERO and move_dir != Vector2.ZERO) :
 		changed_dir.emit()
