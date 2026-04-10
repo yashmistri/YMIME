@@ -6,18 +6,24 @@ var max_rotation: float = PI/2
 
 var step_time_factor = 0.6
 var reset_time:float = 0.01
-var velocity:Vector3
+var velocity:Vector3 = Vector3.ZERO
 enum State {STANDING, WALKING}
 var current_state :State = State.STANDING
 var skel :Skeleton3D
 var is_left_current:bool = true
+var stride_time:float = 0.01
+@export var speed:float = 5.0
+@export var direction:float = 0.0
+@export var step_time:float = 0.01
 @export var test_swing: bool = false:
 	set(value):
 		if value:
 			swing()
 		test_swing = false 
+@export var test_walk: bool = false
+
 func _ready() -> void:
-	$TorsoTarget/debug.visible = Global.debug_on
+	#$TorsoTarget/debug.visible = Global.debug_on
 	$FootTracker/Holder/LeftFootTrack/Tip/MeshInstance3D.visible = Global.debug_on
 	$FootTracker/Holder/RightFootTrack/Tip/MeshInstance3D.visible = Global.debug_on
 	skel = find_child("Skeleton3D")
@@ -25,8 +31,6 @@ func _ready() -> void:
 	make_step()
 	#path.curve.add_point()
 
-var stride_time:float = 0.01
-var step_time:float = 0.01
 func move(foot : Node3D, foot_track : Node3D) -> void:
 	#print("move")
 	var tracker_vec_tip :Node3D= foot_track.get_node("Tip")
@@ -48,6 +52,9 @@ func move(foot : Node3D, foot_track : Node3D) -> void:
 
 @export var swing_time:=0.3
 func swing():
+	swing_path.curve.set_point_position(0,swing_start.position)
+	swing_path.curve.set_point_position(1,swing_end.position)
+	
 	var t = get_tree().create_tween().set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_IN)
 	var pf:PathFollow3D =$SwingPath/SwingPathFollow
 	pf.progress_ratio=0.1
@@ -119,17 +126,20 @@ var swing_arc_center:=$SwingArcCenter
 @onready
 var swing_path:Path3D=$SwingPath
 func _process(delta: float) -> void:
+	if test_walk:
+		velocity = speed *0.01 * Vector3.FORWARD.rotated(Vector3.UP,direction)
+	$LeftFoot.position -= velocity
+	$RightFoot.position -= velocity
+	#$FootTracker.position = position
 	#how to find up vector of swing? cross of center to target and +x
 	#var swing_forward:Vector3 = swing_target.global_position-swing_arc_center.global_position
 	#
 	#var swing_up:Vector3 = Vector3.RIGHT.cross(swing_forward)
 	#swing start = swing_forward rotated around swing_center about swing_up vector
-	swing_path.curve.set_point_position(0,swing_start.position)
-	swing_path.curve.set_point_position(1,swing_end.position)
 	
 	#velocity = $"..".velocity
 	if velocity.length() > 0.01:
-		$Reset.start()
+		#$Reset.start()
 		#rotate tracker vec holder to movement direction independent of look direction
 		#flip if rotation relative to movement is less than -pi/2 or greater than pi/2
 		var a:= Vector3.FORWARD.signed_angle_to(velocity,Vector3.UP)
@@ -141,14 +151,17 @@ func _process(delta: float) -> void:
 		else:
 			$FootTracker/Holder.scale.x = 1
 	else:
-		$Step.stop()
+		#$Step.stop()
+		0
 
 #triggers step for alternating foot
 #call directly on beginning to move and also change move direction and also change look direction
 #on stopping steps go too far forward
 #	recalculate tracker size before making step
 func make_step() -> void:
-	#print("step")
+	if not Engine.is_editor_hint() or not test_walk:
+		return
+	print("step")
 	if is_left_current:
 		move($LeftFoot,$FootTracker/Holder/LeftFootTrack)
 	else:
