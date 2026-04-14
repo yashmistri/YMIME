@@ -6,11 +6,14 @@ var max_rotation: float = PI/2
 
 var step_time_factor = 0.6
 var reset_time:float = 0.01
+var is_stopped:bool = true
 var velocity:Vector3 = Vector3.ZERO
 enum State {STANDING, WALKING}
 var current_state :State = State.STANDING
 var skel :Skeleton3D
 var is_left_current:bool = true
+@export var swing_angle_factor:float = 0.0
+@export var swing_angle_factor_height:float = 2.0
 @export var stride_time:float = 0.01
 @export var stride_length:float=1.0
 @export var speed:float = 5.0
@@ -25,8 +28,8 @@ var is_left_current:bool = true
 
 func _ready() -> void:
 	#$TorsoTarget/debug.visible = Global.debug_on
-	$FootTracker/Holder/LeftFootTrack/Tip/MeshInstance3D.visible = Global.debug_on
-	$FootTracker/Holder/RightFootTrack/Tip/MeshInstance3D.visible = Global.debug_on
+	$FootTracker/Holder/LeftFootTrack/Tip/shape.visible = Global.debug_on
+	$FootTracker/Holder/RightFootTrack/Tip/shape.visible = Global.debug_on
 	skel = find_child("Skeleton3D")
 	make_step()
 	make_step()
@@ -50,44 +53,46 @@ func move(foot : Node3D, foot_track : Node3D) -> void:
 	#print(stride_time)
 	t.tween_property(foot, "global_position", final_pos, stride_time).set_ease(Tween.EASE_IN)
 	#rot.tween_property(foot, "global_rotation", global_rotation, stride_time)
-	foot.global_rotation = global_rotation
-	foot.rotation.x = -90
+	#foot.global_rotation = global_rotation
+	#foot.rotation.x = -90
 
 @export var swing_time:=0.3
+var swing_tween:Tween
 func swing():
-	
-	var t = get_tree().create_tween().set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_IN)
+	if swing_tween:
+		swing_tween.kill()
+	swing_tween = get_tree().create_tween().set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_IN)
 	var pf:PathFollow3D =find_child("SwingPathFollow")
 	pf.progress_ratio=0.1
 	
-	t.tween_property(pf,"progress_ratio",1.0,swing_time)
+	swing_tween.tween_property(pf,"progress_ratio",1.0,swing_time)
+	
+	swing_tween.set_trans(Tween.TRANS_LINEAR)
+	swing_tween.tween_property(pf,"progress_ratio",0.0,swing_time*1.2).set_delay(0.3)
 
 var last_look_a:float
 var angle_acc:float
-var max_turn_before_pivot:float = PI
+var max_turn_before_pivot:float = PI/4
 #calcs angle from current dir to target and sends it to add_rot()
 #also calculates accumulated rotation of lower body and resets feet if body rotates too much
 func look(target:Vector3, delta:float):
 	$TorsoTarget.look_at(target)
-	$Model.look_at(target)
+	var model:=$Model
+	model.look_at(target)
 	$FootTracker/Holder.look_at(target)
-	$RHBase.look_at(target)
-	var right_x_tilt =$RHBase.rotation.x
-	var max_gun_fall:float = PI/4
-	$RHBase.rotation.x = clamp(right_x_tilt, -PI/8,PI)
 	var target_v: Vector3 = (target-global_position)
 	target_v.y = 0
-	var upperspine_t :Transform3D = skel.get_bone_global_pose(skel.find_bone("upperspine"))
-	#var upperspine_a := (-upperspine_t.basis.z).signed_angle_to(Vector3.FORWARD, Vector3.UP)
 	
-	var a_to_target:float = (-basis.z).signed_angle_to(target_v, Vector3.UP)
+	var a_to_target:float = (-model.basis.z).signed_angle_to(target_v, Vector3.UP)
 	#$RightHandTarget.global_rotation.y = a_to_target
-	var rot_y = rotation.y
+	var rot_y = model.rotation.y
 	angle_acc += rot_y-last_look_a
+	
+	#print(angle_acc)
 	if abs(angle_acc) > max_turn_before_pivot:
 		_on_changed_dir()
+		print("changed dir")
 		angle_acc = 0
-	#print(angle_acc)
 	#if abs(diff) > 0:
 		#print("rot {0} last_rot {1} diff {2}".format([a_to_target, last_look_angle, diff]))
 	#var rot_speed :float = clamp(a_to_target, -max_rot_speed, max_rot_speed)
@@ -112,11 +117,7 @@ func add_rot(a: float):
 	else:
 		rotate_y(upperspine_a+a)
 	#rotate_y(a)
-#todo change stride time with speed
-#todo make stride width constant
-#	multiply scale with velocity dir?
-#	increase scale.z of foot trackers
-#trackers are flipped when moving backwards how to fix
+#how to make a step every time rotate too much
 @onready
 var swing_target:=$Model/SwingTarget
 @onready
@@ -125,19 +126,35 @@ var swing_start:=$Model/SwingStart
 var swing_end:=$Model/SwingEnd
 @onready
 var swing_path:Path3D=$Model/SwingPath
+@onready
+var swing_center:=$Model/SwingCenter
+
+@onready
+var weapon: Node3D = $Model/Armature/Skeleton3D/hand_R/Weapon
 func _process(delta: float) -> void:
 	if test_walk:
-		velocity = speed *0.01 * Vector3.FORWARD.rotated(Vector3.UP,direction)
-
-	$LeftFoot.position -= velocity
-	$RightFoot.position -= velocity
-	$FootTracker/Holder/LeftFootTrack.scale.z = stride_length
-	$FootTracker/Holder/RightFootTrack.scale.z = stride_length
+		velocity = speed * Vector3.FORWARD.rotated(Vector3.UP,direction)
+	elif not test_walk and Engine.is_editor_hint():
+		velocity = Vector3.ZERO
+	if Engine.is_editor_hint():
+		look($AimTarget.position,delta)
+	#rotate rh mesh to match rh target
+	#weapon.global_basis = $Model/SwingPath/SwingPathFollow.global_basis
+	#print(weapon)
+	weapon.look_at(swing_center.position)
+	var current_speed:float=velocity.length()
+	$LeftFoot.position -= velocity*delta
+	$RightFoot.position -= velocity*delta
+	$FootTracker/Holder/LeftFootTrack.scale.z = stride_length*current_speed
+	$FootTracker/Holder/RightFootTrack.scale.z = stride_length*current_speed
 	#set swing start,end, and target points in swing_path node
-	swing_path.curve.set_point_position(0,swing_start.position)
-	swing_path.curve.set_point_position(1,swing_target.position)
+	var swing_angle_shift = swing_angle_factor * swing_angle_factor_height
+	swing_path.curve.set_point_position(0,swing_start.position-Vector3(0,swing_angle_shift,0))
+	#swing_path.curve.set_point_position(1,swing_target.position)
 	
-	swing_path.curve.set_point_position(2,swing_end.position)
+	swing_path.curve.set_point_position(1,swing_end.position+Vector3(0,swing_angle_shift,0))
+	
+	
 	
 	#$FootTracker.position = position
 	#how to find up vector of swing? cross of center to target and +x
@@ -145,26 +162,29 @@ func _process(delta: float) -> void:
 	#
 	#var swing_up:Vector3 = Vector3.RIGHT.cross(swing_forward)
 	#swing start = swing_forward rotated around swing_center about swing_up vector
-	
+	#print(velocity.length())
 	#velocity = $"..".velocity
 	if velocity.length() > 0.01:
+		var a:= Vector3.FORWARD.signed_angle_to(velocity,Vector3.UP)
+		$FootTracker/Holder/LeftFootTrack.global_rotation.y = a
+		$FootTracker/Holder/RightFootTrack.global_rotation.y = a
+		is_stopped = false
 		if $Step.is_stopped():
-			$Step.start()
-		#$Reset.start()
+			make_step()
+			#print('stop, step')
+		#wait before resetting both feet to standing position
+		$Reset.start()
+		$Reset2.start()
+		
 		#rotate tracker vec holder to movement direction independent of look direction
 		#flip if rotation relative to movement is less than -pi/2 or greater than pi/2
-		var a:= Vector3.FORWARD.signed_angle_to(velocity,Vector3.UP)
-		#var a_rel := a - rotation.y
-		var a_rel :=a
-		#print(a_rel)
-		$FootTracker/Holder/LeftFootTrack.global_rotation.y = a_rel
-		$FootTracker/Holder/RightFootTrack.global_rotation.y = a_rel
+		
 		#if (a_rel < -PI/2 and a_rel >-3*PI/2) or (a_rel > PI/2 and a_rel < 3*PI/2):
 			#$FootTracker/Holder.scale.x = -1
 		#else:
 			#$FootTracker/Holder.scale.x = 1
 	else:
-		#$Step.stop()
+		is_stopped = true
 		0
 
 #triggers step for alternating foot
@@ -174,14 +194,15 @@ func _process(delta: float) -> void:
 func make_step() -> void:
 	if Engine.is_editor_hint() and not test_walk:
 		return
-	print("step")
+	#print("step")
 	if is_left_current:
 		move($LeftFoot,$FootTracker/Holder/LeftFootTrack)
 	else:
 		move($RightFoot,$FootTracker/Holder/RightFootTrack)
 	is_left_current = not is_left_current
-	$Step.wait_time = step_time
-	$Step.start()
+	if not is_stopped:
+		#print("restart timer")
+		$Step.start(step_time)
 
 
 func _on_changed_dir():

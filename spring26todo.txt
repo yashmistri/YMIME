@@ -1,0 +1,8 @@
+todo
+make idle pose for hands to return to?
+keep right hand in beginning of swing when not attacking
+	return to swing start slowly after attack
+each attack swing is at random angle
+how to rotate right hand during swing to point weapon outside
+x how to figure out when a first step happens and call make_step()
+how to place trackers while turning in place to place foot ahead of rotation

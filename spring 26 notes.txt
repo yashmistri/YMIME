@@ -55,6 +55,7 @@ ideas for anims possible:
 	astorias double flip overhead swing
 	dash forward and attack 3x
 	strafe dash
+	summon clones that copy one attack anim
 
 how to swing hand:
 	use tweens to lerp hand beginning and target pos
@@ -70,6 +71,9 @@ how to swing hand:
 	
 	make sword face in direction from swing center to swing target
 
+implement two sword style and two handed sword
+
+
 how to test walking in editor
 	decouple movement of char and feet?
 	feet get equal and opposite motion to char vel
@@ -78,3 +82,6 @@ use path3d for walking
 figure out cloth sim
 	robe
 	cape
+
+ideas:
+limit rotation speed?
