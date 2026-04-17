@@ -19,6 +19,7 @@ var is_left_current:bool = true
 @export var speed:float = 5.0
 @export var direction:float = 0.0
 @export var step_time:float = 0.01
+@export var step_speed_factor:float = 1.0
 @export var test_swing: bool = false:
 	set(value):
 		if value:
@@ -37,7 +38,7 @@ func _ready() -> void:
 		test_walk = false
 	#path.curve.add_point()
 
-func move(foot : Node3D, foot_track : Node3D) -> void:
+func move(foot : Node3D, foot_track : Node3D, foot_pf:PathFollow3D) -> void:
 	#print("move")
 	var tracker_vec_tip :Node3D= foot_track.get_node("Tip")
 	var final_pos: Vector3
@@ -48,10 +49,15 @@ func move(foot : Node3D, foot_track : Node3D) -> void:
 	#if velocity.length() < 0.1:
 		#stride_time = stride_time_factor/2.0
 	#print(step_time)
+	
+	foot_pf.progress_ratio = 0.0
 	var t =get_tree().create_tween()
+	
+	var t_pf =get_tree().create_tween()
 	#var rot :Tween = get_tree().create_tween()
 	#print(stride_time)
 	t.tween_property(foot, "global_position", final_pos, stride_time).set_ease(Tween.EASE_IN)
+	t_pf.tween_property(foot_pf,"progress_ratio",1.0,step_time)
 	#rot.tween_property(foot, "global_rotation", global_rotation, stride_time)
 	#foot.global_rotation = global_rotation
 	#foot.rotation.x = -90
@@ -79,6 +85,7 @@ func look(target:Vector3, delta:float):
 	$TorsoTarget.look_at(target)
 	var model:=$Model
 	model.look_at(target)
+	model.rotation.x=0.0
 	$FootTracker/Holder.look_at(target)
 	var target_v: Vector3 = (target-global_position)
 	target_v.y = 0
@@ -131,6 +138,9 @@ var swing_center:=$Model/SwingCenter
 
 @onready
 var weapon: Node3D = $Model/Armature/Skeleton3D/hand_R/Weapon
+@onready var left_pf:PathFollow3D = find_child("LeftPF")
+@onready var right_pf:PathFollow3D = find_child("RightPF")
+
 func _process(delta: float) -> void:
 	if test_walk:
 		velocity = speed * Vector3.FORWARD.rotated(Vector3.UP,direction)
@@ -141,10 +151,13 @@ func _process(delta: float) -> void:
 	#rotate rh mesh to match rh target
 	#weapon.global_basis = $Model/SwingPath/SwingPathFollow.global_basis
 	#print(weapon)
-	weapon.look_at(swing_center.position)
+	weapon.look_at(swing_center.global_position)
 	var current_speed:float=velocity.length()
 	$LeftFoot.position -= velocity*delta
 	$RightFoot.position -= velocity*delta
+	#move feet on path follow nodes
+	#left_pf.progress_ratio += current_speed * delta * step_speed_factor
+	#right_pf.progress_ratio += current_speed * delta * step_speed_factor
 	$FootTracker/Holder/LeftFootTrack.scale.z = stride_length*current_speed
 	$FootTracker/Holder/RightFootTrack.scale.z = stride_length*current_speed
 	#set swing start,end, and target points in swing_path node
@@ -196,9 +209,9 @@ func make_step() -> void:
 		return
 	#print("step")
 	if is_left_current:
-		move($LeftFoot,$FootTracker/Holder/LeftFootTrack)
+		move($LeftFoot,$FootTracker/Holder/LeftFootTrack,left_pf)
 	else:
-		move($RightFoot,$FootTracker/Holder/RightFootTrack)
+		move($RightFoot,$FootTracker/Holder/RightFootTrack,right_pf)
 	is_left_current = not is_left_current
 	if not is_stopped:
 		#print("restart timer")

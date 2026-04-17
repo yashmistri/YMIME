@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://bwid2mwtukslq"]
 
-[ext_resource type="Script" uid="uid://is7yvnfi002n" path="res://Scripts/main_3d.gd" id="1_idrat"]
+[ext_resource type="Script" path="res://Scripts/main_3d.gd" id="1_idrat"]
 [ext_resource type="Script" uid="uid://c7t6ujtiquk82" path="res://Scripts/player3d.gd" id="1_nnj57"]
 [ext_resource type="PackedScene" uid="uid://b4l6tkceuqx73" path="res://Scenes/char_model.tscn" id="4_e688o"]
 [ext_resource type="PackedScene" uid="uid://div3mfnjrjog2" path="res://Scenes/wall.tscn" id="8_urbwf"]
@@ -19,8 +19,11 @@ height = 0.4
 albedo_color = Color(1, 0, 0, 1)
 
 [sub_resource type="Environment" id="Environment_nnj57"]
-background_energy_multiplier = 0.0
-ambient_light_energy = 0.0
+background_mode = 2
+background_energy_multiplier = 1.07
+ambient_light_source = 3
+ambient_light_color = Color(1, 1, 1, 1)
+ambient_light_energy = 10.62
 fog_light_energy = 0.19
 
 [sub_resource type="NavigationMesh" id="NavigationMesh_e688o"]
@@ -145,6 +148,7 @@ surface_material_override/0 = SubResource("StandardMaterial3D_nh568")
 
 [node name="Flashlight" type="SpotLight3D" parent="Player" unique_id=1968978846]
 transform = Transform3D(1, 0, 0, 0, 0.88726056, 0.46126863, 0, -0.46126863, 0.88726056, 0, 7.8792796, -0.20445204)
+visible = false
 light_energy = 2.149
 shadow_enabled = true
 shadow_caster_mask = 4294967265
@@ -156,14 +160,13 @@ spot_angle_attenuation = 2.070532
 environment = SubResource("Environment_nnj57")
 
 [node name="OmniLight3D" type="OmniLight3D" parent="." unique_id=2074462201]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.8918457, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 15.892, 5.53)
 light_color = Color(0.9999997, 0.9633147, 0.7531841, 1)
-light_energy = 4.893
-shadow_enabled = true
+light_energy = 8.368
 shadow_opacity = 0.41
 shadow_blur = 5.861
-omni_range = 20.706
-omni_attenuation = 1.337
+omni_range = 37.427
+omni_attenuation = 0.571
 omni_shadow_mode = 0
 
 [node name="NavigationRegion3D" type="NavigationRegion3D" parent="." unique_id=1873785972]

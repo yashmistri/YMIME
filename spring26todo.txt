@@ -6,3 +6,10 @@ each attack swing is at random angle
 how to rotate right hand during swing to point weapon outside
 x how to figure out when a first step happens and call make_step()
 how to place trackers while turning in place to place foot ahead of rotation
+augment walking with path follow system
+	defined path for foot path during walk cycle
+	foot drags behind until move() makes foot follow path once then returns to dragging
+	one path for running that gets shrunk with speed to get walking path
+	or maybe foot always follows path
+	handle standing by making path scale 0
+	start with discrete walking and running paths

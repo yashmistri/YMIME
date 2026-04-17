@@ -17,6 +17,9 @@ angle = 2.8340657
 [sub_resource type="JointLimitationCone3D" id="JointLimitationCone3D_c0nqx"]
 angle = 2.567903
 
+[sub_resource type="JointLimitationCone3D" id="JointLimitationCone3D_3e17n"]
+angle = 0.3790855
+
 [sub_resource type="JointLimitationCone3D" id="JointLimitationCone3D_uebvp"]
 angle = 0.437205
 
@@ -70,13 +73,20 @@ albedo_color = Color(0.59813, 0.99721104, 0.9238513, 1)
 
 [sub_resource type="BoxMesh" id="BoxMesh_m6jr0"]
 material = SubResource("StandardMaterial3D_j3e7b")
-size = Vector3(0.135, 0.165, 0.735)
+size = Vector3(0.135, 0.82, 0.16)
 
 [sub_resource type="BoxMesh" id="BoxMesh_uebvp"]
 size = Vector3(1.51, 0.455, 0.265)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_cwoyp"]
 albedo_color = Color(0.47000003, 1, 0.6908334, 1)
+
+[sub_resource type="Curve3D" id="Curve3D_j3e7b"]
+_data = {
+"points": PackedVector3Array(0, 0, 0, 0, 1, 0, 2.6226044e-06, -0.010840476, 2.7390952, 0, 1, 0, 0, 0, 0, 2.6226044e-06, 0.006402731, -2.623523),
+"tilts": PackedFloat32Array(0, 0)
+}
+point_count = 2
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_c0nqx"]
 albedo_color = Color(0.59813, 0.99721104, 0.9238513, 1)
@@ -104,41 +114,42 @@ script = ExtResource("1_uebvp")
 swing_angle_factor = 0.4
 swing_angle_factor_height = 3.42
 stride_time = 0.295
-stride_length = 0.135
-speed = 0.0
-direction = -0.82
+stride_length = 0.19
+speed = 5.575
+direction = 0.69
 step_time = 0.63
+step_speed_factor = 0.415
 test_walk = true
 swing_time = 1.285
 
 [node name="Model" parent="." unique_id=1730852723 instance=ExtResource("2_uebvp")]
-transform = Transform3D(0.8301123, -0.044328164, -0.55583155, 0, 0.996835, -0.07949866, 0.5575963, 0.06599282, 0.82748497, 0, -0.46, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.26, 0)
 
 [node name="Skeleton3D" parent="Model/Armature" index="0"]
 bones/7/rotation = Quaternion(0.082354225, -0.003625113, 0.8953673, -0.4376325)
 bones/13/rotation = Quaternion(0.06150032, -0.67373466, 0.7320791, -0.07974681)
 
 [node name="hand_L" parent="Model/Armature/Skeleton3D" index="0"]
-transform = Transform3D(-0.8856843, 0.45237243, 0.104507, -0.38841552, -0.84524864, 0.36699823, 0.25435433, 0.28445256, 0.9243324, -0.70161563, -1.0126798, 1.3170547)
+transform = Transform3D(-0.94432867, 0.32864305, 0.015375039, -0.32081586, -0.9301845, 0.1784201, 0.07293817, 0.16355468, 0.9838342, -1.1943432, -1.2826171, 1.0026889)
 
 [node name="forearm_L" parent="Model/Armature/Skeleton3D" index="1"]
-transform = Transform3D(-0.85375357, 0.51325834, 0.08757892, -0.44296443, -0.8043829, 0.39591694, 0.27365473, 0.2992213, 0.91410035, -1.5754678, 0.35682905, 0.8076129)
+transform = Transform3D(-0.9205444, 0.3906274, 0.0027657598, -0.38134006, -0.90014803, 0.21050659, 0.084719256, 0.19272602, 0.9775885, -1.8594091, 0.24993753, 0.67456156)
 
 [node name="upperarm_L" parent="Model/Armature/Skeleton3D" index="2"]
-transform = Transform3D(-0.9361136, -0.2563961, 0.24073152, 0.30952266, -0.92562073, 0.217765, 0.16699201, 0.27836475, 0.9458469, -1.1670433, 1.8312871, 0.36419445)
+transform = Transform3D(-0.93097395, -0.33495045, 0.1452414, 0.32796785, -0.9420666, -0.07033823, 0.1603869, -0.017848551, 0.98689276, -1.3258524, 1.750593, 0.70299315)
 
 [node name="head_2" parent="Model/Armature/Skeleton3D" index="3"]
-transform = Transform3D(0.9822557, 0.030983275, -0.1849694, -0.04462437, 0.996545, -0.07004569, 0.1821601, 0.07705693, 0.98024464, 0.07056543, 2.2145407, 0.51990426)
+transform = Transform3D(0.9905009, -0.023915876, -0.13540867, 0.0017386884, 0.98685783, -0.16158047, 0.1374935, 0.15981019, 0.97752553, -0.106970005, 2.1959822, 0.8399534)
 
 [node name="hand_R" parent="Model/Armature/Skeleton3D" index="4"]
-transform = Transform3D(0.7213667, 0.37197936, 0.5841756, -0.59587973, 0.76322514, 0.2498282, -0.35292676, -0.52831614, 0.7722202, 3.31938, 2.1549902, 0.696803)
+transform = Transform3D(0.6226266, 0.39552236, 0.67520213, -0.5762078, 0.8155432, 0.053608246, -0.52945334, -0.4224346, 0.73568195, 3.3195617, 2.1552637, 0.6968262)
 
 [node name="Cube_005" parent="Model/Armature/Skeleton3D/hand_R" index="0"]
 transform = Transform3D(0.28646556, -0.0002109753, 0.00709638, 0.0008786563, -0.54000086, -0.011250939, -0.013347484, -0.040075906, 0.15156288, -0.018039227, 0.5688677, 0.038938403)
 visible = false
 
 [node name="Weapon" type="Node3D" parent="Model/Armature/Skeleton3D/hand_R" index="1" unique_id=313081003]
-transform = Transform3D(0.5921369, -0.5707059, 0.5690285, 0.55416125, 0.8009197, 0.2267381, -0.5850037, 0.18102904, 0.790751, 0, 0, 0)
+transform = Transform3D(0.63388425, -0.6494984, 0.41998526, 0.4873351, 0.75698143, 0.4353569, -0.6005375, -0.071274795, 0.7965976, 0, 0, 0)
 
 [node name="Sword" type="MeshInstance3D" parent="Model/Armature/Skeleton3D/hand_R/Weapon" unique_id=466842572]
 transform = Transform3D(0.9999999, -3.7252903e-09, 0, 0, -0.015114018, -0.9998858, 0, 0.9998858, -0.015114018, 0.00014418348, 0.03823757, 1.3177433)
@@ -147,34 +158,34 @@ skeleton = NodePath("../..")
 surface_material_override/0 = SubResource("StandardMaterial3D_3e17n")
 
 [node name="forearm_R" parent="Model/Armature/Skeleton3D" index="5"]
-transform = Transform3D(0.6946572, 0.4717696, 0.5430325, -0.6436161, 0.74476695, 0.17629513, -0.32126212, -0.47196922, 0.8209964, 2.5161653, 0.8869815, 1.5003576)
+transform = Transform3D(0.5943488, 0.49777114, 0.6316432, -0.6266808, 0.778902, -0.024140496, -0.5040046, -0.3814908, 0.7748832, 2.4720778, 0.8291382, 1.3463361)
 
 [node name="upperarm_R" parent="Model/Armature/Skeleton3D" index="6"]
-transform = Transform3D(-0.58407426, 0.7221797, -0.3705583, -0.8116934, -0.51782244, 0.27020967, 0.0032565743, 0.45860237, 0.8886354, 1.3657765, 1.7118415, 0.7698319)
+transform = Transform3D(-0.586667, 0.782535, -0.20847167, -0.8082527, -0.5818417, 0.09048644, -0.050488696, 0.22158328, 0.97383344, 1.225547, 1.755977, 0.9933673)
 
 [node name="upperspine" parent="Model/Armature/Skeleton3D" index="7"]
-transform = Transform3D(0.9871089, 0.0063852943, -0.15992227, -0.017511338, 0.99751383, -0.068259284, 0.15908882, 0.07017981, 0.9847666, 0.06047892, 0.6388192, 0.40904477)
+transform = Transform3D(0.99269545, -0.048817806, -0.11032815, 0.030901935, 0.9868564, -0.15861726, 0.11662142, 0.15404928, 0.9811566, -0.029855013, 0.6370958, 0.5966097)
 
 [node name="spine" parent="Model/Armature/Skeleton3D" index="8"]
-transform = Transform3D(0.9998517, 0.015994016, -0.006371757, -0.015609722, 0.9982875, 0.056376636, 0.0072625335, -0.05626881, 0.9983892, 0.03521402, -0.9381242, 0.49792972)
+transform = Transform3D(0.99914545, -0.041192077, -0.0033802092, 0.040899727, 0.9971965, -0.06266141, 0.005951883, 0.0624696, 0.9980292, 0.03521402, -0.9381242, 0.49792972)
 
 [node name="foot_L" parent="Model/Armature/Skeleton3D" index="9"]
-transform = Transform3D(0.8852453, 0.017933294, -0.4647786, 0.37117475, -0.6294307, 0.6826756, -0.28030342, -0.7768496, -0.56385696, -0.5568769, -3.9019966, 0.7857381)
+transform = Transform3D(0.99997425, 0.00082552433, -0.007142164, 0.005099699, 0.6187751, 0.7855515, 0.005067855, -0.78556794, 0.6187547, -1.824575, -3.7678785, -0.8668083)
 
 [node name="lowerleg_L" parent="Model/Armature/Skeleton3D" index="10"]
-transform = Transform3D(-0.9610201, 0.103426725, -0.25640422, -0.23197663, -0.80620337, 0.54426324, -0.15042257, 0.582528, 0.7987703, -0.75647104, -2.3868182, -0.19883147)
+transform = Transform3D(-0.89594215, -0.36514908, -0.25288975, 0.4108928, -0.89759016, -0.15968166, -0.16868381, -0.2469762, 0.9542265, -1.1738031, -2.1571295, -0.33111915)
 
 [node name="thigh_L" parent="Model/Armature/Skeleton3D" index="11"]
-transform = Transform3D(-0.9478166, -0.18778718, -0.25764263, 0.2689291, -0.90495586, -0.32974443, -0.1712335, -0.3818248, 0.9082338, -0.46588612, -0.986475, 0.3920103)
+transform = Transform3D(-0.82615495, -0.45748326, -0.32890227, 0.55599487, -0.7565222, -0.3443012, -0.09130986, -0.4673142, 0.8793632, -0.46588612, -0.986475, 0.3920103)
 
 [node name="foot_R" parent="Model/Armature/Skeleton3D" index="12"]
-transform = Transform3D(0.9597623, -0.23535511, -0.15318127, 0.0953409, -0.23998384, 0.9660835, -0.26413387, -0.94181466, -0.20788854, 0.18563056, -3.9829216, -0.20215455)
+transform = Transform3D(0.84764534, 0.002344871, -0.5305579, 0.5129832, -0.25890642, 0.8184223, -0.13544579, -0.9658992, -0.22066367, 1.6032646, -3.8330622, 1.5436234)
 
 [node name="lowerleg_R" parent="Model/Armature/Skeleton3D" index="13"]
-transform = Transform3D(-0.9238454, -0.19420339, 0.32984036, 0.25212267, -0.95712614, 0.14263055, 0.28799942, 0.21492893, 0.93319964, 0.53369176, -2.1776226, -0.58071625)
+transform = Transform3D(-0.977536, 0.20917729, 0.025839433, -0.1524797, -0.78650206, 0.598468, 0.1455087, 0.5810842, 0.8007298, 1.1871355, -2.3492732, 0.47181875)
 
 [node name="thigh_R" parent="Model/Armature/Skeleton3D" index="14"]
-transform = Transform3D(-0.9728503, 0.042575963, 0.22748482, -0.1762855, -0.7731865, -0.6091845, 0.14995164, -0.6327475, 0.7597004, 0.46780914, -0.98118114, 0.3984076)
+transform = Transform3D(-0.86671317, 0.46485645, 0.18087648, -0.44345266, -0.88411385, 0.14728197, 0.22838043, 0.047441114, 0.9724152, 0.46780914, -0.98118114, 0.3984076)
 
 [node name="FootIK" type="CCDIK3D" parent="Model/Armature/Skeleton3D" index="16" unique_id=163275418]
 angular_delta_limit = 1.860259183238156
@@ -185,13 +196,17 @@ settings/0/root_bone_name = "thigh.L"
 settings/0/root_bone = 10
 settings/0/end_bone_name = "foot.L"
 settings/0/end_bone = 12
-settings/0/extend_end_bone = false
+settings/0/extend_end_bone = true
+settings/0/end_bone/direction = 6
+settings/0/end_bone/length = 0.178
 settings/0/joint_count = 3
 settings/1/root_bone_name = "thigh.R"
 settings/1/root_bone = 13
 settings/1/end_bone_name = "foot.R"
 settings/1/end_bone = 15
-settings/1/extend_end_bone = false
+settings/1/extend_end_bone = true
+settings/1/end_bone/direction = 6
+settings/1/end_bone/length = 0.109
 settings/1/joint_count = 3
 settings/0/joints/0/rotation_axis = 3
 settings/0/joints/0/limitation = SubResource("JointLimitationCone3D_1r01a")
@@ -202,8 +217,10 @@ settings/0/joints/1/rotation_axis_vector = Vector3(1, 0, 0.5)
 settings/0/joints/1/limitation = SubResource("JointLimitationCone3D_c0nqx")
 settings/0/joints/1/limitation/right_axis = 1
 settings/0/joints/1/limitation/rotation_offset = Quaternion(1, 0, 0, 1)
-settings/0/joints/2/rotation_axis = 3
-settings/0/joints/2/limitation = null
+settings/0/joints/2/rotation_axis = 0
+settings/0/joints/2/limitation = SubResource("JointLimitationCone3D_3e17n")
+settings/0/joints/2/limitation/right_axis = 1
+settings/0/joints/2/limitation/rotation_offset = Quaternion(0.34, 0, 0, 1)
 settings/1/joints/0/rotation_axis = 3
 settings/1/joints/0/limitation = SubResource("JointLimitationCone3D_1r01a")
 settings/1/joints/0/limitation/right_axis = 0
@@ -214,7 +231,9 @@ settings/1/joints/1/limitation = SubResource("JointLimitationCone3D_c0nqx")
 settings/1/joints/1/limitation/right_axis = 1
 settings/1/joints/1/limitation/rotation_offset = Quaternion(1, 0, 0, 1)
 settings/1/joints/2/rotation_axis = 3
-settings/1/joints/2/limitation = null
+settings/1/joints/2/limitation = SubResource("JointLimitationCone3D_3e17n")
+settings/1/joints/2/limitation/right_axis = 1
+settings/1/joints/2/limitation/rotation_offset = Quaternion(0.33, 0, 0, 1)
 
 [node name="HandIK" type="CCDIK3D" parent="Model/Armature/Skeleton3D" index="17" unique_id=1000835957]
 max_iterations = 6
@@ -281,7 +300,6 @@ surface_material_override/0 = SubResource("StandardMaterial3D_uebvp")
 
 [node name="SwingCenter" type="Node3D" parent="Model" unique_id=743549342]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.02471387, 6.009262, -0.40315843)
-visible = false
 metadata/_edit_group_ = true
 
 [node name="Debubg" type="MeshInstance3D" parent="Model/SwingCenter" unique_id=607053555]
@@ -308,7 +326,7 @@ mesh = SubResource("SphereMesh_cwoyp")
 surface_material_override/0 = SubResource("StandardMaterial3D_3fbqc")
 
 [node name="LeftFoot" type="Node3D" parent="." unique_id=1345590147]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.6743829, 0, -0.04690317)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.9597977, 6.039568e-14, -1.5554526)
 metadata/_edit_group_ = true
 
 [node name="debug" type="MeshInstance3D" parent="LeftFoot" unique_id=10563328]
@@ -316,7 +334,7 @@ transform = Transform3D(1.92, 0, 0, 0, 1.92, 0, 0, 0, 1.92, 0, 0, 0)
 mesh = SubResource("BoxMesh_m6jr0")
 
 [node name="RightFoot" type="Node3D" parent="." unique_id=2059347641]
-transform = Transform3D(0.99999964, 0, 0, 0, -0.4480735, 0.89399636, 0, -0.8939964, -0.44807348, 0.5122908, 0, -0.45224616)
+transform = Transform3D(0.99999964, 0, 0, 0, 0.99999976, 0, 0, 0, 0.99999964, 1.6677786, 5.5955017e-14, 1.1927422)
 metadata/_edit_group_ = true
 
 [node name="debug" type="MeshInstance3D" parent="RightFoot" unique_id=2044269860]
@@ -326,13 +344,12 @@ mesh = SubResource("BoxMesh_m6jr0")
 [node name="FootTracker" type="Node3D" parent="." unique_id=656936007]
 
 [node name="Holder" type="Node3D" parent="FootTracker" unique_id=861974782]
-transform = Transform3D(0.8301122, 0, -0.5575963, 0, 1, 0, 0.5575963, 0, 0.8301122, 0, 0, 0)
 
 [node name="debug" type="MeshInstance3D" parent="FootTracker/Holder" unique_id=1084559009]
 mesh = SubResource("BoxMesh_uebvp")
 
 [node name="LeftFootTrack" type="Node3D" parent="FootTracker/Holder" unique_id=74260201]
-transform = Transform3D(0, 0, 0, 0, 0, 0, 0, 0, 0, -0.676012, 0, -7.4505806e-07)
+transform = Transform3D(0.77124554, 0, 0.67425203, 0, 1, 0, -0.63653684, 0, 0.81694233, -0.676028, 6.039568e-14, -2.142025e-06)
 
 [node name="debug" type="MeshInstance3D" parent="FootTracker/Holder/LeftFootTrack" unique_id=502531322]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.5067749)
@@ -346,8 +363,16 @@ transform = Transform3D(0.723, 0, 0, 0, 0.723, 0, 0, 0, 0.723, 0, 0.185, 0)
 mesh = SubResource("SphereMesh_cwoyp")
 surface_material_override/0 = SubResource("StandardMaterial3D_cwoyp")
 
+[node name="LeftFootPath" type="Path3D" parent="FootTracker/Holder/LeftFootTrack" unique_id=771899845]
+visible = false
+curve = SubResource("Curve3D_j3e7b")
+
+[node name="LeftPF" type="PathFollow3D" parent="FootTracker/Holder/LeftFootTrack/LeftFootPath" unique_id=501492568]
+transform = Transform3D(-4.3704095e-08, 0.999982, 4.3704095e-08, 0, -4.3710603e-08, 0.99983317, 0.99983317, 4.3710603e-08, 1.9103668e-15, 2.6226044e-06, 0.006402731, -2.6235228)
+progress = 5.851844
+
 [node name="RightFootTrack" type="Node3D" parent="FootTracker/Holder" unique_id=1894514497]
-transform = Transform3D(0, 0, 0, 0, 0, 0, 0, 0, 0, 0.68335086, 0, 5.364418e-07)
+transform = Transform3D(0.77124554, 0, 0.67425203, 0, 1, 0, -0.63653684, 0, 0.81694233, 0.6833659, 5.5955017e-14, 1.834695e-07)
 
 [node name="debug" type="MeshInstance3D" parent="FootTracker/Holder/RightFootTrack" unique_id=1408829163]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.5067749)
@@ -361,6 +386,14 @@ transform = Transform3D(0.723, 0, 0, 0, 0.723, 0, 0, 0, 0.723, 0, 0.185, 0)
 mesh = SubResource("SphereMesh_cwoyp")
 surface_material_override/0 = SubResource("StandardMaterial3D_gy5hj")
 
+[node name="RightFootPath" type="Path3D" parent="FootTracker/Holder/RightFootTrack" unique_id=1504790537]
+visible = false
+curve = SubResource("Curve3D_j3e7b")
+
+[node name="RightPF" type="PathFollow3D" parent="FootTracker/Holder/RightFootTrack/RightFootPath" unique_id=706088320]
+transform = Transform3D(-4.3704016e-08, 0.9999818, 4.3704016e-08, 0, -4.3710592e-08, 0.9998313, 0.9998313, 4.3710592e-08, 1.9103632e-15, 2.6226044e-06, 0.006402731, -2.6235228)
+progress = 5.851844
+
 [node name="LeftHandTarget" type="Node3D" parent="." unique_id=1116484886]
 transform = Transform3D(-0.0060300417, 0.9957001, 0.092439294, 0.9925822, 0.017184677, -0.12035415, -0.121425174, 0.091027915, -0.98841786, -1.1926416, 2.8368711, 0.5131033)
 
@@ -368,7 +401,7 @@ transform = Transform3D(-0.0060300417, 0.9957001, 0.092439294, 0.9925822, 0.0171
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.21735764, 1.9243774, 0)
 
 [node name="TorsoTarget" type="Node3D" parent="." unique_id=897762053]
-transform = Transform3D(0.8474966, 0.17114544, -0.5024527, 0, 0.94659376, 0.32242876, 0.53080076, -0.2732573, 0.802235, 0.21735764, 1.9243774, 0)
+transform = Transform3D(0.99851847, -0.023616511, 0.04902186, 0, 0.90090543, 0.43401542, -0.05441399, -0.4333724, 0.8995707, 0.21735764, 1.9243774, 0)
 
 [node name="Reset" type="Timer" parent="." unique_id=2142176493]
 process_callback = 0
@@ -390,7 +423,7 @@ material_override = SubResource("StandardMaterial3D_4uij5")
 mesh = SubResource("CapsuleMesh_kbb0h")
 
 [node name="AimTarget" type="MeshInstance3D" parent="." unique_id=1806336660]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.2161865, 0, -4.788044)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -3.9885993)
 mesh = SubResource("SphereMesh_uebvp")
 surface_material_override/0 = SubResource("StandardMaterial3D_xfmme")
 
