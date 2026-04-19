@@ -7,7 +7,7 @@ var max_rotation: float = PI/2
 var step_time_factor = 0.6
 var reset_time:float = 0.01
 var is_stopped:bool = true
-var velocity:Vector3 = Vector3.ZERO
+@onready var velocity:Vector3 = Vector3.ZERO
 enum State {STANDING, WALKING}
 var current_state :State = State.STANDING
 var skel :Skeleton3D
@@ -18,7 +18,15 @@ var is_left_current:bool = true
 @export var stride_length:float=1.0
 @export var speed:float = 5.0
 @export var direction:float = 0.0
-@export var step_time:float = 0.01
+@export var debug_shapes_on:bool=false:
+	set(value):
+		for c in find_children("debug"):
+			print("found shape")
+			print(value)
+			c.visible = value
+		debug_shapes_on = value
+		
+var step_time:float = 0.1
 @export var step_speed_factor:float = 1.0
 @export var test_swing: bool = false:
 	set(value):
@@ -29,13 +37,13 @@ var is_left_current:bool = true
 
 func _ready() -> void:
 	#$TorsoTarget/debug.visible = Global.debug_on
-	$FootTracker/Holder/LeftFootTrack/Tip/shape.visible = Global.debug_on
-	$FootTracker/Holder/RightFootTrack/Tip/shape.visible = Global.debug_on
+	#$FootTracker/Holder/LeftFootTrack/Tip/shape.visible = Global.debug_on
+	#$FootTracker/Holder/RightFootTrack/Tip/shape.visible = Global.debug_on
 	skel = find_child("Skeleton3D")
 	make_step()
 	make_step()
-	if not Engine.is_editor_hint():
-		test_walk = false
+	test_walk = false
+	$AimTarget.visible = false
 	#path.curve.add_point()
 
 func move(foot : Node3D, foot_track : Node3D, foot_pf:PathFollow3D) -> void:
@@ -74,8 +82,9 @@ func swing():
 	swing_tween.tween_property(pf,"progress_ratio",1.0,swing_time)
 	
 	swing_tween.set_trans(Tween.TRANS_LINEAR)
-	swing_tween.tween_property(pf,"progress_ratio",0.0,swing_time*1.2).set_delay(0.3)
-
+	swing_tween.tween_property(pf,"progress_ratio",0.1,swing_time*1.2).set_delay(0.3)
+	#set next swing to random angle
+	swing_tween.tween_property(self,"swing_angle_factor",randf(),0.1)
 var last_look_a:float
 var angle_acc:float
 var max_turn_before_pivot:float = PI/4
@@ -97,7 +106,9 @@ func look(target:Vector3, delta:float):
 	
 	#print(angle_acc)
 	if abs(angle_acc) > max_turn_before_pivot:
-		_on_changed_dir()
+		#step only when standing
+		if velocity.length() < 0.01:
+			make_step()
 		print("changed dir")
 		angle_acc = 0
 	#if abs(diff) > 0:
@@ -125,8 +136,7 @@ func add_rot(a: float):
 		rotate_y(upperspine_a+a)
 	#rotate_y(a)
 #how to make a step every time rotate too much
-@onready
-var swing_target:=$Model/SwingTarget
+
 @onready
 var swing_start:=$Model/SwingStart
 @onready
@@ -137,37 +147,49 @@ var swing_path:Path3D=$Model/SwingPath
 var swing_center:=$Model/SwingCenter
 
 @onready
-var weapon: Node3D = $Model/Armature/Skeleton3D/hand_R/Weapon
+var weapon: Node3D = find_child("Weapon")
 @onready var left_pf:PathFollow3D = find_child("LeftPF")
 @onready var right_pf:PathFollow3D = find_child("RightPF")
+@onready var left_track:Node3D = $FootTracker/Holder/LeftFootTrack
+@onready var right_track:Node3D = $FootTracker/Holder/RightFootTrack
 
+var current_speed:float
 func _process(delta: float) -> void:
-	if test_walk:
+	if Engine.is_editor_hint():
+		print("here")
 		velocity = speed * Vector3.FORWARD.rotated(Vector3.UP,direction)
-	elif not test_walk and Engine.is_editor_hint():
-		velocity = Vector3.ZERO
+	else:
+		var p = get_parent()
+		if p.is_class("CharacterBody3D"):
+			velocity = p.velocity
 	if Engine.is_editor_hint():
 		look($AimTarget.position,delta)
 	#rotate rh mesh to match rh target
 	#weapon.global_basis = $Model/SwingPath/SwingPathFollow.global_basis
 	#print(weapon)
 	weapon.look_at(swing_center.global_position)
-	var current_speed:float=velocity.length()
+	
+	current_speed=velocity.length()
+	step_time = step_speed_factor/(current_speed+0.0000001)
+	print("step_time {0} = {1} / {2} in editor={3}".format([step_time,step_speed_factor,current_speed,Engine.is_editor_hint()]))
+	step_time = clamp(step_time,0.1,2.0)
 	$LeftFoot.position -= velocity*delta
 	$RightFoot.position -= velocity*delta
 	#move feet on path follow nodes
 	#left_pf.progress_ratio += current_speed * delta * step_speed_factor
 	#right_pf.progress_ratio += current_speed * delta * step_speed_factor
-	$FootTracker/Holder/LeftFootTrack.scale.z = stride_length*current_speed
-	$FootTracker/Holder/RightFootTrack.scale.z = stride_length*current_speed
+	if current_speed < 0.01:
+		left_track.scale.z = 0.0
+		right_track.scale.z = 0.0
+	else:
+		left_track.scale.z = stride_length
+		right_track.scale.z = stride_length
 	#set swing start,end, and target points in swing_path node
 	var swing_angle_shift = swing_angle_factor * swing_angle_factor_height
 	swing_path.curve.set_point_position(0,swing_start.position-Vector3(0,swing_angle_shift,0))
 	#swing_path.curve.set_point_position(1,swing_target.position)
 	
 	swing_path.curve.set_point_position(1,swing_end.position+Vector3(0,swing_angle_shift,0))
-	
-	
 	
 	#$FootTracker.position = position
 	#how to find up vector of swing? cross of center to target and +x
@@ -189,13 +211,6 @@ func _process(delta: float) -> void:
 		$Reset.start()
 		$Reset2.start()
 		
-		#rotate tracker vec holder to movement direction independent of look direction
-		#flip if rotation relative to movement is less than -pi/2 or greater than pi/2
-		
-		#if (a_rel < -PI/2 and a_rel >-3*PI/2) or (a_rel > PI/2 and a_rel < 3*PI/2):
-			#$FootTracker/Holder.scale.x = -1
-		#else:
-			#$FootTracker/Holder.scale.x = 1
 	else:
 		is_stopped = true
 		0
@@ -216,6 +231,7 @@ func make_step() -> void:
 	if not is_stopped:
 		#print("restart timer")
 		$Step.start(step_time)
+	#print(step_time)
 
 
 func _on_changed_dir():

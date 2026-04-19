@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://bwid2mwtukslq"]
 
-[ext_resource type="Script" path="res://Scripts/main_3d.gd" id="1_idrat"]
+[ext_resource type="Script" uid="uid://is7yvnfi002n" path="res://Scripts/main_3d.gd" id="1_idrat"]
 [ext_resource type="Script" uid="uid://c7t6ujtiquk82" path="res://Scripts/player3d.gd" id="1_nnj57"]
 [ext_resource type="PackedScene" uid="uid://b4l6tkceuqx73" path="res://Scenes/char_model.tscn" id="4_e688o"]
 [ext_resource type="PackedScene" uid="uid://div3mfnjrjog2" path="res://Scenes/wall.tscn" id="8_urbwf"]
@@ -114,11 +114,11 @@ omni_shadow_mode = 0
 
 [node name="Player" type="CharacterBody3D" parent="." unique_id=495396812]
 script = ExtResource("1_nnj57")
-speed_start = 5.0
 max_health = 500.0
 metadata/_edit_group_ = true
 
 [node name="Root" parent="Player" unique_id=575523289 instance=ExtResource("4_e688o")]
+test_walk = false
 
 [node name="Collision" type="CollisionShape3D" parent="Player" unique_id=335371986]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.99107456, 0)
@@ -128,7 +128,7 @@ shape = SubResource("CapsuleShape3D_kjbku")
 transform = Transform3D(1, 0, 0, 0, 0.68534815, 0.7282156, 0, -0.7282156, 0.68534815, 1.9073486e-06, 31.532913, 27.743427)
 projection = 1
 fov = 64.0
-size = 20.065
+size = 7.022
 
 [node name="Mouse" type="MeshInstance3D" parent="Player" unique_id=738534231]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.009094, 0, 1.30896)

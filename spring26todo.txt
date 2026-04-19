@@ -13,3 +13,10 @@ augment walking with path follow system
 	or maybe foot always follows path
 	handle standing by making path scale 0
 	start with discrete walking and running paths
+how to do pixel filter without shimmering effect
+	scroll camera output texture until border then move camera over?
+mix half ragdoll for arm and half ik?
+how to swing arm with full ragdoll from spine to hand
+make swing path for empty left hand
+make armor/clothing/ornament for chars
+set up enemies

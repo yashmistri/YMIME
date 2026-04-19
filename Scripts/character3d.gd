@@ -110,9 +110,10 @@ func _physics_process(delta: float) -> void:
 	#$Root.add_rot(a_to_target-last_look_angle)
 	#last_look_angle = a_to_target
 	$Root.look(target, delta)
-	$Root.velocity = velocity
+	#$Root.velocity = velocity
 	#print(abs(last_move_dir.angle_to(move_dir)))
 	if abs(last_move_dir.angle_to(move_dir)) >=PI or (last_move_dir==Vector2.ZERO and move_dir != Vector2.ZERO) :
+		print("changed input dir")
 		changed_dir.emit()
 		last_move_dir = move_dir
 	#reset system on stopping but dont make a step
