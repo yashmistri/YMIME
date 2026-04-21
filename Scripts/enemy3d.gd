@@ -66,5 +66,5 @@ func _on_gun_has_fired() -> void:
 	shots_fired +=1
 
 func die():
-	start_ragdoll()
+	#start_ragdoll()
 	is_dead = true

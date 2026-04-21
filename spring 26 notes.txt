@@ -85,3 +85,4 @@ figure out cloth sim
 
 ideas:
 limit rotation speed?
+player head cam in ui high fov

@@ -8,11 +8,13 @@ radius = 0.33984375
 height = 2.0140147
 
 [node name="Enemy" type="CharacterBody3D" unique_id=26268006]
+collision_layer = 3
+collision_mask = 5
 script = ExtResource("1_t205n")
+speed_start = 0.8
 metadata/_edit_group_ = true
 
 [node name="Root" parent="." unique_id=575523289 instance=ExtResource("2_t205n")]
-test_walk = false
 
 [node name="Collision" type="CollisionShape3D" parent="." unique_id=622882171]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.0070074, 0)

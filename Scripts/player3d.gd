@@ -10,7 +10,7 @@ func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("mouse1"):
 		$Root.swing()
 	elif event.is_action_pressed("sprint"):
-		is_sprinting = true
+		dash()
 	elif event.is_action_released("sprint"):
 		is_sprinting = false
 	

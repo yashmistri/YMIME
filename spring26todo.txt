@@ -20,3 +20,6 @@ how to swing arm with full ragdoll from spine to hand
 make swing path for empty left hand
 make armor/clothing/ornament for chars
 set up enemies
+dash:
+	how to restrict move direction
+	how to make afterimages

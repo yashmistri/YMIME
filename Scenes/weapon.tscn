@@ -1,0 +1,36 @@
+[gd_scene format=3 uid="uid://4c8xwl8nw1g3"]
+
+[ext_resource type="Script" uid="uid://dxpe16hjp3sl1" path="res://Scenes/weapon.gd" id="1_er6cq"]
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_uebvp"]
+top_radius = 0.2
+bottom_radius = 0.1
+height = 3.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3e17n"]
+albedo_color = Color(0.16924527, 0.1692453, 0.16924527, 1)
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_j3e7b"]
+height = 2.815
+radius = 0.228
+
+[node name="Weapon" type="Node3D" unique_id=65460054]
+transform = Transform3D(0.999975, 0, 0, 0, -0.9999744, -8.744424e-08, 0, 8.742054e-08, -1.0002456, 0, 0, 0)
+script = ExtResource("1_er6cq")
+
+[node name="Sword" type="MeshInstance3D" parent="." unique_id=1210832475]
+transform = Transform3D(0.485, 0, 0, 0, -0.007330297, -0.4849446, 0, 0.4849446, -0.007330297, 0.00014418754, -0.0058240443, 0.6426743)
+mesh = SubResource("CylinderMesh_uebvp")
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_3e17n")
+
+[node name="Area3D" type="Area3D" parent="Sword" unique_id=266090118]
+collision_layer = 0
+collision_mask = 2
+monitoring = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Sword/Area3D" unique_id=1000139002]
+transform = Transform3D(1, -2.9802322e-08, -1.4901161e-08, 0, 1, 0, 2.9802322e-08, 0, 1.0000001, 0, 0, 0)
+shape = SubResource("CylinderShape3D_j3e7b")
+
+[connection signal="body_entered" from="Sword/Area3D" to="." method="_on_area_3d_body_entered"]

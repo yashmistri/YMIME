@@ -71,18 +71,21 @@ func move(foot : Node3D, foot_track : Node3D, foot_pf:PathFollow3D) -> void:
 	#foot.rotation.x = -90
 
 @export var swing_time:=0.3
+@onready var weapon:Node3D = find_child("Weapon")
 var swing_tween:Tween
 func swing():
 	if swing_tween:
 		swing_tween.kill()
+	weapon.set_col(true)
 	swing_tween = get_tree().create_tween().set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_IN)
 	var pf:PathFollow3D =find_child("SwingPathFollow")
 	pf.progress_ratio=0.1
 	
 	swing_tween.tween_property(pf,"progress_ratio",1.0,swing_time)
-	
+	swing_tween.tween_callback(weapon.set_col.bind(false))
 	swing_tween.set_trans(Tween.TRANS_LINEAR)
 	swing_tween.tween_property(pf,"progress_ratio",0.1,swing_time*1.2).set_delay(0.3)
+	
 	#set next swing to random angle
 	#swing_tween.tween_property(self,"swing_angle_factor",randf(),0.1)
 var last_look_a:float
@@ -146,8 +149,6 @@ var swing_path:Path3D=$Model/SwingPath
 @onready
 var swing_center:=$Model/SwingCenter
 
-@onready
-var weapon: Node3D = find_child("Weapon")
 @onready var left_pf:PathFollow3D = find_child("LeftPF")
 @onready var right_pf:PathFollow3D = find_child("RightPF")
 @onready var left_track:Node3D = $FootTracker/Holder/LeftFootTrack
