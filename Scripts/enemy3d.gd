@@ -17,36 +17,38 @@ func _ready():
 # actually wait until player leaves maximum follow distance
 func _physics_process(delta: float) -> void:
 	var player :Character3d= $"../Player"
-	
+	target = player.global_position
 	var direction := nav_agent.get_next_path_position() - position
 	#less points in path -> more likely a straight line to player
-	var player_visible:bool = nav_agent.get_current_navigation_path().size()<5
+	#var player_visible:bool = nav_agent.get_current_navigation_path().size()<5
 	#enemy burst fires then waits
 	#check if current mag has mod burst bullets but not max bullets and doesnt get stuck at this value
 	#print(nav_agent.get_current_navigation_path().size())
-	if shots_fired==burst_amount:
-		can_shoot=false
-		shots_fired=0
-		$BurstDelay.start(burst_delay_time)
+	#if shots_fired==burst_amount:
+		#can_shoot=false
+		#shots_fired=0
+		#$BurstDelay.start(burst_delay_time)
 	#print(nav_agent.distance_to_target())
 	if player != null:
-		var max_target_find_speed:=0.03
-		target = lerp(target, player.position, max_target_find_speed)
+		#var max_target_find_speed:=0.03
+		#target = lerp(target, player.position, max_target_find_speed)
 		#target.x = move_toward(target.x, player.position.x, max_target_find_speed*delta)
 		#target.z = move_toward(target.z, player.position.z, max_target_find_speed*delta)
-		var target_error:float = target.distance_to(player.position)
+		#var target_error:float = target.distance_to(player.position)
 		#print(d_to_target)
+		#print(target)
 		nav_agent.target_position = target
-	if not nav_agent.is_navigation_finished():
+	if not nav_agent.is_target_reached():
 		#print(nav_agent.distance_to_target())
 		if can_follow:
 			move_dir = Vector2(direction.x, direction.z).normalized()
 		else:
 			move_dir = Vector2.ZERO
 	else:
-		move_dir = Vector2.ZERO
-		$FollowDelay.start()
-		can_follow=false
+		#move_dir = Vector2.ZERO
+		#$FollowDelay.start()
+		#can_follow=false
+		0
 		
 	
 	super._physics_process(delta)

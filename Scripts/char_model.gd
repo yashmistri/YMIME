@@ -84,7 +84,7 @@ func swing():
 	swing_tween.set_trans(Tween.TRANS_LINEAR)
 	swing_tween.tween_property(pf,"progress_ratio",0.1,swing_time*1.2).set_delay(0.3)
 	#set next swing to random angle
-	swing_tween.tween_property(self,"swing_angle_factor",randf(),0.1)
+	#swing_tween.tween_property(self,"swing_angle_factor",randf(),0.1)
 var last_look_a:float
 var angle_acc:float
 var max_turn_before_pivot:float = PI/4
@@ -155,23 +155,25 @@ var weapon: Node3D = find_child("Weapon")
 
 var current_speed:float
 func _process(delta: float) -> void:
-	if Engine.is_editor_hint():
-		print("here")
+	if Engine.is_editor_hint() and test_walk:
+		#print("here")
 		velocity = speed * Vector3.FORWARD.rotated(Vector3.UP,direction)
 	else:
 		var p = get_parent()
 		if p.is_class("CharacterBody3D"):
 			velocity = p.velocity
+		else:
+			velocity = Vector3.ZERO
 	if Engine.is_editor_hint():
 		look($AimTarget.position,delta)
 	#rotate rh mesh to match rh target
 	#weapon.global_basis = $Model/SwingPath/SwingPathFollow.global_basis
 	#print(weapon)
-	weapon.look_at(swing_center.global_position)
+	#weapon.look_at(swing_center.global_position)
 	
 	current_speed=velocity.length()
 	step_time = step_speed_factor/(current_speed+0.0000001)
-	print("step_time {0} = {1} / {2} in editor={3}".format([step_time,step_speed_factor,current_speed,Engine.is_editor_hint()]))
+	#print("step_time {0} = {1} / {2} in editor={3}".format([step_time,step_speed_factor,current_speed,Engine.is_editor_hint()]))
 	step_time = clamp(step_time,0.1,2.0)
 	$LeftFoot.position -= velocity*delta
 	$RightFoot.position -= velocity*delta

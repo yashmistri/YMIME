@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://cjy5k0ppmnbq8"]
 
 [ext_resource type="Script" uid="uid://bdlpxi8lsg3kh" path="res://Scripts/enemy3d.gd" id="1_t205n"]
-[ext_resource type="PackedScene" uid="uid://cfx0dwkmulm7a" path="res://Scenes/enemy_model.tscn" id="2_g2rsm"]
+[ext_resource type="PackedScene" uid="uid://b4l6tkceuqx73" path="res://Scenes/char_model.tscn" id="2_t205n"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_e688o"]
 radius = 0.33984375
@@ -11,20 +11,14 @@ height = 2.0140147
 script = ExtResource("1_t205n")
 metadata/_edit_group_ = true
 
-[node name="Root" parent="." unique_id=1738667620 instance=ExtResource("2_g2rsm")]
-
-[node name="MeshInstance3D" parent="Root/FootTracker/Holder/LeftFootTrack/Tip" parent_id_path=PackedInt32Array(1738667620, 583808676) index="0" unique_id=320115512]
-visible = false
-
-[node name="MeshInstance3D" parent="Root/FootTracker/Holder/RightFootTrack/Tip" parent_id_path=PackedInt32Array(1738667620, 1745299917) index="0" unique_id=1709235037]
-visible = false
+[node name="Root" parent="." unique_id=575523289 instance=ExtResource("2_t205n")]
+test_walk = false
 
 [node name="Collision" type="CollisionShape3D" parent="." unique_id=622882171]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.0070074, 0)
 shape = SubResource("CapsuleShape3D_e688o")
 
 [node name="NavigationAgent3D" type="NavigationAgent3D" parent="." unique_id=1112893551]
-target_desired_distance = 2.61
 
 [node name="FollowDelay" type="Timer" parent="." unique_id=60918548]
 wait_time = 0.3
@@ -35,6 +29,7 @@ one_shot = true
 
 [node name="Flashlight" type="SpotLight3D" parent="." unique_id=400084222]
 transform = Transform3D(1, 0, 0, 0, 0.88726056, 0.46126863, 0, -0.46126863, 0.88726056, 0, 3.367784, 0)
+visible = false
 light_energy = 2.149
 shadow_enabled = true
 shadow_caster_mask = 4294967265
@@ -44,6 +39,3 @@ spot_angle_attenuation = 2.070532
 
 [connection signal="timeout" from="FollowDelay" to="." method="_on_follow_delay_timeout"]
 [connection signal="timeout" from="BurstDelay" to="." method="_on_burst_delay_timeout"]
-
-[editable path="Root"]
-[editable path="Root/robot"]
