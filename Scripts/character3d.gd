@@ -16,7 +16,8 @@ var is_dashing:bool=false
 @export
 var max_health: float = 50.0
 var current_health: float
-var damage:float
+@export
+var damage:float=10.0
 #keep track of when movement changes direction and emit signal if so
 var last_move_dir: Vector2 = Vector2.ZERO
 var last_look_angle:float
@@ -33,6 +34,9 @@ func _ready():
 	current_energy = max_energy
 	accel = accel_stat
 	speed = speed_start
+	var weapon:=find_child("Weapon")
+	#print("weapon")
+	weapon.damage = damage
 	connect("changed_dir", $Root._on_changed_dir)
 	connect("changed_look", $Root._on_changed_dir)
 	
@@ -110,9 +114,18 @@ func _physics_process(delta: float) -> void:
 
 func take_damage(d:float):
 	current_health = clamp(current_health-d, 0.0, max_health)
+	spawn_damage_text(d)
+	$anim.play("shake")
 	print(current_health)
 	if current_health ==0.0:
 		die()
+
+func spawn_damage_text(dmg:float):
+	var d:=preload("res://Scenes/damage_text.tscn").instantiate()
+	d.set_val(dmg)
+	get_tree().root.add_child(d)
+	d.global_position = global_position
+	d.position.y+=1
 
 func die():
 	print("dead")

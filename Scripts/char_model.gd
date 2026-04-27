@@ -99,6 +99,7 @@ func look(target:Vector3, delta:float):
 	model.look_at(target)
 	model.rotation.x=0.0
 	$FootTracker/Holder.look_at(target)
+	$FootTracker/Holder.rotation.x=0.0
 	var target_v: Vector3 = (target-global_position)
 	target_v.y = 0
 	
@@ -166,7 +167,9 @@ func _process(delta: float) -> void:
 		else:
 			velocity = Vector3.ZERO
 	if Engine.is_editor_hint():
-		look($AimTarget.position,delta)
+		#look($AimTarget.position,delta)
+		rotation.x = 0
+		rotation.z=0
 	#rotate rh mesh to match rh target
 	#weapon.global_basis = $Model/SwingPath/SwingPathFollow.global_basis
 	#print(weapon)

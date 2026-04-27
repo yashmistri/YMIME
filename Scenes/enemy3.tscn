@@ -2,13 +2,35 @@
 
 [ext_resource type="Script" uid="uid://bdlpxi8lsg3kh" path="res://Scripts/enemy3d.gd" id="1_t205n"]
 [ext_resource type="PackedScene" uid="uid://b4l6tkceuqx73" path="res://Scenes/char_model.tscn" id="2_t205n"]
+[ext_resource type="Animation" uid="uid://c025r3or0ip07" path="res://shake.res" id="3_g2rsm"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_e688o"]
 radius = 0.33984375
 height = 2.0140147
 
+[sub_resource type="Animation" id="Animation_t205n"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Root:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_mdfa3"]
+_data = {
+&"RESET": SubResource("Animation_t205n"),
+&"shake": ExtResource("3_g2rsm")
+}
+
 [node name="Enemy" type="CharacterBody3D" unique_id=26268006]
-collision_layer = 3
+collision_layer = 2
 collision_mask = 5
 script = ExtResource("1_t205n")
 speed_start = 0.8
@@ -38,6 +60,9 @@ shadow_caster_mask = 4294967265
 spot_range = 18.289
 spot_angle = 31.45
 spot_angle_attenuation = 2.070532
+
+[node name="anim" type="AnimationPlayer" parent="." unique_id=2081005135]
+libraries/ = SubResource("AnimationLibrary_mdfa3")
 
 [connection signal="timeout" from="FollowDelay" to="." method="_on_follow_delay_timeout"]
 [connection signal="timeout" from="BurstDelay" to="." method="_on_burst_delay_timeout"]

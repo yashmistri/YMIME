@@ -86,3 +86,5 @@ figure out cloth sim
 ideas:
 limit rotation speed?
 player head cam in ui high fov
+
+new tech/bug: attacking again right after weapon collision triggers damage twice

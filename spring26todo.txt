@@ -3,7 +3,7 @@ make idle pose for hands to return to?
 keep right hand in beginning of swing when not attacking
 	return to swing start slowly after attack
 each attack swing is at random angle
-how to rotate right hand during swing to point weapon outside
+x how to rotate right hand during swing to point weapon outside
 x how to figure out when a first step happens and call make_step()
 how to place trackers while turning in place to place foot ahead of rotation
 augment walking with path follow system
@@ -15,7 +15,9 @@ augment walking with path follow system
 	start with discrete walking and running paths
 how to do pixel filter without shimmering effect
 	scroll camera output texture until border then move camera over?
-mix half ragdoll for arm and half ik?
+mix half ragdoll for arm and half ik? or mix with spring?
+	make imaginary stick with spring that spins around and make rh follow tip
+weapon trail
 how to swing arm with full ragdoll from spine to hand
 make swing path for empty left hand
 make armor/clothing/ornament for chars

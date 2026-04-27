@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://4c8xwl8nw1g3"]
 
-[ext_resource type="Script" uid="uid://dxpe16hjp3sl1" path="res://Scenes/weapon.gd" id="1_er6cq"]
+[ext_resource type="Script" uid="uid://dxpe16hjp3sl1" path="res://Scripts/weapon.gd" id="1_er6cq"]
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_uebvp"]
 top_radius = 0.2
@@ -13,6 +13,19 @@ albedo_color = Color(0.16924527, 0.1692453, 0.16924527, 1)
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_j3e7b"]
 height = 2.815
 radius = 0.228
+
+[sub_resource type="Curve" id="Curve_er6cq"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_qv81b"]
+curve = SubResource("Curve_er6cq")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_e1ly8"]
+gravity = Vector3(0, 0, 0)
+scale_curve = SubResource("CurveTexture_qv81b")
+
+[sub_resource type="SphereMesh" id="SphereMesh_er6cq"]
 
 [node name="Weapon" type="Node3D" unique_id=65460054]
 transform = Transform3D(0.999975, 0, 0, 0, -0.9999744, -8.744424e-08, 0, 8.742054e-08, -1.0002456, 0, 0, 0)
@@ -32,5 +45,15 @@ monitoring = false
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Sword/Area3D" unique_id=1000139002]
 transform = Transform3D(1, -2.9802322e-08, -1.4901161e-08, 0, 1, 0, 2.9802322e-08, 0, 1.0000001, 0, 0, 0)
 shape = SubResource("CylinderShape3D_j3e7b")
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="." unique_id=1148171523]
+transform = Transform3D(1, 0, 0, 0, 1, -1.2718715e-12, 0, 0, 1.0000141, -0.10898219, -0.19975543, 2.1521692)
+visible = false
+amount = 227
+lifetime = 0.62
+transform_align = 2
+trail_lifetime = 1.49
+process_material = SubResource("ParticleProcessMaterial_e1ly8")
+draw_pass_1 = SubResource("SphereMesh_er6cq")
 
 [connection signal="body_entered" from="Sword/Area3D" to="." method="_on_area_3d_body_entered"]

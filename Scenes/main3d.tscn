@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://bwid2mwtukslq"]
 
-[ext_resource type="Script" path="res://Scripts/main_3d.gd" id="1_idrat"]
+[ext_resource type="Script" uid="uid://is7yvnfi002n" path="res://Scripts/main_3d.gd" id="1_idrat"]
 [ext_resource type="Script" uid="uid://c7t6ujtiquk82" path="res://Scripts/player3d.gd" id="1_nnj57"]
 [ext_resource type="PackedScene" uid="uid://b4l6tkceuqx73" path="res://Scenes/char_model.tscn" id="4_e688o"]
 [ext_resource type="PackedScene" uid="uid://cjy5k0ppmnbq8" path="res://Scenes/enemy3.tscn" id="5_e688o"]
@@ -18,6 +18,43 @@ height = 0.4
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_nh568"]
 albedo_color = Color(1, 0, 0, 1)
+
+[sub_resource type="Animation" id="Animation_t205n"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Root:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_g2rsm"]
+resource_name = "shake"
+length = 0.51
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Root:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.033333335, 0.1, 0.16666667, 0.23333333, 0.2979626),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(-0.2, 0, 0), Vector3(0.2, 0, 0), Vector3(-0.2, 0, 0), Vector3(0.2, 0, 0), Vector3(0, 0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_e688o"]
+_data = {
+&"RESET": SubResource("Animation_t205n"),
+&"shake": SubResource("Animation_g2rsm")
+}
 
 [sub_resource type="Environment" id="Environment_nnj57"]
 background_mode = 2
@@ -115,14 +152,13 @@ omni_shadow_mode = 0
 
 [node name="Player" type="CharacterBody3D" parent="." unique_id=495396812]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.3188572, 0, -1.2)
-collision_layer = 5
+collision_layer = 4
 collision_mask = 3
 script = ExtResource("1_nnj57")
 max_health = 500.0
 metadata/_edit_group_ = true
 
 [node name="Root" parent="Player" unique_id=575523289 instance=ExtResource("4_e688o")]
-test_walk = false
 
 [node name="Collision" type="CollisionShape3D" parent="Player" unique_id=335371986]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.99107456, 0)
@@ -164,6 +200,9 @@ spot_angle_attenuation = 2.070532
 wait_time = 0.5
 one_shot = true
 
+[node name="anim" type="AnimationPlayer" parent="Player" unique_id=343453668]
+libraries/ = SubResource("AnimationLibrary_e688o")
+
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1359153835]
 environment = SubResource("Environment_nnj57")
 
@@ -178,7 +217,6 @@ omni_attenuation = 0.571
 omni_shadow_mode = 0
 
 [node name="NavigationRegion3D" type="NavigationRegion3D" parent="." unique_id=1873785972]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2, 0)
 navigation_mesh = SubResource("NavigationMesh_e688o")
 
 [node name="ground" type="MeshInstance3D" parent="NavigationRegion3D" unique_id=631024923]
