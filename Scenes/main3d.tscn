@@ -56,14 +56,6 @@ _data = {
 &"shake": SubResource("Animation_g2rsm")
 }
 
-[sub_resource type="Environment" id="Environment_nnj57"]
-background_mode = 2
-background_energy_multiplier = 1.07
-ambient_light_source = 3
-ambient_light_color = Color(1, 1, 1, 1)
-ambient_light_energy = 10.62
-fog_light_energy = 0.19
-
 [sub_resource type="NavigationMesh" id="NavigationMesh_e688o"]
 vertices = PackedVector3Array(-33.818718, 0.35258543, -23.568718, -31.818718, 0.35258543, -23.568718, -31.568718, 0.35258543, -24.818718, -33.818718, 0.35258543, -33.818718, -27.318718, 0.35258543, -24.818718, -27.068718, 0.35258543, -24.318718, -24.568718, 0.35258543, -24.318718, -24.318718, 0.35258543, -25.818718, -19.318718, 0.35258543, -25.818718, -19.318718, 0.35258543, -33.818718, -20.068718, 0.35258543, -15.318718, -23.818718, 0.35258543, -15.318718, -24.068718, 0.35258543, -13.818718, -20.068718, 0.35258543, -12.318718, 33.931282, 0.35258543, -33.818718, -17.068718, 0.35258543, -25.568718, -17.068718, 0.35258543, -23.818718, -18.568718, 0.35258543, -23.568718, -18.568718, 0.35258543, -19.568718, -17.318718, 0.35258543, -19.318718, -17.568718, 0.35258543, -12.068718, -33.818718, 0.35258543, 33.931282, -27.568718, 0.35258543, -13.818718, -27.818718, 0.35258543, -15.318718, -33.818718, 0.35258543, -15.318718, 33.931282, 0.35258543, 33.931282, -24.318718, 0.35258543, -23.568718, -27.068718, 0.35258543, -22.318718, -20.068718, 0.35258543, -19.318718, -27.568718, 0.35258543, -22.068718, -27.318718, 0.35258543, -17.068718, -24.068718, 0.35258543, -17.068718, -30.818718, 2.6025853, -23.818718, -30.818718, 2.6025853, -23.068718, -28.068718, 2.6025853, -23.068718, -28.068718, 2.6025853, -23.818718, -31.568718, 0.35258543, -22.068718, -27.818718, 0.35258543, -16.818718, -19.068718, 5.1025853, -18.568718, -19.068718, 5.1025853, -13.068718, -18.318718, 5.1025853, -13.068718, -18.318718, 5.1025853, -18.568718, -26.818718, 5.8525853, -16.068718, -26.818718, 5.8525853, -14.818718, -24.818718, 5.8525853, -14.818718, -24.818718, 5.8525853, -16.068718, -26.568718, 0.35258543, -15.818718, -26.568718, 0.35258543, -15.068718, -25.068718, 0.35258543, -15.068718, -25.068718, 0.35258543, -15.818718)
 polygons = [PackedInt32Array(1, 0, 2), PackedInt32Array(2, 0, 3), PackedInt32Array(5, 4, 6), PackedInt32Array(6, 4, 7), PackedInt32Array(9, 8, 7), PackedInt32Array(4, 2, 7), PackedInt32Array(7, 2, 3), PackedInt32Array(7, 3, 9), PackedInt32Array(11, 10, 12), PackedInt32Array(12, 10, 13), PackedInt32Array(16, 15, 14), PackedInt32Array(18, 17, 19), PackedInt32Array(19, 17, 16), PackedInt32Array(21, 13, 20), PackedInt32Array(23, 22, 24), PackedInt32Array(24, 22, 21), PackedInt32Array(12, 13, 22), PackedInt32Array(22, 13, 21), PackedInt32Array(8, 9, 15), PackedInt32Array(15, 9, 14), PackedInt32Array(19, 16, 20), PackedInt32Array(20, 16, 14), PackedInt32Array(21, 20, 25), PackedInt32Array(25, 20, 14), PackedInt32Array(6, 26, 5), PackedInt32Array(5, 26, 27), PackedInt32Array(30, 29, 31), PackedInt32Array(31, 29, 26), PackedInt32Array(31, 26, 28), PackedInt32Array(28, 26, 17), PackedInt32Array(29, 27, 26), PackedInt32Array(11, 31, 10), PackedInt32Array(10, 31, 28), PackedInt32Array(17, 18, 28), PackedInt32Array(35, 34, 32), PackedInt32Array(32, 34, 33), PackedInt32Array(0, 1, 36), PackedInt32Array(30, 37, 29), PackedInt32Array(29, 37, 36), PackedInt32Array(23, 24, 37), PackedInt32Array(37, 24, 36), PackedInt32Array(36, 24, 0), PackedInt32Array(41, 40, 38), PackedInt32Array(38, 40, 39), PackedInt32Array(45, 44, 42), PackedInt32Array(42, 44, 43), PackedInt32Array(49, 48, 46), PackedInt32Array(46, 48, 47)]
@@ -73,18 +65,40 @@ polygons = [PackedInt32Array(1, 0, 2), PackedInt32Array(2, 0, 3), PackedInt32Arr
 [sub_resource type="PlaneMesh" id="PlaneMesh_e688o"]
 material = SubResource("ShaderMaterial_urbwf")
 
+[sub_resource type="Gradient" id="Gradient_e688o"]
+interpolation_mode = 2
+interpolation_color_space = 2
+offsets = PackedFloat32Array(0, 0.5165165, 1)
+colors = PackedColorArray(0.85972357, 0, 0.3214338, 1, 0, 0, 0, 1, 0.42176664, 0.459534, 1, 1)
+
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_kjbku"]
 noise_type = 2
-frequency = 0.0235
-fractal_type = 0
+frequency = 0.0157
+fractal_octaves = 4
+fractal_lacunarity = 1.335
+fractal_gain = 1.445
+cellular_jitter = 8.565
+domain_warp_enabled = true
+domain_warp_type = 2
+domain_warp_amplitude = 2.915
+domain_warp_frequency = 0.1
+domain_warp_fractal_type = 0
+domain_warp_fractal_octaves = 1
+domain_warp_fractal_lacunarity = 7.14
+domain_warp_fractal_gain = 1.895
 
 [sub_resource type="NoiseTexture2D" id="NoiseTexture2D_e688o"]
+width = 1024
+height = 1024
 noise = SubResource("FastNoiseLite_kjbku")
+color_ramp = SubResource("Gradient_e688o")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3osc8"]
 albedo_texture = SubResource("NoiseTexture2D_e688o")
 
 [sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_nnj57"]
+
+[sub_resource type="Environment" id="Environment_e688o"]
 
 [node name="Main3d" type="Node3D" unique_id=1536319688]
 script = ExtResource("1_idrat")
@@ -159,6 +173,7 @@ max_health = 500.0
 metadata/_edit_group_ = true
 
 [node name="Root" parent="Player" unique_id=575523289 instance=ExtResource("4_e688o")]
+test_walk = false
 
 [node name="Collision" type="CollisionShape3D" parent="Player" unique_id=335371986]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.99107456, 0)
@@ -203,18 +218,11 @@ one_shot = true
 [node name="anim" type="AnimationPlayer" parent="Player" unique_id=343453668]
 libraries/ = SubResource("AnimationLibrary_e688o")
 
-[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1359153835]
-environment = SubResource("Environment_nnj57")
-
 [node name="OmniLight3D" type="OmniLight3D" parent="." unique_id=2074462201]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 15.892, 5.53)
-light_color = Color(0.9999997, 0.9633147, 0.7531841, 1)
-light_energy = 8.368
-shadow_opacity = 0.41
-shadow_blur = 5.861
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 10.999426, 5.53)
+shadow_enabled = true
 omni_range = 37.427
 omni_attenuation = 0.571
-omni_shadow_mode = 0
 
 [node name="NavigationRegion3D" type="NavigationRegion3D" parent="." unique_id=1873785972]
 navigation_mesh = SubResource("NavigationMesh_e688o")
@@ -243,6 +251,9 @@ transform = Transform3D(1.6293967, 0, 0, 0, 4.729888, 0, 0, 0, 6.451636, -18.682
 transform = Transform3D(3.636086, 0, 0, 0, 2.1466599, 0, 0, 0, 1.4965155, -29.484789, 1.1350794, -23.539482)
 
 [node name="Enemy" parent="." unique_id=26268006 instance=ExtResource("5_e688o")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.23099065, 0, 4.1345024)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.23099065, 0, -4.857603)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1043597173]
+environment = SubResource("Environment_e688o")
 
 [connection signal="timeout" from="Player/DashTimer" to="Player" method="reset_speed"]

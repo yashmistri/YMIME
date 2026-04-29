@@ -40,28 +40,6 @@ func _ready():
 	connect("changed_dir", $Root._on_changed_dir)
 	connect("changed_look", $Root._on_changed_dir)
 	
-	stop_ragdoll()
-
-# tween bonesim influence 0 to 1 and ik influence 1 to 0?
-func start_ragdoll():
-	$Collision.disabled = true
-	is_ragdoll = true
-	#$Root.visible = false
-	#$Ragdoll.visible = true
-	
-	
-	#set_ragdoll_pose()
-	#get_tree().paused = true
-	#bs.influence = 0.0
-	#var bt :Tween = get_tree().create_tween()
-	#bt.tween_property(bs,"influence",1.0,2.0)
-
-#figure out how to get correct bone poses in real time 
-func stop_ragdoll():
-	$Collision.disabled = false
-	is_ragdoll = false
-	$Root.visible = true
-	#$Ragdoll.visible = false
 
 func dash():
 	speed = speed_start*2.0

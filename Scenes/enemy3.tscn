@@ -34,6 +34,7 @@ collision_layer = 2
 collision_mask = 5
 script = ExtResource("1_t205n")
 speed_start = 0.8
+max_health = 10.0
 metadata/_edit_group_ = true
 
 [node name="Root" parent="." unique_id=575523289 instance=ExtResource("2_t205n")]

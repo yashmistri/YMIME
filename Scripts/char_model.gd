@@ -157,6 +157,7 @@ var swing_center:=$Model/SwingCenter
 
 var current_speed:float
 func _process(delta: float) -> void:
+	
 	if Engine.is_editor_hint() and test_walk:
 		#print("here")
 		velocity = speed * Vector3.FORWARD.rotated(Vector3.UP,direction)
@@ -184,6 +185,8 @@ func _process(delta: float) -> void:
 	#move feet on path follow nodes
 	#left_pf.progress_ratio += current_speed * delta * step_speed_factor
 	#right_pf.progress_ratio += current_speed * delta * step_speed_factor
+	left_track.scale=Vector3(1.0,1.0,1.0)
+	right_track.scale=Vector3(1.0,1.0,1.0)
 	if current_speed < 0.01:
 		left_track.scale.z = 0.0
 		right_track.scale.z = 0.0
@@ -238,7 +241,6 @@ func make_step() -> void:
 		#print("restart timer")
 		$Step.start(step_time)
 	#print(step_time)
-
 
 func _on_changed_dir():
 	make_step()
